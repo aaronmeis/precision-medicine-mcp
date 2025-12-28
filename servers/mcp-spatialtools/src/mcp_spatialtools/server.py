@@ -78,11 +78,20 @@ MAX_MT_PERCENT = float(os.getenv("MAX_MT_PERCENT", "20.0"))
 
 def _ensure_directories() -> None:
     """Ensure required directories exist."""
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    (DATA_DIR / "raw").mkdir(exist_ok=True)
-    (DATA_DIR / "filtered").mkdir(exist_ok=True)
-    (DATA_DIR / "aligned").mkdir(exist_ok=True)
+    try:
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        (DATA_DIR / "raw").mkdir(exist_ok=True)
+        (DATA_DIR / "filtered").mkdir(exist_ok=True)
+        (DATA_DIR / "aligned").mkdir(exist_ok=True)
+    except (OSError, PermissionError):
+        # If DATA_DIR can't be created (e.g., using default /workspace path), skip
+        pass
+
+    try:
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    except (OSError, PermissionError):
+        # If CACHE_DIR can't be created (e.g., using default /workspace path), skip
+        pass
 
 
 # ============================================================================
@@ -165,40 +174,57 @@ async def filter_quality(
     # Real implementation would use scanpy or similar
     # For POC, simulate with pandas
     try:
-        # Read spatial data
+        # Read spatial data - first column is barcode/spot ID
         if input_path.suffix == '.csv':
-            data = pd.read_csv(input_path)
+            data = pd.read_csv(input_path, index_col=0)
         else:
             raise ValueError(f"Unsupported file format: {input_path.suffix}")
 
         barcodes_before = len(data)
 
-        # Mock filtering logic (would be replaced with real QC)
-        # Filter by minimum reads
-        data_filtered = data[data.get('n_reads', 0) >= min_reads].copy()
+        # Real QC filtering logic
+        data_filtered = data.copy()
 
-        # Filter by minimum genes
-        data_filtered = data_filtered[data_filtered.get('n_genes', 0) >= min_genes].copy()
+        # Filter by minimum reads (if n_reads column exists)
+        if 'n_reads' in data_filtered.columns:
+            data_filtered = data_filtered[data_filtered['n_reads'] >= min_reads].copy()
 
-        # Filter by mitochondrial percentage
-        data_filtered = data_filtered[
-            data_filtered.get('mt_percent', 0) <= max_mt_percent
-        ].copy()
+        # Filter by minimum genes (if n_genes column exists or calculate from expression)
+        if 'n_genes' in data_filtered.columns:
+            data_filtered = data_filtered[data_filtered['n_genes'] >= min_genes].copy()
+        else:
+            # Calculate number of non-zero genes per spot
+            # All columns should be numeric gene expression values now (barcode is index)
+            gene_cols = [col for col in data_filtered.columns if col not in ['x', 'y', 'in_tissue', 'n_reads', 'n_genes', 'mt_percent']]
+            if gene_cols:
+                # Convert to numeric, coerce errors to NaN
+                numeric_data = data_filtered[gene_cols].apply(pd.to_numeric, errors='coerce')
+                n_genes_per_spot = (numeric_data > 0).sum(axis=1)
+                data_filtered = data_filtered[n_genes_per_spot >= min_genes].copy()
+
+        # Filter by mitochondrial percentage (if mt_percent column exists)
+        if 'mt_percent' in data_filtered.columns:
+            data_filtered = data_filtered[data_filtered['mt_percent'] <= max_mt_percent].copy()
 
         barcodes_after = len(data_filtered)
 
-        # Save filtered data
-        data_filtered.to_csv(output_path, index=False)
+        # Save filtered data (preserve barcode index)
+        data_filtered.to_csv(output_path, index=True)
+
+        # Calculate QC metrics
+        gene_cols = [col for col in data_filtered.columns if col not in ['x', 'y', 'in_tissue', 'n_reads', 'n_genes', 'mt_percent']]
+        n_genes_detected = len(gene_cols) if gene_cols else 0
 
         return {
             "output_file": str(output_path),
             "barcodes_before": barcodes_before,
             "barcodes_after": barcodes_after,
-            "genes_detected": int(data_filtered.get('n_genes', 0).max()) if len(data_filtered) > 0 else 0,
+            "genes_detected": n_genes_detected,
+            "pass_rate": (barcodes_after / barcodes_before * 100) if barcodes_before > 0 else 0,
             "qc_metrics": {
-                "mean_reads_per_barcode": float(data_filtered.get('n_reads', 0).mean()) if len(data_filtered) > 0 else 0,
-                "median_genes_per_barcode": float(data_filtered.get('n_genes', 0).median()) if len(data_filtered) > 0 else 0,
-                "mean_mt_percent": float(data_filtered.get('mt_percent', 0).mean()) if len(data_filtered) > 0 else 0,
+                "mean_reads_per_barcode": float(data_filtered['n_reads'].mean()) if 'n_reads' in data_filtered.columns and len(data_filtered) > 0 else 0,
+                "median_genes_per_barcode": float(data_filtered['n_genes'].median()) if 'n_genes' in data_filtered.columns and len(data_filtered) > 0 else 0,
+                "mean_mt_percent": float(data_filtered['mt_percent'].mean()) if 'mt_percent' in data_filtered.columns and len(data_filtered) > 0 else 0,
                 "filtering_rate": barcodes_after / barcodes_before if barcodes_before > 0 else 0,
             }
         }
