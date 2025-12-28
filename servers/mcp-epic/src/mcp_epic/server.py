@@ -48,7 +48,8 @@ class FHIRClient:
     def __init__(self):
         """Initialize FHIR client with GCP credentials."""
         self.base_url = FHIR_BASE_URL
-        self.credentials, _ = default()
+        # Request healthcare API scopes explicitly
+        self.credentials, _ = default(scopes=['https://www.googleapis.com/auth/cloud-healthcare'])
         self.client = httpx.AsyncClient(timeout=30.0)
 
     async def _get_access_token(self) -> str:
@@ -316,7 +317,8 @@ async def get_patient_conditions(patient_id: str) -> Dict[str, Any]:
         - Stage information (for cancer diagnoses)
     """
     try:
-        bundle = await fhir_client.search("Condition", {"patient": patient_id})
+        client = get_fhir_client()
+        bundle = await client.search("Condition", {"patient": patient_id})
         deidentified = deidentify_bundle(bundle)
 
         count = deidentified.get("total", 0)
@@ -369,7 +371,8 @@ async def get_patient_observations(
         if category:
             params["category"] = category
 
-        bundle = await fhir_client.search("Observation", params)
+        client = get_fhir_client()
+        bundle = await client.search("Observation", params)
         deidentified = deidentify_bundle(bundle)
 
         count = deidentified.get("total", 0)
@@ -415,7 +418,8 @@ async def get_patient_medications(patient_id: str) -> Dict[str, Any]:
         - Reason for medication
     """
     try:
-        bundle = await fhir_client.search("MedicationStatement", {"patient": patient_id})
+        client = get_fhir_client()
+        bundle = await client.search("MedicationStatement", {"patient": patient_id})
         deidentified = deidentify_bundle(bundle)
 
         count = deidentified.get("total", 0)

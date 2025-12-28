@@ -2,12 +2,13 @@
 
 import pytest
 from unittest.mock import AsyncMock, patch, MagicMock
-from mcp_epic.server import (
-    get_patient_demographics,
-    get_patient_conditions,
-    get_patient_observations,
-    get_patient_medications,
-)
+from mcp_epic import server
+
+# Get the actual functions from the wrapped tools
+get_patient_demographics = server.get_patient_demographics.fn
+get_patient_conditions = server.get_patient_conditions.fn
+get_patient_observations = server.get_patient_observations.fn
+get_patient_medications = server.get_patient_medications.fn
 
 
 @pytest.fixture
@@ -109,9 +110,10 @@ class TestGetPatientDemographics:
     @pytest.mark.asyncio
     async def test_success(self, mock_patient_response):
         """Test successful patient retrieval."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.get = AsyncMock(return_value=mock_patient_response)
+        mock_client = AsyncMock()
+        mock_client.get = AsyncMock(return_value=mock_patient_response)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_demographics("patient-001")
 
             assert result["status"] == "success"
@@ -124,11 +126,12 @@ class TestGetPatientDemographics:
     @pytest.mark.asyncio
     async def test_http_error(self):
         """Test handling of HTTP errors."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            error = MagicMock()
-            error.response.status_code = 404
-            mock_client.get = AsyncMock(side_effect=Exception("Not found"))
+        mock_client = AsyncMock()
+        error = MagicMock()
+        error.response.status_code = 404
+        mock_client.get = AsyncMock(side_effect=Exception("Not found"))
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_demographics("patient-999")
 
             assert result["status"] == "error"
@@ -138,9 +141,10 @@ class TestGetPatientDemographics:
     @pytest.mark.asyncio
     async def test_deidentification_applied(self, mock_patient_response):
         """Test that de-identification is applied."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.get = AsyncMock(return_value=mock_patient_response)
+        mock_client = AsyncMock()
+        mock_client.get = AsyncMock(return_value=mock_patient_response)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_demographics("patient-001")
 
             data = result["data"]
@@ -160,9 +164,10 @@ class TestGetPatientConditions:
     @pytest.mark.asyncio
     async def test_success(self, mock_conditions_bundle):
         """Test successful conditions retrieval."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=mock_conditions_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=mock_conditions_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_conditions("patient-001")
 
             assert result["status"] == "success"
@@ -184,9 +189,10 @@ class TestGetPatientConditions:
             ],
         }
 
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_conditions("patient-001")
 
             assert result["count"] == 3
@@ -201,9 +207,10 @@ class TestGetPatientConditions:
             "total": 0,
         }
 
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=empty_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=empty_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_conditions("patient-001")
 
             assert result["status"] == "success"
@@ -216,9 +223,10 @@ class TestGetPatientObservations:
     @pytest.mark.asyncio
     async def test_success(self, mock_observations_bundle):
         """Test successful observations retrieval."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=mock_observations_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=mock_observations_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_observations("patient-001")
 
             assert result["status"] == "success"
@@ -230,9 +238,10 @@ class TestGetPatientObservations:
     @pytest.mark.asyncio
     async def test_with_category_filter(self, mock_observations_bundle):
         """Test observations with category filter."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=mock_observations_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=mock_observations_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_observations("patient-001", category="laboratory")
 
             assert result["status"] == "success"
@@ -243,9 +252,10 @@ class TestGetPatientObservations:
     @pytest.mark.asyncio
     async def test_clinical_data_preserved(self, mock_observations_bundle):
         """Test that clinical data is preserved after de-identification."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=mock_observations_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=mock_observations_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_observations("patient-001")
 
             # Check first observation
@@ -261,9 +271,10 @@ class TestGetPatientMedications:
     @pytest.mark.asyncio
     async def test_success(self, mock_medications_bundle):
         """Test successful medications retrieval."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=mock_medications_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=mock_medications_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_medications("patient-001")
 
             assert result["status"] == "success"
@@ -275,9 +286,10 @@ class TestGetPatientMedications:
     @pytest.mark.asyncio
     async def test_medication_data_preserved(self, mock_medications_bundle):
         """Test that medication data is preserved."""
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=mock_medications_bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=mock_medications_bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_medications("patient-001")
 
             med = result["data"]["entry"][0]["resource"]
@@ -310,9 +322,10 @@ class TestGetPatientMedications:
             ],
         }
 
-        with patch("mcp_epic.server.fhir_client") as mock_client:
-            mock_client.search = AsyncMock(return_value=bundle)
+        mock_client = AsyncMock()
+        mock_client.search = AsyncMock(return_value=bundle)
 
+        with patch("mcp_epic.server.get_fhir_client", return_value=mock_client):
             result = await get_patient_medications("patient-001")
 
             assert result["count"] == 2
