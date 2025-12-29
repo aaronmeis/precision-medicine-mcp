@@ -7,8 +7,6 @@ AI-Orchestrated Clinical Bioinformatics for Precision Oncology using Model Conte
 [![Claude Desktop](https://img.shields.io/badge/Claude-Desktop-orange.svg)](https://claude.ai/download)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-## Statement of Purpose
-
 - Analyze complete patient profiles—from genomics to spatial transcriptomics—using natural language
 - Demonstrate end-to-end precision medicine workflows for Stage IV Ovarian Cancer
 - Use 9 specialized MCP servers and 40+ analysis tools
