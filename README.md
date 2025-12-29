@@ -191,7 +191,7 @@ cd precision-medicine-mcp/tests/manual_testing/Solution-Testing
 ./install_dependencies.sh  # Installs 9 MCP servers
 
 # 3. Configure Claude Desktop
-cp ../../../configs/claude_desktop_config.json \
+cp ../../../desktop-configs/claude_desktop_config.json \
    ~/Library/Application\ Support/Claude/claude_desktop_config.json
 
 # 4. Verify (restart Claude Desktop first)
@@ -210,7 +210,7 @@ cp ../../../configs/claude_desktop_config.json \
 
 **Infrastructure Resources:**
 - **Cloud Setup:** [GCP Deployment Guide](infrastructure/GET_STARTED.md) - Healthcare API, FHIR stores, Vertex AI
-- **Config Files:** [Claude Desktop Config](configs/claude_desktop_config.json)
+- **Config Files:** [Claude Desktop Config](desktop-configs/claude_desktop_config.json)
 - **Automated Testing:** [Verify All 9 Servers](tests/manual_testing/Solution-Testing/MANUAL_TESTING_GUIDE.md)
 - **STAR Installation:** [STAR Aligner Setup](servers/mcp-spatialtools/INSTALL_STAR.md) (for spatial analysis)
 
