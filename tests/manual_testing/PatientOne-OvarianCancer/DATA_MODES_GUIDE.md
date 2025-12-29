@@ -26,7 +26,7 @@ PatientOne supports two distinct operating modes to accommodate different use ca
 - **DRY_RUN:** 25-35 min, ~$0.32 total
 - **Actual Data:** 2-4 hours, $15-45 total
 
-**[→ See Full Cost Analysis & ROI](../../../COST_ANALYSIS.md)**
+**[→ See Full Cost Analysis & ROI](../../../docs/COST_ANALYSIS.md)**
 
 ---
 
@@ -979,7 +979,7 @@ convert input.png output.tiff
 ### Documentation
 - [PatientOne Architecture →](../../../architecture/patient-one/README.md)
 - [PatientOne Quick Start →](./README.md)
-- [MCP Server Configuration →](../../../configs/README.md)
+- [MCP Server Configuration →](../../../desktop-configs/README.md)
 - [Test Coverage Report →](../../README.md)
 
 ### External Links
