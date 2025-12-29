@@ -6,9 +6,10 @@
 |------|-----------|------------|----------|
 | **DRY_RUN** | 25-35 min | $0.30-0.65 | Demo, learning, CI/CD testing |
 | **Automated Report** | ~12 seconds | $0.10-0.20 | Quick analysis with pre-aligned data |
-| **Real Patient Data** | 1-2 hours | $7-19 | Production analysis, research, clinical decision support |
+| **Real Patient Data (Current)** | 1-2 hours | $7-19 | Production analysis, research (pre-aligned data) |
+| **Real Patient Data (with STAR)** | 1.5-3 hours | $12-29 | Production analysis from raw FASTQ |
 
-**Note:** Real data costs reduced from previous estimates due to spatialtools improvements (70% real as of Dec 29, 2025). STAR alignment still mocked, reducing processing time and cost.
+**Note:** SpatialTools upgraded to 95% real implementation (Dec 29, 2025). STAR alignment now functional but optional (adds 30-60 min, $5-10 if starting from raw FASTQ).
 
 ---
 
@@ -142,26 +143,32 @@ cd /path/to/spatial-mcp
 
 ### Per-Test Breakdown
 
-| Test | Servers Used | Processing Time | Compute Cost | API Cost | Total Cost |
-|------|--------------|----------------|--------------|----------|-----------|
-| **TEST_1: Clinical + Genomic** | MockEpic, FGbio, TCGA | 10-15 min | $0.50 | $0 | $0.50-0.75 |
-| **TEST_2: Multi-Omics** | MultiOmics | 15-25 min | $2-4 | $0 | $2-4 |
-| **TEST_3: Spatial** | SpatialTools, DeepCell | 10-20 min | $1-3 | $0 | $1-3 |
-| **TEST_4: Imaging** | OpenImageData, DeepCell | 20-40 min | $3-6 | $0-1 | $3-7 |
-| **TEST_5: Integration** | All 9 servers | 5-10 min | $0.25 | $0 | $0.25-0.50 |
-| **TOTAL** | - | **1-2 hours** | **$7-14** | **$0-5** | **$7-19** |
+| Test | Servers Used | Processing Time (Pre-aligned) | Processing Time (with STAR) | Compute Cost (Pre-aligned) | Compute Cost (with STAR) | API Cost | Total Cost (Pre-aligned) | Total Cost (with STAR) |
+|------|--------------|-------------------------------|------------------------------|----------------------------|--------------------------|----------|--------------------------|------------------------|
+| **TEST_1: Clinical + Genomic** | MockEpic, FGbio, TCGA | 10-15 min | 10-15 min | $0.50 | $0.50 | $0 | $0.50-0.75 | $0.50-0.75 |
+| **TEST_2: Multi-Omics** | MultiOmics | 15-25 min | 15-25 min | $2-4 | $2-4 | $0 | $2-4 | $2-4 |
+| **TEST_3: Spatial** | SpatialTools, DeepCell | 10-20 min | 40-80 min | $1-3 | $6-13 | $0 | $1-3 | $6-13 |
+| **TEST_4: Imaging** | OpenImageData, DeepCell | 20-40 min | 20-40 min | $3-6 | $3-6 | $0-1 | $3-7 | $3-7 |
+| **TEST_5: Integration** | All 9 servers | 5-10 min | 5-10 min | $0.25 | $0.25 | $0 | $0.25-0.50 | $0.25-0.50 |
+| **TOTAL** | - | **1-2 hours** | **1.5-3 hours** | **$7-14** | **$12-24** | **$0-5** | **$7-19** | **$12-29** |
 
 ### Detailed Cost Components
 
-#### 1. Computational Processing ($7-14)
+#### 1. Computational Processing ($7-14 pre-aligned, $12-24 with STAR)
 
 **Spatial Transcriptomics (TEST_3):**
-- ⚠️ **Note:** STAR alignment still mocked (70% real implementation as of Dec 29, 2025)
+- ✅ **Note:** SpatialTools upgraded to 95% real implementation (Dec 29, 2025)
+- STAR alignment (optional): 30-60 min = **$5-10** (r5.2xlarge @ $0.504/hr)
+  - 50M reads × 100bp
+  - Human genome (hg38) with GENCODE annotations
+  - 8 threads, 32GB RAM
+  - Output: Sorted BAM (~20-50GB)
+- Batch correction (ComBat): 10-30 sec = $0.01
 - Differential expression (Mann-Whitney U + FDR): 2-5 min = $0.20-0.50
 - Spatial autocorrelation (Moran's I): 2-5 min = $0.20-0.50
 - Cell type deconvolution (signature-based): 1-3 min = $0.10-0.30
-- ❌ DeepCell segmentation: MOCKED (not included in cost)
-- **When STAR implemented:** Add 30-60 min, $5-10 for alignment
+- Pathway enrichment (Fisher's exact + FDR): <1 sec = $0.01
+- ❌ DeepCell segmentation: Still mocked (not included in cost)
 
 **Multi-Omics Integration (TEST_2):**
 - HAllA analysis (chunked): 10-15 min = $1-2
@@ -262,20 +269,29 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 - **Storage:** 5GB for MCP servers + Python dependencies
 - **Network:** Internet for Claude Desktop API calls only
 
-### Real Patient Data Mode (Current: 70% real implementation)
-- **CPU:** 4-8 cores sufficient for current real features (DE, Moran's I, deconvolution)
-- **GPU:** ❌ Not needed yet (DeepCell mocked as of Dec 29, 2025)
+### Real Patient Data Mode (Current: 95% real implementation)
+
+**Without STAR alignment (pre-aligned data):**
+- **CPU:** 4-8 cores sufficient for DE, Moran's I, deconvolution, pathway enrichment
+- **GPU:** ❌ Not needed (DeepCell still mocked as of Dec 29, 2025)
 - **RAM:** 16GB minimum, 32GB recommended
 - **Storage:** 20GB minimum for patient data + cache
 - **Network:** Stable connection for TCGA API calls (if enabled)
 
-**When STAR alignment implemented:**
-- CPU: 8-16 cores recommended
-- RAM: 32-64GB
-- Storage: 100GB for reference genomes
+**With STAR alignment (from raw FASTQ):**
+- **CPU:** 8-16 cores recommended (STAR scales linearly)
+- **RAM:** 32GB minimum, 64GB recommended
+  - STAR loads entire genome index into RAM (~30GB for hg38)
+  - Additional RAM for sorting BAM files
+- **Storage:** 100GB minimum
+  - Genome index: ~30GB
+  - FASTQ files: ~10-50GB (compressed)
+  - BAM output: ~20-100GB
+  - Intermediate files: ~10-20GB
+- **Network:** Download genome index once (3GB compressed), then local
 
-**When DeepCell implemented:**
-- GPU: NVIDIA with 8GB+ VRAM recommended
+**When DeepCell implemented (future):**
+- **GPU:** NVIDIA with 8GB+ VRAM recommended
 
 ---
 
@@ -330,10 +346,17 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 **Last Updated:** December 29, 2025
 
 **Recent Updates:**
+- **Major:** SpatialTools upgraded from 70% → 95% real implementation
+  - STAR alignment now functional (adds 30-60 min, $5-10)
+  - Batch correction validated with ComBat algorithm
+  - Pathway enrichment statistically validated (Fisher's exact + FDR)
 - Added automated patient report generator (~12 sec, $0.10-0.20)
-- Updated spatialtools status: 40% → 70% real implementation
-- Reduced real data costs: $15-45 → $7-19 (STAR alignment still mocked)
-- Reduced real data time: 2-4 hours → 1-2 hours
-- Updated infrastructure requirements (no GPU needed yet)
+- Updated costs:
+  - Pre-aligned data: $7-19 (1-2 hours) - UNCHANGED
+  - With STAR alignment: $12-29 (1.5-3 hours) - NEW
+- Updated infrastructure requirements:
+  - Pre-aligned: 16GB RAM sufficient
+  - With STAR: 32-64GB RAM recommended
+  - Storage: 20GB → 100GB if using STAR
 
-**Pricing basis:** Claude Sonnet 4 ($3/M input, $15/M output), AWS EC2 c6i.2xlarge ($0.34/hr), AWS g4dn.xlarge ($0.526/hr)
+**Pricing basis:** Claude Sonnet 4 ($3/M input, $15/M output), AWS EC2 r5.2xlarge ($0.504/hr for STAR), c6i.2xlarge ($0.34/hr for other tasks), g4dn.xlarge ($0.526/hr for GPU when needed)
