@@ -57,38 +57,55 @@ AI-Orchestrated Clinical Bioinformatics for Precision Oncology using Model Conte
 ```mermaid
 graph TD
     subgraph "Clinical & Genomic Foundation"
-        EPIC[mcp-mockepic<br/>Clinical Data]
-        FGBIO[mcp-fgbio<br/>FASTQ/VCF]
-        TCGA[mcp-tcga<br/>Cancer Atlas]
+        EPIC[mcp-mockepic<br/>Clinical Data<br/>❌ Mock]
+        FGBIO[mcp-fgbio<br/>FASTQ/VCF<br/>✅ Production]
+        TCGA[mcp-tcga<br/>Cancer Atlas<br/>❌ Mocked]
     end
 
     subgraph "Multi-Omics Analysis"
-        MULTI[mcp-multiomics<br/>RNA/Protein/Phospho]
+        MULTI[mcp-multiomics<br/>RNA/Protein/Phospho<br/>✅ Production]
     end
 
     subgraph "Spatial Biology"
-        SPATIAL[mcp-spatialtools<br/>Spatial RNA-seq]
-        IMAGE[mcp-openimagedata<br/>Histology]
-        DEEPCELL[mcp-deepcell<br/>Cell Segmentation]
+        SPATIAL[mcp-spatialtools<br/>Spatial RNA-seq<br/>⚠️ 70% Real]
+        IMAGE[mcp-openimagedata<br/>Histology<br/>🔶 Partial]
+        DEEPCELL[mcp-deepcell<br/>Cell Segmentation<br/>❌ Mocked]
     end
 
     subgraph "AI & Workflow Orchestration"
-        HF[mcp-huggingface<br/>ML Models]
-        SEQERA[mcp-seqera<br/>Nextflow]
+        HF[mcp-huggingface<br/>ML Models<br/>❌ Mocked]
+        SEQERA[mcp-seqera<br/>Nextflow<br/>❌ Mocked]
     end
 
-    EPIC --> PATIENT[PatientOne<br/>Precision Medicine]
-    FGBIO --> PATIENT
-    TCGA --> PATIENT
-    MULTI --> PATIENT
+    EPIC -.-> PATIENT[PatientOne<br/>Precision Medicine]
+    FGBIO ==> PATIENT
+    TCGA -.-> PATIENT
+    MULTI ==> PATIENT
     SPATIAL --> PATIENT
-    IMAGE --> PATIENT
-    DEEPCELL --> PATIENT
-    HF --> PATIENT
-    SEQERA --> PATIENT
+    IMAGE -.-> PATIENT
+    DEEPCELL -.-> PATIENT
+    HF -.-> PATIENT
+    SEQERA -.-> PATIENT
 
     style PATIENT fill:#e1f5ff,stroke:#0066cc,stroke-width:3px
+    style FGBIO fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style MULTI fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style SPATIAL fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style IMAGE fill:#fff3cd,stroke:#ffc107,stroke-width:1px
+    style TCGA fill:#f8d7da,stroke:#dc3545,stroke-width:1px
+    style DEEPCELL fill:#f8d7da,stroke:#dc3545,stroke-width:1px
+    style HF fill:#f8d7da,stroke:#dc3545,stroke-width:1px
+    style SEQERA fill:#f8d7da,stroke:#dc3545,stroke-width:1px
+    style EPIC fill:#e2e3e5,stroke:#6c757d,stroke-width:1px
 ```
+
+**Legend:**
+- ✅ **Production Ready** (solid green boxes, thick arrows `==>`)
+- ⚠️ **Conditionally Ready** (yellow boxes, solid arrows `-->`)
+- 🔶 **Partial** (light yellow, dotted arrows `-.->`  )
+- ❌ **Mocked** (red boxes, dotted arrows `-.->`)
+- **Mock by Design** (gray boxes, dotted arrows `-.->`)
+
 
 ---
 
