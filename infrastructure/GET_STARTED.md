@@ -1,4 +1,7 @@
-# Phase 1A: Let's Get Started! 🚀
+# GCP Arch
+<img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/data/images/gcp-deploy.png">
+
+## Phase 1A: Let's Get Started! 🚀
 
 **Time Required:** 30 minutes - 1 hour
 **Cost:** Free (using GCP $300 credit)
