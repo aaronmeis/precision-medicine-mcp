@@ -53,6 +53,9 @@ This repository serves multiple audiences in the precision medicine ecosystem. F
 **Example Outputs for Researchers:**
 - [PatientOne Results](architecture/patient-one/patient-one-outputs/for-researchers/) - Complete analysis results with visualizations
 
+**Scientific References:**
+- [Publications & Datasets](docs/REFERENCES.md) - Peer-reviewed papers, TCGA datasets, spatial transcriptomics resources
+
 **Production-Ready Servers:**
 
 | Server | Tools | Status | Key Features |
@@ -142,6 +145,12 @@ graph TD
 
 **Example Outputs for Developers:**
 - [Technical Documentation](architecture/patient-one/patient-one-outputs/for-developer/) - Full test prompts, server reference guide, MCP reports
+
+**See It In Action:**
+
+<kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/data/images/Claude-client.png" width=800></kbd>
+
+*MCP servers orchestrating bioinformatics workflows through Claude Desktop*
 
 ---
 
@@ -292,36 +301,18 @@ This project is named in memory of a dear friend who passed from High-Grade Sero
 
 ---
 
-## Example Client Usage
+## Acknowledgments
 
-**MCP servers in action with Claude Desktop:**
+This project is dedicated to **PatientOne** - in memory of a dear friend who passed from High-Grade Serous Ovarian Carcinoma in 2025. Her courage inspired the creation of these AI-orchestrated bioinformatics tools.
 
-<kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/data/images/Claude-client.png" width=800></kbd>
+**Built with:**
+- [Model Context Protocol](https://modelcontextprotocol.io/) (Anthropic)
+- [BioinfoMCP](https://arxiv.org/html/2510.02139v1) research framework
+- Open-source bioinformatics community (FGbio, TCGA, GENCODE, KEGG, 10x Genomics)
 
-**Try it yourself:** [PatientOne Quick Start Guide →](tests/manual_testing/PatientOne-OvarianCancer/README.md)
-
----
-
-## Resources
-
-**Technical Documentation:**
-- [MCP Specification](https://modelcontextprotocol.io/specification/2025-06-18) - Protocol specification
-- [FastMCP Framework](https://github.com/modelcontextprotocol/python-sdk) - Python SDK for building MCP servers
-- [PatientOne Architecture](architecture/patient-one/README.md) - System design & data flow
-- [Cost Analysis & ROI](docs/COST_ANALYSIS.md) - Performance, costs, time estimates
-
-**Scientific References:**
-- [BioinfoMCP Paper](https://arxiv.org/html/2510.02139v1) - Bioinformatics workflows with MCP
-- [Spatial Transcriptomics Review](https://academic.oup.com/nar/article/53/12/gkaf536/8174767) - Technology overview
-- [TCGA Ovarian Cancer](https://portal.gdc.cancer.gov/projects/TCGA-OV) - Public genomic datasets
-- [10x Genomics Visium](https://www.10xgenomics.com/datasets) - Spatial transcriptomics platform
-
-**Acknowledgments:**
-- Model Context Protocol (Anthropic)
-- BioinfoMCP research team
-- FGbio, TCGA, Seqera Platform
-- 10x Genomics, GENCODE, KEGG
-- PatientOne - in memory of a dear friend
+**For detailed acknowledgments, citations, and scientific references:**
+- [Complete Acknowledgments](ACKNOWLEDGMENTS.md)
+- [Scientific References & Publications](docs/REFERENCES.md)
 
 ---
 
