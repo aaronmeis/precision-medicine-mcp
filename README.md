@@ -16,137 +16,6 @@ AI-Orchestrated Clinical Bioinformatics for Precision Oncology using Model Conte
 
 ---
 
-## Who is this For?
-
-This repository serves multiple audiences in the precision medicine ecosystem. Find your role below to get started quickly:
-
-### 🔬 **Bioinformatics Researchers**
-*You want to analyze multi-omics cancer data and validate precision medicine hypotheses*
-
-**Start here:**
-- **Quick Start:** [PatientOne Workflow Guide](tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete ovarian cancer analysis in 25-35 min
-- **Production Servers:** [mcp-multiomics](servers/mcp-multiomics/README.md) (RNA/Protein/Phospho integration) • [mcp-fgbio](servers/mcp-fgbio/README.md) (Genomic QC)
-- **Spatial Analysis:** [mcp-spatialtools Quick Start](servers/mcp-spatialtools/QUICKSTART.md) - Batch correction, pathway enrichment, spatial autocorrelation (95% real)
-- **Cost Analysis:** [Performance & ROI Guide](docs/COST_ANALYSIS.md) - $0.32 demo or $7-19 real analysis
-
-**Use cases:** PDX model analysis • Tumor microenvironment mapping • Drug resistance mechanisms • Pathway enrichment
-
----
-
-### 💻 **MCP Developers**
-*You want to build custom MCP servers or extend existing bioinformatics tools*
-
-**Start here:**
-- **Architecture:** [System Design](architecture/README.md) • [PatientOne Architecture](architecture/patient-one/README.md)
-- **Server Templates:** [mcp-multiomics Implementation](servers/mcp-multiomics/README.md) (91 tests, 68% coverage - best reference)
-- **Development Guide:** [Solution Testing](tests/manual_testing/Solution-Testing/README.md) - Server verification and CI/CD
-- **Implementation Status:** [Server Status Matrix](docs/SERVER_IMPLEMENTATION_STATUS.md) - Real vs mocked features
-
-**Example servers:**
-- ✅ **Production-ready:** [mcp-fgbio](servers/mcp-fgbio/) (FASTQ/VCF processing) • [mcp-multiomics](servers/mcp-multiomics/) (Multi-omics integration)
-- ⚠️ **95% Real:** [mcp-spatialtools](servers/mcp-spatialtools/) (Spatial transcriptomics with STAR alignment, ComBat batch correction, pathway enrichment)
-
----
-
-### 🏥 **Clinical Care Teams** *(Oncologists, Genetic Counselors)*
-*You want to understand how AI-orchestrated bioinformatics can support clinical decision-making*
-
-**⚠️ IMPORTANT:** This repository is for **RESEARCH USE ONLY**. Not validated for clinical decision-making, FDA/EMA approval, or patient care.
-
-**Start here:**
-- **Clinical Overview:** [PatientOne Case Study](architecture/patient-one/README.md) - Stage IV HGSOC patient journey
-- **Sample Outputs:** [Clinical Reports](architecture/patient-one/patient-one-outputs/) - Example analyses and interpretations
-- **Data Privacy:** [FHIR Integration Guide](tests/manual_testing/PatientOne-OvarianCancer/implementation/PHASE0_CLINICAL_FHIR.md) - De-identified clinical data handling
-- **Disclaimer:** See [Production Readiness Status](#️-important-production-readiness-status) below
-
-**Educational value:** Understand precision medicine workflows • Evaluate bioinformatics pipelines • Assess multi-omics integration approaches
-
----
-
-### 🛠️ **Software Engineers**
-*You want to deploy, integrate, or scale this system*
-
-**Start here:**
-- **Installation:** [Quick Start Guide](#quick-start) - 5-minute setup with Claude Desktop
-- **Infrastructure:** [GCP Deployment Guide](infrastructure/README.md) - Cloud setup for Healthcare API, Vertex AI, Nextflow
-- **Configuration:** [Claude Desktop Config](configs/claude_desktop_config.json) - MCP server setup
-- **Testing:** [Automated Testing](tests/manual_testing/Solution-Testing/) - Verify all 9 servers
-
-**Deployment scenarios:**
-- **Local Development:** MacOS/Linux with Claude Desktop (16GB RAM, 50GB disk)
-- **Cloud Research:** GCP Healthcare API + Vertex AI (see [infrastructure/](infrastructure/))
-- **HPC Clusters:** Nextflow workflows with [mcp-seqera](servers/mcp-seqera/) integration
-
----
-
-### 📊 **Data Scientists / ML Engineers**
-*You want to work with multi-omics data pipelines or build predictive models*
-
-**Start here:**
-- **Data Formats:** [Patient-001 Synthetic Dataset](data/patient-data/PAT001-OVC-2025/README.md) - Clinical, genomics, spatial, imaging
-- **Multi-Omics Integration:** [mcp-multiomics Examples](servers/mcp-multiomics/README.md) - HAllA, Stouffer meta-analysis, upstream regulators
-- **Spatial Analysis:** [Batch Correction Workflow](servers/mcp-spatialtools/tests/test_batch_correction_spatial_format.py) - ComBat for spatial transcriptomics
-- **ML Integration:** [mcp-huggingface](servers/mcp-huggingface/) (mocked - extensible for real models)
-
-**Analysis workflows:**
-- Differential expression with FDR correction
-- Pathway enrichment (44 curated ovarian cancer pathways)
-- Spatial autocorrelation (Moran's I)
-- Cell type deconvolution
-
----
-
-### 🎓 **Students & Educators**
-*You want to learn or teach precision medicine and bioinformatics*
-
-**Start here:**
-- **Tutorials:** [PatientOne Quick Start](tests/manual_testing/PatientOne-OvarianCancer/README.md) - Step-by-step guided workflow
-- **Synthetic Data:** [PAT001-OVC-2025](data/patient-data/PAT001-OVC-2025/README.md) - 100% synthetic, safe for classroom use
-- **Documentation:** [Architecture Guides](architecture/) - System design, data flow, integration patterns
-- **Cost:** DRY_RUN mode at ~$0.32 per analysis (perfect for teaching)
-
-**Educational topics:**
-- Precision oncology workflows
-- Multi-omics data integration
-- Spatial transcriptomics analysis
-- AI orchestration in bioinformatics
-
----
-
-### 👥 **Patients & Families**
-*You want to understand precision medicine for ovarian cancer*
-
-**⚠️ IMPORTANT:** This is a **research demonstration**, not a clinical tool. Always consult qualified oncologists for medical decisions.
-
-**Start here:**
-- **PatientOne Story:** Named in memory of a friend who passed from HGSOC in 2025 ([background](architecture/patient-one/README.md))
-- **What is Precision Medicine:** [High-level Overview](architecture/patient-one/README.md#what-is-precision-medicine) (coming soon)
-- **Educational Resources:** See [Resources](#resources) section below for peer-reviewed articles
-
-**What this demonstrates:** How bioinformatics can analyze genomics, transcriptomics, and imaging to identify potential treatment strategies. This is research technology, not clinical care.
-
----
-
-## ⚠️ Important: Production Readiness Status
-
-**Before using these servers for research or production:**
-
-**Production-Ready Servers (2/9):**
-- ✅ **mcp-multiomics** - Multi-omics integration (91 tests, 68% coverage)
-- ✅ **mcp-fgbio** - Genomic QC (29 tests, 77% coverage)
-
-**Conditionally Ready (1/9):**
-- ⚠️ **mcp-spatialtools** (95% real - STAR alignment, ComBat batch correction, pathway enrichment validated; see [Implementation Status](servers/mcp-spatialtools/SERVER_IMPLEMENTATION_STATUS.md))
-
-**Mocked/Partial Servers (6/9):**
-- ❌ mcp-tcga, mcp-deepcell, mcp-huggingface, mcp-seqera (0% real - fully mocked)
-- 🔶 mcp-openimagedata (30% real - basic features only)
-- Mock EHR by design: mcp-epic
-
-**📋 Check detailed status before production use:** [Server Implementation Status Matrix →](docs/SERVER_IMPLEMENTATION_STATUS.md)
-
----
-
 ## Featured Use Case: PatientOne
 
 **Comprehensive Precision Medicine Workflow for Stage IV Ovarian Cancer**
@@ -155,15 +24,59 @@ This repository serves multiple audiences in the precision medicine ecosystem. F
 
 **End-to-end demonstration using all 9 MCP servers:**
 - **Patient:** Stage IV HGSOC, platinum-resistant, BRCA1 mutation
-- **Data Modalities:** Clinical (Epic) → Genomic (FGbio, TCGA) → Multiomics (RNA/Protein/Phospho) → Spatial (900 spots, 31 genes) → Imaging (H&E, multiplex IF)
-- **Cost:** DRY_RUN demo in 25-35 min (~$0.32) or real analysis in 1-3 hours ($7-29, see [Cost Analysis](docs/COST_ANALYSIS.md))
+- **Data Modalities:** Clinical (Epic FHIR) → Genomic (FGbio, TCGA) → Multi-omics (RNA/Protein/Phospho) → Spatial (900 spots, 31 genes) → Imaging (H&E, multiplex IF)
+- **Cost:** DRY_RUN demo in 25-35 min (~$0.32) or real analysis in 1-3 hours ($7-29)
 - **ROI:** Replaces ~40 hours of manual bioinformatics work per patient
 
-**📖 Learn More:** [PatientOne Documentation →](architecture/patient-one/README.md) | [Quick Start →](tests/manual_testing/PatientOne-OvarianCancer/README.md) | [Sample Outputs →](architecture/patient-one/patient-one-outputs/)    
+**📖 Learn More:** [PatientOne Documentation →](architecture/patient-one/README.md) | [Quick Start →](tests/manual_testing/PatientOne-OvarianCancer/README.md) | [Sample Outputs →](architecture/patient-one/patient-one-outputs/)
 
 ---
 
-## Server Ecosystem Overview
+## Who is this For?
+
+This repository serves multiple audiences in the precision medicine ecosystem. Find your role below to get started quickly:
+
+### 🔬 **Bioinformatics Researchers**
+*You want to analyze multi-omics cancer data and validate precision medicine hypotheses*
+
+**What you can do with this repository:**
+- Analyze spatial transcriptomics data (STAR alignment, batch correction, pathway enrichment)
+- Integrate multi-omics datasets (RNA, protein, phosphoproteomics)
+- Map tumor microenvironment heterogeneity
+- Identify drug resistance mechanisms
+
+**Quick Start:**
+1. [PatientOne Workflow Guide](tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete analysis in 25-35 min
+2. [mcp-spatialtools Quick Start](servers/mcp-spatialtools/QUICKSTART.md) - Batch correction, pathway enrichment (95% real)
+3. [Cost Analysis](docs/COST_ANALYSIS.md) - $0.32 demo or $7-29 real analysis
+
+**Production-Ready Servers:**
+
+| Server | Tools | Status | Key Features |
+|--------|-------|--------|--------------|
+| **mcp-multiomics** | 9 | ✅ Production | HAllA integration, Stouffer meta-analysis, upstream regulators |
+| **mcp-fgbio** | 4 | ✅ Production | FASTQ/VCF QC, genome reference management |
+| **mcp-spatialtools** | 10 | ⚠️ 95% Real | STAR alignment, ComBat batch correction, pathway enrichment, Moran's I |
+
+**Mocked Servers** (workflow demonstration only):
+- mcp-tcga, mcp-deepcell, mcp-huggingface, mcp-seqera (0% real)
+- mcp-openimagedata (30% real - basic features only)
+- mcp-epic (mock FHIR by design)
+
+**Use cases:** PDX model analysis • Tumor microenvironment mapping • Drug resistance mechanisms • Pathway enrichment
+
+---
+
+### 💻 **MCP Developers**
+*You want to build custom MCP servers or extend existing bioinformatics tools*
+
+**What you can learn:**
+- How to architect MCP servers for complex bioinformatics workflows
+- Best practices for testing (91 tests in mcp-multiomics, 68% coverage)
+- Integration patterns for external tools (STAR, ComBat, HAllA)
+- Real vs mocked implementation strategies
+
+**Server Architecture:**
 
 ```mermaid
 graph TD
@@ -211,78 +124,220 @@ graph TD
 ```
 
 **Legend:**
-- ✅ **Production Ready** (solid green boxes, thick arrows `==>`)
-- ⚠️ **Conditionally Ready** (yellow boxes, solid arrows `-->`)
-- 🔶 **Partial** (light yellow, dotted arrows `-.->`  )
-- ❌ **Mocked** (red boxes, dotted arrows `-.->`)
-- **Mock by Design** (gray boxes, dotted arrows `-.->`)
+- ✅ Production Ready (solid green, thick arrows `==>`) - 2/9 servers
+- ⚠️ Conditionally Ready (yellow, solid arrows `-->`) - 1/9 servers
+- 🔶 Partial (light yellow, dotted `-.->`  ) - 1/9 servers
+- ❌ Mocked (red, dotted `-.->`) - 4/9 servers
+- Mock by Design (gray, dotted `-.->`) - 1/9 servers
 
-
----
-
-## MCP Server Ecosystem (9 Servers, 40 Tools)
-
-| Server | Tools | Purpose | Status |
-|--------|-------|---------|--------|
-| **mcp-fgbio** | 4 | FASTQ/VCF processing, genome references | ✅ Production |
-| **mcp-spatialtools** | 10 | Spatial transcriptomics (STAR alignment, batch correction, pathway enrichment, Moran's I) | ⚠️ 95% Real |
-| **mcp-openimagedata** | 3 | Histology image retrieval and registration | 🔶 Partial |
-| **mcp-multiomics** | 9 | RNA/Protein/Phospho integration (HAllA, Stouffer) | ✅ Production |
-| **mcp-tcga** | 5 | Cancer atlas queries, cohort comparisons | ❌ Mocked |
-| **mcp-epic** | 3 | Clinical EHR data (mock) | ❌ By design |
-| **mcp-deepcell** | 2 | Cell segmentation and classification | ❌ Mocked |
-| **mcp-huggingface** | 3 | Genomic language models | ❌ Mocked |
-| **mcp-seqera** | 3 | Nextflow workflow orchestration | ❌ Mocked |
-
-**📋 Detailed tool listings:** See individual server READMEs in [servers/](servers/)
+**Development Resources:**
+- **Architecture:** [System Design](architecture/README.md) • [PatientOne Architecture](architecture/patient-one/README.md)
+- **Best Reference:** [mcp-multiomics](servers/mcp-multiomics/README.md) (91 tests, 68% coverage, HAllA integration)
+- **95% Real Example:** [mcp-spatialtools](servers/mcp-spatialtools/) ([Implementation Status](servers/mcp-spatialtools/SERVER_IMPLEMENTATION_STATUS.md))
+- **Testing Guide:** [Solution Testing](tests/manual_testing/Solution-Testing/README.md)
+- **Status Matrix:** [All Server Implementation Details](docs/SERVER_IMPLEMENTATION_STATUS.md)
 
 ---
 
-## Quick Start
+### 🏥 **Clinical Care Teams** *(Oncologists, Genetic Counselors)*
+*You want to understand how AI-orchestrated bioinformatics can support clinical decision-making*
 
-IMPORTANT: In this POC all MCP servers are running locally and are expected to use your local Claude Desktop as their client.
+**⚠️ IMPORTANT:** This repository is for **RESEARCH USE ONLY**. Not validated for clinical decision-making, FDA/EMA approval, or patient care.
+
+**What this demonstrates:**
+- How multi-omics data can identify potential treatment strategies
+- Integration of clinical (FHIR), genomic, spatial, and imaging data
+- AI orchestration of complex bioinformatics workflows
+- Evidence-based pathway analysis (44 curated ovarian cancer pathways)
+
+**Educational Resources:**
+- **Case Study:** [PatientOne - Stage IV HGSOC](architecture/patient-one/README.md)
+- **Sample Outputs:** [Clinical Reports & Visualizations](architecture/patient-one/patient-one-outputs/)
+- **Data Privacy:** [FHIR De-identification](tests/manual_testing/PatientOne-OvarianCancer/implementation/PHASE0_CLINICAL_FHIR.md)
+- **Workflow Overview:** See PatientOne graphic above for data flow
+
+**Educational value:** Understand precision medicine workflows • Evaluate bioinformatics pipelines • Assess multi-omics integration approaches
+
+**⚠️ Disclaimer:** This is research technology, not clinical care. Always consult qualified oncologists for medical decisions.
+
+---
+
+### 🛠️ **Software Engineers**
+*You want to deploy, integrate, or scale this system*
+
+**Quick Start - Local Development (5 minutes):**
 
 ```bash
-# Install (5 min)
+# 1. Clone repository
 git clone https://github.com/lynnlangit/precision-medicine-mcp.git
 cd precision-medicine-mcp/tests/manual_testing/Solution-Testing
-./install_dependencies.sh
 
-# Configure Claude Desktop
-cp ../../../configs/claude_desktop_config.json ~/Library/Application\ Support/Claude/claude_desktop_config.json
+# 2. Install dependencies
+./install_dependencies.sh  # Installs 9 MCP servers
 
-# Verify (restart Claude Desktop first)
+# 3. Configure Claude Desktop
+cp ../../../configs/claude_desktop_config.json \
+   ~/Library/Application\ Support/Claude/claude_desktop_config.json
+
+# 4. Verify (restart Claude Desktop first)
 ./verify_servers.sh
 ```
 
 **Prerequisites:** Python 3.11+, Claude Desktop, 16GB RAM, 50GB disk
 
+**Deployment Scenarios:**
+
+| Environment | Setup | Resources | Use Case |
+|-------------|-------|-----------|----------|
+| **Local Development** | MacOS/Linux + Claude Desktop | 16GB RAM, 50GB disk | Research, testing, demos |
+| **Cloud Research** | GCP Healthcare API + Vertex AI | Custom (scalable) | Production research, multi-patient |
+| **HPC Clusters** | Nextflow workflows | 32GB+ RAM, 100GB+ disk | Large-scale spatial analysis with STAR |
+
+**Infrastructure Resources:**
+- **Cloud Setup:** [GCP Deployment Guide](infrastructure/README.md) - Healthcare API, FHIR stores, Vertex AI
+- **Config Files:** [Claude Desktop Config](configs/claude_desktop_config.json)
+- **Automated Testing:** [Verify All 9 Servers](tests/manual_testing/Solution-Testing/)
+- **STAR Installation:** [STAR Aligner Setup](servers/mcp-spatialtools/INSTALL_STAR.md) (for spatial analysis)
+
+---
+
+### 📊 **Data Scientists / ML Engineers**
+*You want to work with multi-omics data pipelines or build predictive models*
+
+**What you can analyze:**
+
+**Data Modalities (PatientOne example):**
+- **Clinical:** FHIR resources (demographics, conditions, medications, biomarkers)
+- **Genomics:** VCF files (TP53, PIK3CA, PTEN, BRCA1 mutations)
+- **Multi-omics:** RNA-seq (15 samples) • Proteomics (15 samples) • Phosphoproteomics (15 samples)
+- **Spatial:** 900 spots × 31 genes (Visium format)
+- **Imaging:** H&E histology, multiplex IF (DAPI, CD3, CD8, Ki67, PanCK)
+
+**Analysis Workflows:**
+1. **Differential Expression** - Mann-Whitney U test + FDR correction
+2. **Pathway Enrichment** - Fisher's exact test on 44 curated pathways (KEGG, Hallmark, GO_BP, Drug_Resistance)
+3. **Spatial Autocorrelation** - Moran's I for spatially variable genes
+4. **Cell Type Deconvolution** - Signature-based scoring (tumor, fibroblasts, immune, hypoxic)
+5. **Batch Correction** - ComBat for removing technical variation
+6. **Multi-omics Integration** - HAllA association analysis, Stouffer meta-analysis
+
+**Start Here:**
+- **Synthetic Dataset:** [PAT001-OVC-2025](data/patient-data/PAT001-OVC-2025/README.md) - 100% synthetic, 5 modalities
+- **Multi-omics Examples:** [mcp-multiomics](servers/mcp-multiomics/README.md) - HAllA, Stouffer, upstream regulators
+- **Batch Correction:** [ComBat Workflow](servers/mcp-spatialtools/tests/test_batch_correction_spatial_format.py)
+- **ML Integration:** [mcp-huggingface](servers/mcp-huggingface/) (mocked - extensible for real models)
+
+---
+
+### 🎓 **Students & Educators**
+*You want to learn or teach precision medicine and bioinformatics*
+
+**Why this is perfect for teaching:**
+- ✅ **100% synthetic data** - No patient privacy concerns, safe for classroom use
+- ✅ **Low cost** - DRY_RUN mode ~$0.32 per complete analysis
+- ✅ **Comprehensive** - Covers all major bioinformatics domains
+- ✅ **Well-documented** - Step-by-step guides with expected outputs
+
+**Start Here:**
+1. **Tutorials:** [PatientOne Quick Start](tests/manual_testing/PatientOne-OvarianCancer/README.md) - Step-by-step walkthrough
+2. **Synthetic Data:** [PAT001-OVC-2025](data/patient-data/PAT001-OVC-2025/README.md) - Clinical, genomics, spatial, imaging
+3. **Architecture:** [System Design](architecture/) - Data flow, integration patterns
+4. **Hands-on:** Run DRY_RUN mode in 25-35 min for ~$0.32
+
+**Educational Topics Covered:**
+- Precision oncology workflows (clinical → genomic → spatial → treatment)
+- Multi-omics data integration (RNA, protein, phospho)
+- Spatial transcriptomics analysis (batch correction, pathway enrichment)
+- AI orchestration in bioinformatics (natural language → tool execution)
+- Statistical methods (Fisher's exact, FDR, Moran's I, Mann-Whitney U)
+- Cloud deployment (GCP Healthcare API, FHIR)
+
+**Classroom Activities:**
+- Analyze PatientOne case study (25-35 min)
+- Compare DRY_RUN vs real analysis results
+- Design custom precision medicine workflows
+- Extend servers with new bioinformatics tools
+
+---
+
+### 👥 **Patients & Families**
+*You want to understand precision medicine for ovarian cancer*
+
+**⚠️ IMPORTANT:** This is a **research demonstration**, not a clinical tool. Always consult qualified oncologists for medical decisions.
+
+**What this demonstrates:**
+Precision medicine analyzes your unique cancer profile—genomics, transcriptomics, and imaging—to identify which treatments are most likely to work for you. This repository shows how bioinformatics can process this complex data, but it's research technology, not clinical care.
+
+**PatientOne Story:**
+This project is named in memory of a dear friend who passed from High-Grade Serous Ovarian Carcinoma (HGSOC) in 2025. Her journey inspired the development of these tools to help researchers understand and combat this devastating disease.
+
+**Learn More:**
+- **PatientOne Background:** [Case Study](architecture/patient-one/README.md)
+- **What is Precision Medicine:** [Overview](architecture/patient-one/README.md#what-is-precision-medicine) (coming soon)
+- **Educational Resources:** See [Resources](#resources) section below for peer-reviewed articles
+- **Clinical Trials:** [ClinicalTrials.gov - Ovarian Cancer](https://clinicaltrials.gov/)
+
+**Important Reminders:**
+- This repository is for **RESEARCH ONLY** - not for diagnosing or treating cancer
+- All treatment decisions must be made by qualified oncologists
+- The synthetic data is for demonstration purposes - not real patient data
+- Consult your healthcare team for personalized medical advice
+
+---
+
+## ⚠️ Important: Production Readiness Status
+
+**Before using these servers for research or production:**
+
+**Production-Ready Servers (2/9):**
+- ✅ **mcp-multiomics** - Multi-omics integration (91 tests, 68% coverage)
+- ✅ **mcp-fgbio** - Genomic QC (29 tests, 77% coverage)
+
+**Conditionally Ready (1/9):**
+- ⚠️ **mcp-spatialtools** (95% real - STAR alignment, ComBat batch correction, pathway enrichment validated; see [Implementation Status](servers/mcp-spatialtools/SERVER_IMPLEMENTATION_STATUS.md))
+
+**Mocked/Partial Servers (6/9):**
+- ❌ mcp-tcga, mcp-deepcell, mcp-huggingface, mcp-seqera (0% real - fully mocked for workflow demonstration)
+- 🔶 mcp-openimagedata (30% real - basic features only)
+- Mock EHR by design: mcp-epic (FHIR mock for testing)
+
+**📋 Check detailed status before production use:** [Server Implementation Status Matrix →](docs/SERVER_IMPLEMENTATION_STATUS.md)
+
 ---
 
 ## Example Client Usage
 
-**Example of MCP servers in action using Claude Desktop:**
+**MCP servers in action with Claude Desktop:**
+
 <kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/data/images/Claude-client.png" width=800></kbd>
 
-**Try PatientOne:** [Quick Start Guide →](tests/manual_testing/PatientOne-OvarianCancer/README.md)
+**Try it yourself:** [PatientOne Quick Start Guide →](tests/manual_testing/PatientOne-OvarianCancer/README.md)
 
 ---
 
 ## Resources
 
-**References:**
-- [MCP Specification](https://modelcontextprotocol.io/specification/2025-06-18)
-- [FastMCP Docs](https://github.com/modelcontextprotocol/python-sdk)
-- [BioinfoMCP Paper](https://arxiv.org/html/2510.02139v1)
-- [Spatial Transcriptomics Review](https://academic.oup.com/nar/article/53/12/gkaf536/8174767)
+**Technical Documentation:**
+- [MCP Specification](https://modelcontextprotocol.io/specification/2025-06-18) - Protocol specification
+- [FastMCP Framework](https://github.com/modelcontextprotocol/python-sdk) - Python SDK for building MCP servers
+- [PatientOne Architecture](architecture/patient-one/README.md) - System design & data flow
+- [Cost Analysis & ROI](docs/COST_ANALYSIS.md) - Performance, costs, time estimates
 
-**Cost & Performance Analysis:**
-- [Complete Cost Analysis & ROI](docs/COST_ANALYSIS.md) - Detailed breakdown of DRY_RUN vs Real Data costs, time estimates, and return on investment calculations
+**Scientific References:**
+- [BioinfoMCP Paper](https://arxiv.org/html/2510.02139v1) - Bioinformatics workflows with MCP
+- [Spatial Transcriptomics Review](https://academic.oup.com/nar/article/53/12/gkaf536/8174767) - Technology overview
+- [TCGA Ovarian Cancer](https://portal.gdc.cancer.gov/projects/TCGA-OV) - Public genomic datasets
+- [10x Genomics Visium](https://www.10xgenomics.com/datasets) - Spatial transcriptomics platform
 
-**Acknowledgments:** Model Context Protocol (Anthropic), BioinfoMCP, FGbio, TCGA, Seqera Platform
+**Acknowledgments:**
+- Model Context Protocol (Anthropic)
+- BioinfoMCP research team
+- FGbio, TCGA, Seqera Platform
+- 10x Genomics, GENCODE, KEGG
+- PatientOne - in memory of a dear friend
 
 ---
 
-
 **Last Updated:** December 29, 2025
+**Status:** 3/9 servers production-ready (mcp-multiomics, mcp-fgbio, mcp-spatialtools @ 95%)
 **Built for the precision medicine community**
