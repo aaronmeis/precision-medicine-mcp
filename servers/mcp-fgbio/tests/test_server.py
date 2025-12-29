@@ -200,7 +200,8 @@ class TestValidateFastq:
     @pytest.mark.asyncio
     async def test_validate_missing_file(self) -> None:
         """Test error handling for missing file."""
-        with pytest.raises(IOError, match="not found"):
+        from mcp_fgbio.validation import ValidationError
+        with pytest.raises(ValidationError, match="not found"):
             await validate_fastq(
                 fastq_path="/nonexistent/file.fastq",
                 min_quality_score=20
@@ -213,10 +214,11 @@ class TestValidateFastq:
         monkeypatch
     ) -> None:
         """Test error handling for invalid FASTQ format."""
+        from mcp_fgbio.validation import ValidationError
         # Disable dry-run to test actual validation
         monkeypatch.setenv("FGBIO_DRY_RUN", "false")
 
-        with pytest.raises(ValueError, match="validation failed"):
+        with pytest.raises(ValidationError, match="Invalid FASTQ format"):
             await validate_fastq(
                 fastq_path=str(mock_invalid_fastq),
                 min_quality_score=20
