@@ -168,7 +168,7 @@ graph TD
 **Educational Resources:**
 - **Case Study:** [PatientOne - Stage IV HGSOC](architecture/patient-one/README.md)
 - **Clinical Reports:** [Sample Outputs for Care Teams](architecture/patient-one/patient-one-outputs/for-care-team/) - MCP reports, spatial analysis, multi-omics figures
-- **Data Privacy:** [FHIR De-identification](tests/manual_testing/PatientOne-OvarianCancer/implementation/PHASE0_CLINICAL_FHIR.md)
+- **Data Privacy:** [FHIR & De-identification Guide](infrastructure/test-data/MOCK_FHIR_GUIDE.md) - HIPAA Safe Harbor method
 - **Workflow Overview:** See PatientOne graphic above for data flow
 
 **Educational value:** Understand precision medicine workflows • Evaluate bioinformatics pipelines • Assess multi-omics integration approaches
