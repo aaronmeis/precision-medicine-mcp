@@ -1008,6 +1008,157 @@ async def perform_differential_expression(
 # ============================================================================
 
 
+def _calculate_batch_variance(data: np.ndarray, batch: np.ndarray) -> float:
+    """Calculate variance explained by batch effects.
+
+    Uses ANOVA-like approach to estimate what proportion of variance
+    is explained by batch labels.
+
+    Args:
+        data: Sample × feature matrix
+        batch: Batch labels for each sample
+
+    Returns:
+        Proportion of variance explained by batch (0-1)
+    """
+    # Overall mean
+    grand_mean = np.mean(data, axis=0)
+
+    # Total sum of squares
+    ss_total = np.sum((data - grand_mean) ** 2)
+
+    if ss_total == 0:
+        return 0.0
+
+    # Between-batch sum of squares
+    ss_between = 0.0
+    for b in np.unique(batch):
+        batch_mask = (batch == b)
+        batch_data = data[batch_mask]
+        batch_mean = np.mean(batch_data, axis=0)
+        n_batch = np.sum(batch_mask)
+        ss_between += n_batch * np.sum((batch_mean - grand_mean) ** 2)
+
+    # Variance explained by batch
+    variance_explained = ss_between / ss_total
+
+    return float(variance_explained)
+
+
+def _combat_batch_correction(
+    data: pd.DataFrame,
+    batch: np.ndarray,
+    parametric: bool = True
+) -> pd.DataFrame:
+    """Apply ComBat batch correction algorithm.
+
+    ComBat uses empirical Bayes framework to adjust for batch effects.
+    Based on Johnson et al. (2007) Biostatistics and the SVA R package.
+
+    Args:
+        data: Expression matrix (genes × samples)
+        batch: Batch labels for each sample (1D array)
+        parametric: Use parametric empirical Bayes (True) or non-parametric (False)
+
+    Returns:
+        Batch-corrected expression matrix
+    """
+    # Convert to numpy for computation
+    dat = data.values
+    n_genes, n_samples = dat.shape
+
+    # Get unique batches
+    batches = np.unique(batch)
+    n_batch = len(batches)
+
+    if n_batch == 1:
+        logger.warning("Only one batch detected, returning original data")
+        return data
+
+    # Create batch design matrix
+    batch_design = np.zeros((n_samples, n_batch))
+    for i, b in enumerate(batches):
+        batch_design[:, i] = (batch == b).astype(int)
+
+    # Step 1: Standardize data across genes
+    # Calculate gene-wise means and variances
+    gene_mean = np.mean(dat, axis=1, keepdims=True)
+    gene_var = np.var(dat, axis=1, keepdims=True)
+    gene_var[gene_var == 0] = 1e-10  # Avoid division by zero
+
+    # Standardize
+    s_data = (dat - gene_mean) / np.sqrt(gene_var)
+
+    # Step 2: Estimate batch effects (location and scale parameters)
+    # For each batch, estimate gamma (location) and delta (scale)
+    gamma_hat = np.zeros((n_genes, n_batch))
+    delta_hat = np.zeros((n_genes, n_batch))
+
+    for i, b in enumerate(batches):
+        batch_samples = (batch == b)
+        batch_data = s_data[:, batch_samples]
+
+        # Location parameter (mean)
+        gamma_hat[:, i] = np.mean(batch_data, axis=1)
+
+        # Scale parameter (variance)
+        delta_hat[:, i] = np.var(batch_data, axis=1)
+
+    # Step 3: Empirical Bayes shrinkage
+    if parametric:
+        # Parametric prior: gamma ~ N(gamma_bar, tau^2)
+        gamma_bar = np.mean(gamma_hat, axis=1, keepdims=True)
+        tau_squared = np.var(gamma_hat, axis=1, keepdims=True)
+
+        # Empirical Bayes adjustment for gamma
+        # Shrink toward overall mean
+        n_samples_per_batch = np.array([np.sum(batch == b) for b in batches])
+
+        for i in range(n_batch):
+            n_b = n_samples_per_batch[i]
+            # Shrinkage factor
+            shrink_factor = tau_squared[:, 0] / (tau_squared[:, 0] + gene_var[:, 0] / n_b)
+            # Shrunk estimate
+            gamma_star = shrink_factor * gamma_hat[:, i] + (1 - shrink_factor) * gamma_bar[:, 0]
+            gamma_hat[:, i] = gamma_star
+
+        # For delta (variance), use inverse gamma prior
+        # Simpler approach: shrink toward pooled variance
+        pooled_var = np.mean(delta_hat, axis=1, keepdims=True)
+        for i in range(n_batch):
+            n_b = n_samples_per_batch[i]
+            # Simple shrinkage toward pooled variance
+            weight = n_b / (n_b + 10)  # Regularization
+            delta_star = weight * delta_hat[:, i] + (1 - weight) * pooled_var[:, 0]
+            delta_hat[:, i] = delta_star
+
+    # Step 4: Adjust the data
+    corrected = s_data.copy()
+
+    for i, b in enumerate(batches):
+        batch_samples = (batch == b)
+
+        # Subtract location effect
+        corrected[:, batch_samples] -= gamma_hat[:, i:i+1]
+
+        # Adjust for scale effect
+        # scale = sqrt(delta)
+        scale_ratio = np.sqrt(gene_var[:, 0] / (delta_hat[:, i] + 1e-10))
+        corrected[:, batch_samples] *= scale_ratio[:, np.newaxis]
+
+    # Step 5: Reverse standardization (back to original scale)
+    corrected = corrected * np.sqrt(gene_var) + gene_mean
+
+    # Return as DataFrame with original index/columns
+    corrected_df = pd.DataFrame(
+        corrected,
+        index=data.index,
+        columns=data.columns
+    )
+
+    return corrected_df
+
+
 @mcp.tool()
 async def perform_batch_correction(
     expression_files: List[str],
@@ -1051,7 +1202,104 @@ async def perform_batch_correction(
             "mode": "dry_run"
         }
 
-    return {"output_file": output_file}
+    # Real implementation: ComBat batch correction
+    try:
+        # Validate inputs
+        if len(expression_files) != len(batch_labels):
+            return {
+                "status": "error",
+                "error": "Number of expression files must match number of batch labels"
+            }
+
+        if method not in ["combat"]:
+            return {
+                "status": "error",
+                "error": f"Method '{method}' not supported. Currently only 'combat' is implemented."
+            }
+
+        # Load and merge expression matrices
+        expression_data = []
+        sample_names = []
+
+        for i, (file_path, batch_label) in enumerate(zip(expression_files, batch_labels)):
+            try:
+                # Load expression data
+                expr_df = pd.read_csv(file_path, index_col=0)
+
+                # Add batch suffix to column names to avoid conflicts
+                expr_df.columns = [f"{col}_{batch_label}_{i}" for col in expr_df.columns]
+
+                expression_data.append(expr_df)
+                sample_names.extend(expr_df.columns.tolist())
+
+            except Exception as e:
+                return {
+                    "status": "error",
+                    "error": f"Failed to load file {file_path}: {str(e)}"
+                }
+
+        # Merge all data (genes × samples)
+        merged_data = pd.concat(expression_data, axis=1)
+
+        # Ensure all genes are present across all batches
+        # Fill missing values with 0
+        merged_data = merged_data.fillna(0)
+
+        logger.info(f"Merged data shape: {merged_data.shape} (genes × samples)")
+
+        # Create batch array
+        batch_array = []
+        for i, (file_path, batch_label) in enumerate(zip(expression_files, batch_labels)):
+            n_samples = expression_data[i].shape[1]
+            batch_array.extend([batch_label] * n_samples)
+
+        batch_array = np.array(batch_array)
+
+        # Calculate batch effect metrics BEFORE correction
+        # Calculate variance explained by batch
+        variance_before = _calculate_batch_variance(merged_data.T.values, batch_array)
+
+        # Apply ComBat batch correction
+        logger.info(f"Applying ComBat batch correction with {len(set(batch_labels))} batches...")
+        corrected_data = _combat_batch_correction(merged_data, batch_array, parametric=True)
+
+        # Calculate batch effect metrics AFTER correction
+        variance_after = _calculate_batch_variance(corrected_data.T.values, batch_array)
+
+        # Calculate variance reduction
+        variance_reduction = (variance_before - variance_after) / variance_before if variance_before > 0 else 0
+
+        # Save corrected data
+        corrected_data.to_csv(output_file)
+
+        logger.info(f"Batch correction complete. Saved to: {output_file}")
+
+        # Return metrics
+        return {
+            "status": "success",
+            "method": method,
+            "num_batches": len(set(batch_labels)),
+            "num_samples": len(expression_files),
+            "total_samples": len(sample_names),
+            "genes_corrected": merged_data.shape[0],
+            "output_file": output_file,
+            "batch_metrics": {
+                "variance_before": round(float(variance_before), 4),
+                "variance_after": round(float(variance_after), 4),
+                "variance_reduction": round(float(variance_reduction), 4)
+            },
+            "batches": {batch_label: batch_array.tolist().count(batch_label)
+                       for batch_label in set(batch_labels)},
+            "mode": "real_analysis"
+        }
+
+    except Exception as e:
+        logger.error(f"Error performing batch correction: {e}")
+        return {
+            "status": "error",
+            "error": str(e),
+            "message": "Failed to perform batch correction. Check file paths and formats."
+        }
 
 
 # ============================================================================
