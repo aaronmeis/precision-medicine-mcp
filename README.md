@@ -278,6 +278,47 @@ streamlit run app.py
 - **UI Documentation:** [Streamlit App Guide](ui/streamlit-app/README.md)
 - **Deployment Script:** [deploy.sh](ui/streamlit-app/deploy.sh)
 
+**Jupyter Notebook Client (Data Science Interface):**
+
+Interactive Jupyter notebook for reproducible bioinformatics analysis (deployed on Cloud Run):
+
+🌐 **Live JupyterLab:** https://jupyter-mcp-notebook-305650208648.us-central1.run.app
+
+**Features:**
+- Interactive Python notebook environment
+- MCPClient helper class for easy MCP server calls
+- Pre-built workflows (spatial analysis, pathway enrichment, multi-omics)
+- Token usage tracking and cost estimation
+- Visualization examples (matplotlib, seaborn, plotly)
+- Reproducible analysis - save and share workflows
+
+**Quick Test:**
+```bash
+# Local testing
+cd ui/jupyter-notebook
+pip install -r requirements.txt
+export ANTHROPIC_API_KEY=your_key_here
+jupyter notebook mcp_client.ipynb
+
+# Access at http://localhost:8888
+```
+
+**Example Usage:**
+```python
+from mcp_client import MCPClient
+
+client = MCPClient()
+result = client.call_servers(
+    prompt="Analyze spatial transcriptomics for Patient-001",
+    servers=["spatialtools"]
+)
+print(result["response"])
+print(f"Cost: ${result['usage']['estimated_cost_usd']:.4f}")
+```
+
+- **Notebook Documentation:** [Jupyter Notebook Guide](ui/jupyter-notebook/README.md)
+- **Deployment Script:** [deploy.sh](ui/jupyter-notebook/deploy.sh)
+
 </details>
 
 <details>
