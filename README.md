@@ -32,7 +32,9 @@ AI-Orchestrated Clinical Bioinformatics for Precision Oncology using Model Conte
 
 This repository serves multiple audiences in the precision medicine ecosystem. Find your role below to get started quickly:
 
-### 🔬 **Bioinformatics Researchers**
+<details>
+<summary><h3>🔬 Bioinformatics Researchers</h3></summary>
+
 *You want to analyze multi-omics cancer data and validate precision medicine hypotheses*
 
 **What you can do with this repository:**
@@ -65,32 +67,12 @@ This repository serves multiple audiences in the precision medicine ecosystem. F
 - mcp-openimagedata (30% real - basic features only)
 - mcp-epic (mock FHIR by design)
 
-**GCP Cloud Run Deployment:**
-
-All 9 servers successfully deployed and tested on Google Cloud Platform:
-
-| Server | Status | Test Result | URL |
-|--------|--------|-------------|-----|
-| mcp-fgbio | ✅ Running | ✓ PASS | https://mcp-fgbio-ondu7mwjpa-uc.a.run.app |
-| mcp-multiomics | ✅ Running | ✓ PASS | https://mcp-multiomics-ondu7mwjpa-uc.a.run.app |
-| mcp-spatialtools | ✅ Running | ✓ PASS | https://mcp-spatialtools-ondu7mwjpa-uc.a.run.app |
-| mcp-tcga | ✅ Running | ✓ PASS | https://mcp-tcga-ondu7mwjpa-uc.a.run.app |
-| mcp-openimagedata | ✅ Running | ✓ PASS | https://mcp-openimagedata-ondu7mwjpa-uc.a.run.app |
-| mcp-seqera | ✅ Running | ✓ PASS | https://mcp-seqera-ondu7mwjpa-uc.a.run.app |
-| mcp-huggingface | ✅ Running | ✓ PASS | https://mcp-huggingface-ondu7mwjpa-uc.a.run.app |
-| mcp-deepcell | ✅ Running | ✓ PASS | https://mcp-deepcell-ondu7mwjpa-uc.a.run.app |
-| mcp-mockepic | ✅ Running | ✓ PASS | https://mcp-mockepic-ondu7mwjpa-uc.a.run.app |
-
-**Test Results:** 9/9 servers passed functional testing via Claude API (December 30, 2025)
-
-- **Deployment Guide:** [GCP Cloud Run Setup](docs/deployment/DEPLOYMENT_STATUS.md)
-- **Test Script:** [Automated Testing](tests/integration/test_all_gcp_servers.py)
-
 **Use cases:** PDX model analysis • Tumor microenvironment mapping • Drug resistance mechanisms • Pathway enrichment
 
----
+</details>
 
-### 💻 **MCP Developers**
+<details>
+<summary><h3>💻 MCP Developers</h3></summary>
 *You want to build custom MCP servers or extend existing bioinformatics tools*
 
 **What you can learn:**
@@ -169,9 +151,10 @@ graph TD
 
 *MCP servers orchestrating bioinformatics workflows through Claude Desktop*
 
----
+</details>
 
-### 🏥 **Clinical Care Teams** *(Oncologists, Genetic Counselors)*
+<details>
+<summary><h3>🏥 Clinical Care Teams (Oncologists, Genetic Counselors)</h3></summary>
 *You want to understand how AI-orchestrated bioinformatics can support clinical decision-making*
 
 **⚠️ IMPORTANT:** This repository is for **RESEARCH USE ONLY**. Not validated for clinical decision-making, FDA/EMA approval, or patient care.
@@ -192,9 +175,11 @@ graph TD
 
 **⚠️ Disclaimer:** This is research technology, not clinical care. Always consult qualified oncologists for medical decisions.
 
----
+</details>
 
-### 🛠️ **Software Engineers**
+<details>
+<summary><h3>🛠️ Software Engineers</h3></summary>
+
 *You want to deploy, integrate, or scale this system*
 
 **Quick Start - Local Development (5 minutes):**
@@ -231,9 +216,31 @@ cp ../../../desktop-configs/claude_desktop_config.json \
 - **Automated Testing:** [Verify All 9 Servers](tests/manual_testing/Solution-Testing/MANUAL_TESTING_GUIDE.md)
 - **STAR Installation:** [STAR Aligner Setup](servers/mcp-spatialtools/INSTALL_STAR.md) (for spatial analysis)
 
----
+**GCP Cloud Run Deployment:**
 
-### 📊 **Data Scientists / ML Engineers**
+All 9 servers successfully deployed and tested on Google Cloud Platform:
+
+| Server | Status | Test Result | URL |
+|--------|--------|-------------|-----|
+| mcp-fgbio | ✅ Running | ✓ PASS | https://mcp-fgbio-ondu7mwjpa-uc.a.run.app |
+| mcp-multiomics | ✅ Running | ✓ PASS | https://mcp-multiomics-ondu7mwjpa-uc.a.run.app |
+| mcp-spatialtools | ✅ Running | ✓ PASS | https://mcp-spatialtools-ondu7mwjpa-uc.a.run.app |
+| mcp-tcga | ✅ Running | ✓ PASS | https://mcp-tcga-ondu7mwjpa-uc.a.run.app |
+| mcp-openimagedata | ✅ Running | ✓ PASS | https://mcp-openimagedata-ondu7mwjpa-uc.a.run.app |
+| mcp-seqera | ✅ Running | ✓ PASS | https://mcp-seqera-ondu7mwjpa-uc.a.run.app |
+| mcp-huggingface | ✅ Running | ✓ PASS | https://mcp-huggingface-ondu7mwjpa-uc.a.run.app |
+| mcp-deepcell | ✅ Running | ✓ PASS | https://mcp-deepcell-ondu7mwjpa-uc.a.run.app |
+| mcp-mockepic | ✅ Running | ✓ PASS | https://mcp-mockepic-ondu7mwjpa-uc.a.run.app |
+
+**Test Results:** 9/9 servers passed functional testing via Claude API (December 30, 2025)
+
+- **Deployment Guide:** [GCP Cloud Run Setup](docs/deployment/DEPLOYMENT_STATUS.md)
+- **Test Script:** [Automated Testing](tests/integration/test_all_gcp_servers.py)
+
+</details>
+
+<details>
+<summary><h3>📊 Data Scientists / ML Engineers</h3></summary>
 *You want to work with multi-omics data pipelines or build predictive models*
 
 **What you can analyze:**
@@ -259,9 +266,10 @@ cp ../../../desktop-configs/claude_desktop_config.json \
 - **Batch Correction:** [ComBat Workflow](servers/mcp-spatialtools/tests/test_batch_correction_spatial_format.py)
 - **ML Integration:** [mcp-huggingface](servers/mcp-huggingface/) (mocked - extensible for real models)
 
----
+</details>
 
-### 🎓 **Students & Educators**
+<details>
+<summary><h3>🎓 Students & Educators</h3></summary>
 *You want to learn or teach precision medicine and bioinformatics*
 
 **Why this is perfect for teaching:**
@@ -290,9 +298,10 @@ cp ../../../desktop-configs/claude_desktop_config.json \
 - Design custom precision medicine workflows
 - Extend servers with new bioinformatics tools
 
----
+</details>
 
-### 👥 **Patients & Families**
+<details>
+<summary><h3>👥 Patients & Families</h3></summary>
 *You want to understand precision medicine for ovarian cancer*
 
 **⚠️ IMPORTANT:** This is a **research demonstration**, not a clinical tool. Always consult qualified oncologists for medical decisions.
@@ -315,6 +324,8 @@ This project is named in memory of a dear friend who passed from High-Grade Sero
 - All treatment decisions must be made by qualified oncologists
 - The synthetic data is for demonstration purposes - not real patient data
 - Consult your healthcare team for personalized medical advice
+
+</details>
 
 ---
 
