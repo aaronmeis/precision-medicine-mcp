@@ -865,7 +865,8 @@ def main() -> None:
     else:
         logger.info("✅ Real data processing mode enabled (FGBIO_DRY_RUN=false)")
 
-    # Run the server# Get transport and port from environment
+    # Run the server
+    # Get transport and port from environment
     transport = os.getenv("MCP_TRANSPORT", "stdio")
     port = int(os.getenv("PORT", os.getenv("MCP_PORT", "8000")))
 
