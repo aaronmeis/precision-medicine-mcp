@@ -58,10 +58,10 @@ For complete workflow examples, see **MCP_POC_Example_Prompts.md** which include
 ## Related Documentation
 
 ### Current Project
-- **[Multi-Omics Documentation](../multiomics/README.md)** - Phase 3 multi-omics integration (mcp-multiomics server)
-- **[Main README](../../README.md)** - Project overview and quick start
-- **[Manual Testing](../../manual_testing/README.md)** - Testing and verification guides
-- **[Configuration](../../configs/README.md)** - Claude Desktop configuration
+- **[Multi-Omics Documentation](../../multiomics/README.md)** - Phase 3 multi-omics integration (mcp-multiomics server)
+- **[Main README](../../../README.md)** - Project overview and quick start
+- **[Manual Testing](../../../tests/manual_testing/README.md)** - Testing and verification guides
+- **[Configuration](../../../desktop-configs/README.md)** - Claude Desktop configuration
 
 ### Phase 3+ Servers (Not in this directory)
 Phase 3 introduced 6 additional servers for advanced analysis:

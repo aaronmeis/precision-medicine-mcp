@@ -199,17 +199,17 @@ Which genes are significantly dysregulated across all modalities?
 ## Related Documentation
 
 ### Server Documentation
-- **[Server README](../../servers/mcp-multiomics/README.md)** - Server-specific documentation
-- **[Test Results](../../manual_testing/Solution-Testing/TEST_RESULTS_ALL_SERVERS.md)** - All server test results
+- **[Server README](../../../servers/mcp-multiomics/README.md)** - Server-specific documentation
+- **[Test Results](../../../tests/manual_testing/Solution-Testing/TEST_RESULTS_ALL_SERVERS.md)** - All server test results
 
 ### Project Documentation
-- **[Main README](../../README.md)** - Project overview
-- **[Spatial Docs](../spatial/README.md)** - Phase 1-2 spatial transcriptomics docs
-- **[Configuration](../../configs/README.md)** - Claude Desktop setup
+- **[Main README](../../../README.md)** - Project overview
+- **[Spatial Docs](../../spatial/README.md)** - Phase 1-2 spatial transcriptomics docs
+- **[Configuration](../../../desktop-configs/README.md)** - Claude Desktop setup
 
 ### Technical Resources
-- **[Architecture](../../architecture/spatial/README.md)** - Spatial MCP architecture
-- **[Manual Testing](../../manual_testing/README.md)** - Testing and verification
+- **[Architecture](../../spatial/README.md)** - Spatial MCP architecture
+- **[Manual Testing](../../../tests/manual_testing/README.md)** - Testing and verification
 
 ---
 
@@ -229,7 +229,7 @@ Which genes are significantly dysregulated across all modalities?
 ## Quick Links
 
 📖 **[DETAILED_GUIDE.md](DETAILED_GUIDE.md)** - Complete 584-line technical reference
-🔧 **[Troubleshooting](../../servers/mcp-multiomics/TROUBLESHOOTING.md)** - Technical fixes and debugging
+🔧 **[Troubleshooting](../../../servers/mcp-multiomics/TROUBLESHOOTING.md)** - Technical fixes and debugging
 📋 **[Integration Summary](MULTIOMICS_INTEGRATION_SUMMARY.md)** - Original integration summary (archived)
 📐 **[Implementation Plan](archive/Implementation_Plan_mcp_multiomics.md)** - Original design document (archived)
 

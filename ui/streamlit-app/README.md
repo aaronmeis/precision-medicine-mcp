@@ -343,7 +343,7 @@ gcloud run deploy streamlit-mcp-chat \
 - [ ] Server health monitoring
 - [ ] Cost tracking dashboard
 
-**Want to contribute?** See [Contributing Guide](../../CONTRIBUTING.md)
+**Want to contribute?** Open an issue or pull request on GitHub!
 
 ## Support
 

@@ -405,7 +405,7 @@ All PatientOne analyses are:
 - **Main Project:** [Precision Medicine MCP Servers →](../../README.md)
 - **Spatial Workflow:** [Architecture →](../spatial/README.md)
 - **Multiomics Workflow:** [Architecture →](../multiomics/README.md)
-- **Testing Guide:** [PatientOne Implementation →](../../manual_testing/PatientOne-OvarianCancer/README.md)
+- **Testing Guide:** [PatientOne Implementation →](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
 
 ---
 

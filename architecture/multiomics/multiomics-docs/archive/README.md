@@ -38,8 +38,8 @@ For current mcp-multiomics documentation, see:
 
 - **[../README.md](../README.md)** - Quick reference and navigation
 - **[../DETAILED_GUIDE.md](../DETAILED_GUIDE.md)** - Comprehensive technical reference (584 lines)
-- **[../../servers/mcp-multiomics/README.md](../../../servers/mcp-multiomics/README.md)** - Server-specific documentation
-- **[../../servers/mcp-multiomics/TROUBLESHOOTING.md](../../../servers/mcp-multiomics/TROUBLESHOOTING.md)** - Technical fixes and debugging
+- **[Server README](../../../../servers/mcp-multiomics/README.md)** - Server-specific documentation
+- **[Troubleshooting](../../../../servers/mcp-multiomics/TROUBLESHOOTING.md)** - Technical fixes and debugging
 
 ---
 

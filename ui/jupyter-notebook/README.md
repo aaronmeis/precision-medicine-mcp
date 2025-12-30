@@ -452,7 +452,7 @@ export ANTHROPIC_API_KEY=your_key_here
 - [ ] GPU support for image analysis
 - [ ] R kernel support
 
-**Want to contribute?** See [Contributing Guide](../../CONTRIBUTING.md)
+**Want to contribute?** Open an issue or pull request on GitHub!
 
 ## Support
 
