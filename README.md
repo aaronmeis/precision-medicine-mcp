@@ -65,6 +65,27 @@ This repository serves multiple audiences in the precision medicine ecosystem. F
 - mcp-openimagedata (30% real - basic features only)
 - mcp-epic (mock FHIR by design)
 
+**GCP Cloud Run Deployment:**
+
+All 9 servers successfully deployed and tested on Google Cloud Platform:
+
+| Server | Status | Test Result | URL |
+|--------|--------|-------------|-----|
+| mcp-fgbio | ✅ Running | ✓ PASS | https://mcp-fgbio-ondu7mwjpa-uc.a.run.app |
+| mcp-multiomics | ✅ Running | ✓ PASS | https://mcp-multiomics-ondu7mwjpa-uc.a.run.app |
+| mcp-spatialtools | ✅ Running | ✓ PASS | https://mcp-spatialtools-ondu7mwjpa-uc.a.run.app |
+| mcp-tcga | ✅ Running | ✓ PASS | https://mcp-tcga-ondu7mwjpa-uc.a.run.app |
+| mcp-openimagedata | ✅ Running | ✓ PASS | https://mcp-openimagedata-ondu7mwjpa-uc.a.run.app |
+| mcp-seqera | ✅ Running | ✓ PASS | https://mcp-seqera-ondu7mwjpa-uc.a.run.app |
+| mcp-huggingface | ✅ Running | ✓ PASS | https://mcp-huggingface-ondu7mwjpa-uc.a.run.app |
+| mcp-deepcell | ✅ Running | ✓ PASS | https://mcp-deepcell-ondu7mwjpa-uc.a.run.app |
+| mcp-mockepic | ✅ Running | ✓ PASS | https://mcp-mockepic-ondu7mwjpa-uc.a.run.app |
+
+**Test Results:** 9/9 servers passed functional testing via Claude API (December 30, 2025)
+
+- **Deployment Guide:** [GCP Cloud Run Setup](docs/deployment/DEPLOYMENT_STATUS.md)
+- **Test Script:** [Automated Testing](tests/integration/test_all_gcp_servers.py)
+
 **Use cases:** PDX model analysis • Tumor microenvironment mapping • Drug resistance mechanisms • Pathway enrichment
 
 ---
