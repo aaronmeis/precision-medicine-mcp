@@ -7,7 +7,7 @@
 
 AI-Orchestrated Clinical Bioinformatics for Precision Oncology using Model Context Protocol
 
-- Analyze complete patient profiles—from genomics to spatial transcriptomics—using natural language
+- Analyze complete patient profiles—from genomics to spatial transcriptomics—using **natural language**
 - Demonstrate end-to-end precision medicine workflows for Stage IV Ovarian Cancer
 - Use 9 specialized MCP servers and 40+ analysis tools
 
