@@ -1,0 +1,39 @@
+# OAuth2 Proxy for Azure AD SSO Authentication
+# Acts as authentication layer in front of Streamlit UI and Jupyter Notebook
+
+FROM quay.io/oauth2-proxy/oauth2-proxy:v7.6.0-alpine
+
+# Install CA certificates for HTTPS
+RUN apk --no-cache add ca-certificates
+
+# Create non-root user for security
+RUN addgroup -g 2000 oauth2-proxy && \
+    adduser -u 2000 -G oauth2-proxy -s /bin/sh -D oauth2-proxy
+
+# Switch to non-root user
+USER oauth2-proxy
+
+# Expose port 4180 (OAuth2 Proxy default)
+EXPOSE 4180
+
+# Default configuration via environment variables
+# These will be overridden by Cloud Run environment variables
+ENV OAUTH2_PROXY_HTTP_ADDRESS="0.0.0.0:4180" \
+    OAUTH2_PROXY_UPSTREAMS="http://localhost:8501" \
+    OAUTH2_PROXY_EMAIL_DOMAINS="*" \
+    OAUTH2_PROXY_COOKIE_SECURE="true" \
+    OAUTH2_PROXY_COOKIE_HTTPONLY="true" \
+    OAUTH2_PROXY_COOKIE_SAMESITE="lax" \
+    OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER="true" \
+    OAUTH2_PROXY_PASS_USER_HEADERS="true" \
+    OAUTH2_PROXY_SET_XAUTHREQUEST="true" \
+    OAUTH2_PROXY_COOKIE_NAME="_oauth2_proxy" \
+    OAUTH2_PROXY_SESSION_COOKIE_MINIMAL="true"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:4180/ping || exit 1
+
+# Run OAuth2 Proxy
+# Configuration is provided via environment variables in Cloud Run deployment
+CMD ["oauth2-proxy"]
