@@ -865,8 +865,15 @@ def main() -> None:
     else:
         logger.info("✅ Real data processing mode enabled (FGBIO_DRY_RUN=false)")
 
-    # Run the server
-    mcp.run(transport="stdio")
+    # Run the server# Get transport and port from environment
+    transport = os.getenv("MCP_TRANSPORT", "stdio")
+    port = int(os.getenv("PORT", os.getenv("MCP_PORT", "8000")))
+
+    # Run the server with appropriate transport
+    if transport in ("sse", "streamable-http"):
+        mcp.run(transport=transport, port=port, host="0.0.0.0")
+    else:
+        mcp.run(transport=transport)
 
 
 if __name__ == "__main__":

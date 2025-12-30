@@ -26,12 +26,15 @@ test_server() {
 
     echo -n "Testing ${server_name}... "
 
-    # Test health endpoint
-    if curl -s -f --max-time 10 "${url}/health" > /dev/null 2>&1; then
-        echo -e "${GREEN}✓ PASS${NC}"
+    # Test SSE endpoint - should return 405 Method Not Allowed for GET without SSE headers
+    # but that still means the server is running
+    http_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "${url}/sse")
+
+    if [ "$http_code" = "405" ] || [ "$http_code" = "200" ]; then
+        echo -e "${GREEN}✓ PASS (HTTP $http_code)${NC}"
         return 0
     else
-        echo -e "${RED}✗ FAIL${NC}"
+        echo -e "${RED}✗ FAIL (HTTP $http_code)${NC}"
         return 1
     fi
 }

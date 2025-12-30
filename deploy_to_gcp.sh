@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # GCP Cloud Run Deployment Script for All 9 MCP Servers
 # Prerequisites:
@@ -20,17 +20,17 @@ PROJECT_ID="${GCP_PROJECT_ID:-precision-medicine-poc}"
 REGION="${GCP_REGION:-us-central1}"
 REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
 
-# Server configurations
-declare -A SERVERS=(
-    ["mcp-fgbio"]="3000"
-    ["mcp-multiomics"]="3001"
-    ["mcp-spatialtools"]="3002"
-    ["mcp-tcga"]="3003"
-    ["mcp-openimagedata"]="3004"
-    ["mcp-seqera"]="3005"
-    ["mcp-huggingface"]="3006"
-    ["mcp-deepcell"]="3007"
-    ["mcp-mockepic"]="3008"
+# Server configurations (bash 3 compatible)
+SERVERS=(
+    "mcp-fgbio:3000"
+    "mcp-multiomics:3001"
+    "mcp-spatialtools:3002"
+    "mcp-tcga:3003"
+    "mcp-openimagedata:3004"
+    "mcp-seqera:3005"
+    "mcp-huggingface:3006"
+    "mcp-deepcell:3007"
+    "mcp-mockepic:3008"
 )
 
 # Functions
@@ -103,18 +103,18 @@ deploy_server() {
     print_info "Building and deploying from ${server_path}..."
 
     # Deploy to Cloud Run
+    # Note: Dockerfile sets MCP_TRANSPORT=sse and other defaults
+    # Cloud Run automatically sets PORT environment variable
     gcloud run deploy "${server_name}" \
         --source "${server_path}" \
         --platform managed \
         --region "${REGION}" \
         --allow-unauthenticated \
-        --port "${port}" \
         --memory 2Gi \
         --cpu 2 \
         --min-instances 0 \
         --max-instances 10 \
         --timeout 300 \
-        --set-env-vars "MCP_TRANSPORT=http,MCP_PORT=${port}" \
         --quiet
 
     if [ $? -eq 0 ]; then
@@ -178,9 +178,10 @@ main() {
     DEPLOYED=0
     FAILED=0
 
-    for server in "${!SERVERS[@]}"; do
-        port="${SERVERS[$server]}"
-        if deploy_server "$server" "$port"; then
+    for server_config in "${SERVERS[@]}"; do
+        server_name="${server_config%%:*}"
+        port="${server_config##*:}"
+        if deploy_server "$server_name" "$port"; then
             ((DEPLOYED++))
         else
             ((FAILED++))

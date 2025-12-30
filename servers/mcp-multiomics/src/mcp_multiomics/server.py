@@ -9,6 +9,7 @@ Provides tools for:
 """
 
 import logging
+import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -1212,7 +1213,15 @@ def main():
     else:
         logger.info("✅ Real data processing mode enabled (MULTIOMICS_DRY_RUN=false)")
 
-    mcp.run()
+    # Get transport and port from environment
+    transport = os.getenv("MCP_TRANSPORT", "stdio")
+    port = int(os.getenv("PORT", os.getenv("MCP_PORT", "8000")))
+
+    # Run the server with appropriate transport
+    if transport in ("sse", "streamable-http"):
+        mcp.run(transport=transport, port=port, host="0.0.0.0")
+    else:
+        mcp.run(transport=transport)
 
 
 if __name__ == "__main__":
