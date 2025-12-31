@@ -33,7 +33,7 @@ AI-Orchestrated Clinical Bioinformatics for Precision Oncology using Model Conte
 > **See the [Executive Summary](docs/EXECUTIVE_SUMMARY.md)** for:
 > - ROI Analysis: $3,187 savings per patient, $288,700 net benefit Year 1
 > - Production Readiness: HIPAA-compliant hospital deployment in 3 months
-> - Budget: $15,000 pilot (3 months), $30,000/year production
+> - Budget: $15,000 pilot (3 months), $30,000/year production - for tokens and cloud services only
 > - Risk Assessment: Comprehensive mitigation strategies
 > - Success Metrics: Technical, business, and research outcomes
 
