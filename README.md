@@ -48,6 +48,32 @@ This repository serves multiple audiences in the precision medicine ecosystem. F
 
 *You want to analyze multi-omics cancer data, build data pipelines, or develop predictive models*
 
+```mermaid
+graph LR
+    A[📁 Multi-Omics Data] --> B[🔧 Analysis Workflows]
+    B --> C[📊 Insights]
+
+    A1[Clinical<br/>FHIR] --> A
+    A2[Genomics<br/>VCF] --> A
+    A3[RNA/Protein<br/>Phospho] --> A
+    A4[Spatial<br/>Visium] --> A
+    A5[Imaging<br/>H&E/IF] --> A
+
+    B --> B1[Diff Expression]
+    B --> B2[Pathway Enrichment]
+    B --> B3[Cell Deconvolution]
+    B --> B4[Batch Correction]
+    B --> B5[Multi-omics Integration]
+
+    C --> C1[Treatment Targets]
+    C --> C2[Resistance Mechanisms]
+    C --> C3[Biomarkers]
+
+    style A fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
+    style B fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style C fill:#d4edda,stroke:#28a745,stroke-width:2px
+```
+
 **What you can do with this repository:**
 - Analyze spatial transcriptomics data (STAR alignment, batch correction, pathway enrichment)
 - Integrate multi-omics datasets (RNA, protein, phosphoproteomics)
