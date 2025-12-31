@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 
 # GCP Cloud Run Deployment Script for All 9 MCP Servers
+#
 # Prerequisites:
 #   - gcloud CLI installed and authenticated
 #   - Project configured with billing enabled
 #   - Cloud Run API enabled
+#
+# Usage:
+#   ./deploy_to_gcp.sh                    # Deploy in development mode (unauthenticated)
+#   ./deploy_to_gcp.sh --production       # Deploy in production mode (authenticated, VPC, secrets)
+#   ./deploy_to_gcp.sh --server mcp-epic  # Deploy single server
+#
+# Modes:
+#   Development: Public access, no VPC, no secrets, for testing
+#   Production:  Authenticated, VPC, service accounts, secrets, HIPAA-compliant
 
 set -e  # Exit on error
 
@@ -20,18 +30,78 @@ PROJECT_ID="${GCP_PROJECT_ID:-precision-medicine-poc}"
 REGION="${GCP_REGION:-us-central1}"
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
-# Server configurations (bash 3 compatible)
+# Deployment mode (development or production)
+DEPLOYMENT_MODE="${DEPLOYMENT_MODE:-development}"
+
+# Production-specific configuration
+VPC_CONNECTOR="${VPC_CONNECTOR:-mcp-connector}"  # Serverless VPC Connector name
+VPC_EGRESS="${VPC_EGRESS:-all-traffic}"          # Route all traffic through VPC
+
+# Parse command-line arguments
+SINGLE_SERVER=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --production)
+            DEPLOYMENT_MODE="production"
+            shift
+            ;;
+        --development)
+            DEPLOYMENT_MODE="development"
+            shift
+            ;;
+        --server)
+            SINGLE_SERVER="$2"
+            shift 2
+            ;;
+        --help)
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  --production          Deploy in production mode (authenticated, VPC, secrets)"
+            echo "  --development         Deploy in development mode (public access, default)"
+            echo "  --server <name>       Deploy only specified server (e.g., mcp-epic)"
+            echo "  --help                Show this help message"
+            echo ""
+            exit 0
+            ;;
+        *)
+            print_error "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Server configurations with resource requirements
+# Format: "name:port:memory:cpu:env-vars:dry-run-flag"
 SERVERS=(
-    "mcp-fgbio:3000"
-    "mcp-multiomics:3001"
-    "mcp-spatialtools:3002"
-    "mcp-tcga:3003"
-    "mcp-openimagedata:3004"
-    "mcp-seqera:3005"
-    "mcp-huggingface:3006"
-    "mcp-deepcell:3007"
-    "mcp-mockepic:3008"
+    "mcp-fgbio:3000:2Gi:2:FGBIO_LOG_LEVEL=INFO:FGBIO_DRY_RUN=false"
+    "mcp-multiomics:3001:4Gi:2:MULTIOMICS_LOG_LEVEL=INFO:MULTIOMICS_DRY_RUN=false"
+    "mcp-spatialtools:3002:4Gi:2:SPATIAL_LOG_LEVEL=INFO:SPATIAL_DRY_RUN=false"
+    "mcp-tcga:3003:2Gi:2:TCGA_LOG_LEVEL=INFO:TCGA_DRY_RUN=true"
+    "mcp-openimagedata:3004:2Gi:2:IMAGE_LOG_LEVEL=INFO:IMAGE_DRY_RUN=false"
+    "mcp-seqera:3005:2Gi:1:SEQERA_LOG_LEVEL=INFO:SEQERA_DRY_RUN=true"
+    "mcp-huggingface:3006:2Gi:1:HF_LOG_LEVEL=INFO:HF_DRY_RUN=true"
+    "mcp-deepcell:3007:2Gi:1:DEEPCELL_LOG_LEVEL=INFO:DEEPCELL_DRY_RUN=true"
+    "mcp-mockepic:3008:2Gi:1:EPIC_LOG_LEVEL=INFO:DEIDENTIFY_ENABLED=true"
 )
+
+# Server-specific secrets (production only)
+declare -A SERVER_SECRETS
+SERVER_SECRETS["mcp-epic"]="EPIC_FHIR_ENDPOINT=epic-fhir-endpoint:latest,EPIC_CLIENT_ID=epic-client-id:latest,EPIC_CLIENT_SECRET=epic-client-secret:latest"
+
+# Service account mappings (production only)
+declare -A SERVICE_ACCOUNTS
+SERVICE_ACCOUNTS["mcp-fgbio"]="mcp-fgbio-sa"
+SERVICE_ACCOUNTS["mcp-multiomics"]="mcp-multiomics-sa"
+SERVICE_ACCOUNTS["mcp-spatialtools"]="mcp-spatialtools-sa"
+SERVICE_ACCOUNTS["mcp-tcga"]="mcp-tcga-sa"
+SERVICE_ACCOUNTS["mcp-openimagedata"]="mcp-openimagedata-sa"
+SERVICE_ACCOUNTS["mcp-seqera"]="mcp-seqera-sa"
+SERVICE_ACCOUNTS["mcp-huggingface"]="mcp-huggingface-sa"
+SERVICE_ACCOUNTS["mcp-deepcell"]="mcp-deepcell-sa"
+SERVICE_ACCOUNTS["mcp-epic"]="mcp-epic-sa"
+SERVICE_ACCOUNTS["mcp-mockepic"]="mcp-mockepic-sa"
 
 # Functions
 print_header() {
@@ -71,7 +141,7 @@ check_prerequisites() {
     print_success "Authenticated to GCP"
 
     # Set project
-    gcloud config set project "${PROJECT_ID}"
+    gcloud config set project "${PROJECT_ID}" --quiet
     print_success "Project set to: ${PROJECT_ID}"
 
     # Enable required APIs
@@ -83,16 +153,80 @@ check_prerequisites() {
         --quiet
     print_success "APIs enabled"
 
+    # Production mode: Additional prerequisite checks
+    if [ "$DEPLOYMENT_MODE" = "production" ]; then
+        print_info "Checking production prerequisites..."
+
+        # Enable additional APIs for production
+        gcloud services enable \
+            vpcaccess.googleapis.com \
+            secretmanager.googleapis.com \
+            logging.googleapis.com \
+            monitoring.googleapis.com \
+            --quiet
+        print_success "Production APIs enabled"
+
+        # Check VPC connector exists
+        if ! gcloud compute networks vpc-access connectors describe "${VPC_CONNECTOR}" \
+                --region="${REGION}" \
+                --project="${PROJECT_ID}" &> /dev/null; then
+            print_error "VPC connector '${VPC_CONNECTOR}' not found"
+            echo "Create VPC connector first:"
+            echo "  cd infrastructure/hospital-deployment"
+            echo "  ./setup-vpc.sh"
+            exit 1
+        fi
+        print_success "VPC connector found: ${VPC_CONNECTOR}"
+
+        # Check service accounts exist
+        print_info "Verifying service accounts..."
+        local missing_sa=0
+        for sa_name in "${SERVICE_ACCOUNTS[@]}"; do
+            if ! gcloud iam service-accounts describe "${sa_name}@${PROJECT_ID}.iam.gserviceaccount.com" \
+                    --project="${PROJECT_ID}" &> /dev/null; then
+                print_error "Service account not found: ${sa_name}"
+                ((missing_sa++))
+            fi
+        done
+
+        if [ $missing_sa -gt 0 ]; then
+            print_error "Missing ${missing_sa} service account(s)"
+            echo "Create service accounts first:"
+            echo "  cd infrastructure/hospital-deployment"
+            echo "  ./setup-project.sh"
+            exit 1
+        fi
+        print_success "All service accounts verified"
+
+        # Check secrets exist (at least check for Epic secrets if deploying mcp-epic)
+        if [ -z "$SINGLE_SERVER" ] || [ "$SINGLE_SERVER" = "mcp-epic" ]; then
+            print_info "Verifying Epic FHIR secrets..."
+            for secret in epic-fhir-endpoint epic-client-id epic-client-secret; do
+                if ! gcloud secrets describe "$secret" --project="${PROJECT_ID}" &> /dev/null; then
+                    print_error "Secret not found: $secret"
+                    echo "Create secrets first:"
+                    echo "  cd infrastructure/hospital-deployment"
+                    echo "  ./setup-secrets.sh"
+                    exit 1
+                fi
+            done
+            print_success "Epic FHIR secrets verified"
+        fi
+    fi
+
     echo ""
 }
 
 # Deploy a single server
 deploy_server() {
-    local server_name=$1
-    local port=$2
+    local server_config=$1
+
+    # Parse server configuration
+    IFS=':' read -r server_name port memory cpu env_vars dry_run <<< "$server_config"
+
     local server_path="${REPO_ROOT}/servers/${server_name}"
 
-    print_header "Deploying ${server_name}"
+    print_header "Deploying ${server_name} (${DEPLOYMENT_MODE} mode)"
 
     # Check if Dockerfile exists
     if [ ! -f "${server_path}/Dockerfile" ]; then
@@ -101,31 +235,73 @@ deploy_server() {
     fi
 
     print_info "Building and deploying from ${server_path}..."
+    print_info "Resources: ${memory} memory, ${cpu} CPU"
 
-    # Copy shared utilities into server directory temporarily
-    if [ -d "${server_path}/../../shared" ]; then
-        cp -r "${server_path}/../../shared" "${server_path}/_shared_temp"
+    # Build gcloud deploy command
+    local deploy_cmd="gcloud run deploy ${server_name}"
+    deploy_cmd+=" --source ${server_path}"
+    deploy_cmd+=" --platform managed"
+    deploy_cmd+=" --region ${REGION}"
+    deploy_cmd+=" --memory ${memory}"
+    deploy_cmd+=" --cpu ${cpu}"
+    deploy_cmd+=" --min-instances 0"
+    deploy_cmd+=" --max-instances 10"
+    deploy_cmd+=" --timeout 300"
+
+    # Base environment variables
+    local all_env_vars="MCP_TRANSPORT=sse,ENVIRONMENT=${DEPLOYMENT_MODE},${env_vars},${dry_run}"
+
+    # Production mode: Add authentication, VPC, service account, secrets
+    if [ "$DEPLOYMENT_MODE" = "production" ]; then
+        print_info "Production mode: Adding VPC, service account, and secrets..."
+
+        # Require authentication (NO --allow-unauthenticated)
+        deploy_cmd+=" --no-allow-unauthenticated"
+
+        # VPC connector for hospital network integration
+        deploy_cmd+=" --vpc-connector ${VPC_CONNECTOR}"
+        deploy_cmd+=" --vpc-egress ${VPC_EGRESS}"
+
+        # Ingress: Internal and Cloud Load Balancing (not public)
+        deploy_cmd+=" --ingress internal-and-cloud-load-balancing"
+
+        # Service account with least-privilege IAM
+        local service_account="${SERVICE_ACCOUNTS[$server_name]}"
+        if [ -n "$service_account" ]; then
+            deploy_cmd+=" --service-account ${service_account}@${PROJECT_ID}.iam.gserviceaccount.com"
+            print_info "Using service account: ${service_account}"
+        else
+            print_error "No service account configured for ${server_name}"
+            return 1
+        fi
+
+        # Server-specific secrets from Secret Manager
+        local secrets="${SERVER_SECRETS[$server_name]}"
+        if [ -n "$secrets" ]; then
+            deploy_cmd+=" --set-secrets ${secrets}"
+            print_info "Loading secrets from Secret Manager"
+        fi
+
+        # Production environment variables
+        deploy_cmd+=" --update-env-vars ${all_env_vars}"
+
+        # Labels for production tracking
+        deploy_cmd+=" --labels environment=production,hipaa-compliant=true,server=${server_name}"
+
+    else
+        # Development mode: Public access, no VPC, no secrets
+        print_info "Development mode: Public access enabled"
+        deploy_cmd+=" --allow-unauthenticated"
+        deploy_cmd+=" --update-env-vars ${all_env_vars}"
+        deploy_cmd+=" --labels environment=development,server=${server_name}"
     fi
 
-    # Deploy to Cloud Run
-    # Force environment variables to override any cached values
-    gcloud run deploy "${server_name}" \
-        --source "${server_path}" \
-        --platform managed \
-        --region "${REGION}" \
-        --allow-unauthenticated \
-        --memory 2Gi \
-        --cpu 2 \
-        --min-instances 0 \
-        --max-instances 10 \
-        --timeout 300 \
-        --update-env-vars MCP_TRANSPORT=sse \
-        --quiet
+    # Always quiet mode
+    deploy_cmd+=" --quiet"
 
-    # Clean up temporary shared directory
-    if [ -d "${server_path}/_shared_temp" ]; then
-        rm -rf "${server_path}/_shared_temp"
-    fi
+    # Execute deployment
+    print_info "Executing: ${deploy_cmd}"
+    eval "$deploy_cmd"
 
     if [ $? -eq 0 ]; then
         # Get the service URL
@@ -136,6 +312,12 @@ deploy_server() {
 
         print_success "Deployed: ${SERVICE_URL}"
         echo "${server_name}=${SERVICE_URL}" >> "${REPO_ROOT}/infrastructure/deployment_urls.txt"
+
+        # Production mode: Display authentication info
+        if [ "$DEPLOYMENT_MODE" = "production" ]; then
+            print_info "⚠️  This service requires authentication"
+            print_info "   Access via VPN: ${SERVICE_URL}"
+        fi
     else
         print_error "Failed to deploy ${server_name}"
         return 1
@@ -163,35 +345,79 @@ test_server() {
 
 # Main deployment function
 main() {
-    print_header "GCP Cloud Run Deployment - 9 MCP Servers"
+    print_header "GCP Cloud Run Deployment - MCP Servers"
     echo -e "${BLUE}Project: ${PROJECT_ID}${NC}"
     echo -e "${BLUE}Region: ${REGION}${NC}"
+    echo -e "${BLUE}Mode: ${DEPLOYMENT_MODE}${NC}"
+
+    if [ "$DEPLOYMENT_MODE" = "production" ]; then
+        echo -e "${YELLOW}Production mode:${NC}"
+        echo -e "${YELLOW}  - Authentication required${NC}"
+        echo -e "${YELLOW}  - VPC connector: ${VPC_CONNECTOR}${NC}"
+        echo -e "${YELLOW}  - Service accounts enabled${NC}"
+        echo -e "${YELLOW}  - Secrets from Secret Manager${NC}"
+        echo -e "${YELLOW}  - HIPAA-compliant configuration${NC}"
+    else
+        echo -e "${YELLOW}Development mode:${NC}"
+        echo -e "${YELLOW}  - Public access (no authentication)${NC}"
+        echo -e "${YELLOW}  - No VPC integration${NC}"
+        echo -e "${YELLOW}  - Testing/development only${NC}"
+    fi
     echo ""
 
-    # Ask for confirmation
-    read -p "Deploy all 9 servers to GCP Cloud Run? (y/n) " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        print_info "Deployment cancelled"
-        exit 0
+    # Determine which servers to deploy
+    local servers_to_deploy=()
+    if [ -n "$SINGLE_SERVER" ]; then
+        # Deploy single server
+        for server_config in "${SERVERS[@]}"; do
+            server_name="${server_config%%:*}"
+            if [ "$server_name" = "$SINGLE_SERVER" ]; then
+                servers_to_deploy+=("$server_config")
+                break
+            fi
+        done
+
+        if [ ${#servers_to_deploy[@]} -eq 0 ]; then
+            print_error "Server not found: $SINGLE_SERVER"
+            echo "Available servers:"
+            for server_config in "${SERVERS[@]}"; do
+                server_name="${server_config%%:*}"
+                echo "  - $server_name"
+            done
+            exit 1
+        fi
+
+        print_info "Deploying single server: $SINGLE_SERVER"
+    else
+        # Deploy all servers
+        servers_to_deploy=("${SERVERS[@]}")
+        print_info "Deploying all ${#SERVERS[@]} servers"
+
+        # Ask for confirmation
+        read -p "Continue with deployment? (y/n) " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Deployment cancelled"
+            exit 0
+        fi
     fi
 
     # Check prerequisites
     check_prerequisites
 
-    # Clear previous deployment URLs
-    > "${REPO_ROOT}/infrastructure/deployment_urls.txt"
+    # Clear previous deployment URLs (if deploying all)
+    if [ -z "$SINGLE_SERVER" ]; then
+        > "${REPO_ROOT}/infrastructure/deployment_urls.txt"
+    fi
 
-    # Deploy all servers
-    print_header "Deploying All Servers"
+    # Deploy servers
+    print_header "Starting Deployment"
 
     DEPLOYED=0
     FAILED=0
 
-    for server_config in "${SERVERS[@]}"; do
-        server_name="${server_config%%:*}"
-        port="${server_config##*:}"
-        if deploy_server "$server_name" "$port"; then
+    for server_config in "${servers_to_deploy[@]}"; do
+        if deploy_server "$server_config"; then
             ((DEPLOYED++))
         else
             ((FAILED++))
@@ -200,9 +426,9 @@ main() {
 
     echo ""
     print_header "Deployment Summary"
-    echo -e "${GREEN}Deployed: ${DEPLOYED}/9${NC}"
+    echo -e "${GREEN}Deployed: ${DEPLOYED}/${#servers_to_deploy[@]}${NC}"
     if [ $FAILED -gt 0 ]; then
-        echo -e "${RED}Failed: ${FAILED}/9${NC}"
+        echo -e "${RED}Failed: ${FAILED}/${#servers_to_deploy[@]}${NC}"
     fi
     echo ""
 
@@ -213,18 +439,34 @@ main() {
         echo ""
     fi
 
-    # Test deployed servers
-    print_header "Health Check Tests"
-    while IFS='=' read -r server url; do
-        test_server "$server" "$url" || true
-    done < "${REPO_ROOT}/infrastructure/deployment_urls.txt"
+    # Test deployed servers (skip in production mode - requires authentication)
+    if [ "$DEPLOYMENT_MODE" = "development" ]; then
+        print_header "Health Check Tests"
+        while IFS='=' read -r server url; do
+            test_server "$server" "$url" || true
+        done < "${REPO_ROOT}/infrastructure/deployment_urls.txt"
+    else
+        print_info "Skipping health checks in production mode (authentication required)"
+    fi
 
     echo ""
     print_header "Next Steps"
-    echo -e "${YELLOW}1. Copy infrastructure/deployment_urls.txt URLs for your Claude API configuration${NC}"
-    echo -e "${YELLOW}2. Update authentication tokens (if needed)${NC}"
-    echo -e "${YELLOW}3. Test servers with: curl \${SERVICE_URL}/health${NC}"
-    echo -e "${YELLOW}4. See GCP_TESTING_GUIDE.md for Claude API integration${NC}"
+
+    if [ "$DEPLOYMENT_MODE" = "production" ]; then
+        echo -e "${YELLOW}Production Deployment:${NC}"
+        echo -e "${YELLOW}1. Verify VPN access to deployed services${NC}"
+        echo -e "${YELLOW}2. Test authentication with Azure AD SSO${NC}"
+        echo -e "${YELLOW}3. Verify Epic FHIR connection (for mcp-epic)${NC}"
+        echo -e "${YELLOW}4. Check audit logs in Cloud Logging${NC}"
+        echo -e "${YELLOW}5. Review HIPAA compliance checklist${NC}"
+        echo -e "${YELLOW}   See: /docs/hospital-deployment/HIPAA_COMPLIANCE.md${NC}"
+    else
+        echo -e "${YELLOW}Development Deployment:${NC}"
+        echo -e "${YELLOW}1. Copy deployment_urls.txt URLs for Claude API config${NC}"
+        echo -e "${YELLOW}2. Test servers: curl \${SERVICE_URL}/health${NC}"
+        echo -e "${YELLOW}3. See GCP_TESTING_GUIDE.md for integration${NC}"
+        echo -e "${YELLOW}4. Deploy to production: ./deploy_to_gcp.sh --production${NC}"
+    fi
     echo ""
 
     print_success "Deployment complete!"
