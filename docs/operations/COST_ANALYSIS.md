@@ -11,7 +11,7 @@
 | **Real Patient Data (Small Files)** | 1-2 hours | $7-19 | Workflow testing with small synthetic data |
 | **Real Patient Data (with STAR, Small Files)** | 1.5-3 hours | $12-29 | Testing from raw FASTQ (small files) |
 
-**Data size:** ~4.5 MB total (315 KB spatial, 38 KB multi-omics)
+**Data size:** ~4.9 MB total (315 KB spatial, 505 KB multi-omics)
 
 ### Production Data (Realistic Hospital Volumes)
 
@@ -24,7 +24,7 @@
 
 **Key differences:**
 - **Spatial:** 315 KB demo → 100-500 MB production (300-1500x larger)
-- **Multi-omics:** 38 KB demo → 15-20 MB processed matrices production (400-500x larger)
+- **Multi-omics:** 505 KB demo → 15-20 MB processed matrices production (30-40x larger)
 - **Processing time:** 1-3 hours demo → 4-8 hours production (realistic file sizes)
 - **Compute cost:** $7-29 demo → $25-120 production (larger memory, longer runtime)
 
@@ -159,7 +159,7 @@ cd /path/to/spatial-mcp
 - Processes actual patient genomic, transcriptomic, and imaging data
 - Executes computational workflows (alignment, segmentation, etc.)
 - Makes external API calls (TCGA, HuggingFace, Seqera)
-- **Data size:** Small synthetic files (~4.5 MB total)
+- **Data size:** Small synthetic files (~4.9 MB total)
 
 ### Per-Test Breakdown
 
@@ -293,7 +293,7 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 
 **ROI:** Replaces ~40 hours of manual bioinformatics work per patient ($80/hr × 40 = $3,200)
 **Savings:** $3,187 per patient using automated reports, or $159,350 annually
-**Note:** Small synthetic files (315 KB spatial, 38 KB multi-omics)
+**Note:** Small synthetic files (315 KB spatial, 505 KB multi-omics)
 
 ### Academic Research Lab (Production Data)
 **Scenario:** 50 patient analyses per year with realistic hospital data volumes
@@ -355,14 +355,14 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 - **RAM:** 16GB minimum, 32GB recommended
 - **Storage:** 20GB minimum for patient data + cache
 - **Network:** Stable connection for TCGA API calls (if enabled)
-- **Data size:** ~4.5 MB per patient (315 KB spatial, 38 KB multi-omics)
+- **Data size:** ~4.9 MB per patient (315 KB spatial, 505 KB multi-omics)
 
 **With STAR alignment (from raw FASTQ, small files):**
 - **CPU:** 8-16 cores recommended (STAR scales linearly)
 - **RAM:** 32GB minimum, 64GB recommended
 - **Storage:** 100GB minimum
 - **Network:** Download genome index once (3GB compressed), then local
-- **Data size:** ~4.5 MB per patient (synthetic small FASTQ files)
+- **Data size:** ~4.9 MB per patient (synthetic small FASTQ files)
 
 ### Real Patient Data Mode - Production Volumes (Hospital Deployment)
 
@@ -433,7 +433,7 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 - **Scientific computation** (not just LLM orchestration)
 - **Data volume**: Production data is 300-1500× larger than demonstration files
   - Spatial: 315 KB demo → 100-500 MB production
-  - Multi-omics: 38 KB demo → 2.7 GB raw or 15-20 MB processed
+  - Multi-omics: 505 KB demo → 2.7 GB raw or 15-20 MB processed
 - **Processing time**: 2-4 hours (pre-aligned) to 4-8 hours (raw FASTQ) vs 25-35 minutes in DRY_RUN
 - **Memory requirements**: 64-128 GB RAM for production vs 4-8 GB for demonstration
 
@@ -441,7 +441,7 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 **A:** Yes! The costs scale with:
 - **Number of spatial spots:** 900 in demo → 3,000-5,000 in production Visium
 - **Number of genes profiled:** 31 in demo → 18,000-30,000 in whole transcriptome
-- **Multi-omics data volume:** 38 KB demo → 2.7 GB raw production
+- **Multi-omics data volume:** 505 KB demo → 2.7 GB raw production
 - **Image resolution and number of markers:** 4.1 MB demo → 500 MB - 2 GB production
 
 **Demonstration costs:** ~$1 (DRY_RUN) to $7-29 (small synthetic files)
@@ -464,7 +464,7 @@ Similar to DRY_RUN mode, but with larger context from real data files:
 
 **Recent Updates:**
 - **Major:** Updated all costs to reflect realistic hospital production data volumes (Dec 30, 2025)
-  - **Demonstration data:** 4.5 MB per patient (315 KB spatial, 38 KB multi-omics)
+  - **Demonstration data:** 4.9 MB per patient (315 KB spatial, 505 KB multi-omics)
   - **Production data:** 3-8 GB per patient (100-500 MB spatial, 2.7 GB multi-omics raw)
   - **Cost impact:** 3-4× increase for production volumes
 - **Major:** SpatialTools upgraded from 70% → 95% real implementation (Dec 29, 2025)

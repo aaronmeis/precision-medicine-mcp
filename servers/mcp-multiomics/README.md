@@ -42,9 +42,9 @@ Validate data quality and consistency BEFORE analysis.
 **Example:**
 ```
 Claude, please validate my multi-omics data quality:
-- RNA: /data/pdx_rna.csv
-- Protein: /data/pdx_protein.csv
-- Metadata: /data/metadata.csv (includes Batch column)
+- RNA: /data/pdx_rna_seq.csv
+- Protein: /data/pdx_proteomics.csv
+- Metadata: /data/sample_metadata.csv (includes Batch column)
 
 Check for batch effects and sample naming issues.
 ```
@@ -133,10 +133,10 @@ Integrate multi-omics data from RNA, protein, and phosphorylation datasets.
 **Example:**
 ```
 Claude, please integrate my multi-omics PDX data:
-- RNA: /data/pdx_rna_fpkm.csv
-- Protein: /data/pdx_protein_tmt.csv
-- Phospho: /data/pdx_phospho.csv
-- Metadata: /data/sample_info.csv
+- RNA: /data/pdx_rna_seq.csv
+- Protein: /data/pdx_proteomics.csv
+- Phospho: /data/pdx_phosphoproteomics.csv
+- Metadata: /data/sample_metadata.csv
 
 Apply Z-score normalization and filter features with >50% missing data.
 ```
@@ -424,10 +424,10 @@ Claude, analyze my PDX treatment response data with complete pipeline:
 STEP 0: Preprocessing (CRITICAL for real proteomics data)
 ========================================================
 1. Validate data quality:
-   - RNA: /data/pdx_rna_raw.csv
-   - Protein: /data/pdx_protein_raw.csv (TMT, 2 batches, ~18 samples/run)
-   - Phospho: /data/pdx_phospho_raw.csv
-   - Metadata: /data/metadata.csv (includes Batch column)
+   - RNA: /data/pdx_rna_seq_raw.csv
+   - Protein: /data/pdx_proteomics_raw.csv (TMT, 2 batches, ~18 samples/run)
+   - Phospho: /data/pdx_phosphoproteomics_raw.csv
+   - Metadata: /data/sample_metadata.csv (includes Batch column)
 
    Check for batch effects and sample naming issues.
 

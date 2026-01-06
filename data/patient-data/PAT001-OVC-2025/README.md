@@ -65,15 +65,15 @@ This directory contains **100% synthetic patient data** created for demonstratio
 
 | File | Size | Description | Source |
 |------|------|-------------|--------|
-| `pdx_rna_expression.csv` | 15 KB | RNA-seq for 15 PDX samples | Synthetic |
-| `pdx_protein.csv` | 12 KB | Proteomics for 15 PDX samples | Synthetic |
-| `pdx_phospho.csv` | 11 KB | Phosphoproteomics for 15 PDX samples | Synthetic |
-| `pdx_metadata.csv` | 426 B | Sample annotations (resistant vs sensitive) | Synthetic |
+| `pdx_rna_seq.csv` | 279 KB | RNA-seq for 15 PDX samples | Synthetic |
+| `pdx_proteomics.csv` | 140 KB | Proteomics for 15 PDX samples | Synthetic |
+| `pdx_phosphoproteomics.csv` | 85 KB | Phosphoproteomics for 15 PDX samples | Synthetic |
+| `sample_metadata.csv` | 799 B | Sample annotations (resistant vs sensitive) | Synthetic |
 
 **Demonstration specifications:**
 - 15 PDX samples (simplified comparative study)
 - Pre-processed counts matrices (not raw files)
-- Total size: ~38 KB
+- Total size: ~505 KB
 
 #### Production Data (Realistic Per-Patient)
 

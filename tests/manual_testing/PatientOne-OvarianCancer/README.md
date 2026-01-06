@@ -144,18 +144,19 @@ Run **TEST_1** to see clinical + genomic integration:
 
 2. **Copy/paste this prompt:**
 ```
-I want to run the PatientOne clinical and genomic analysis.
+I want to run the PatientOne clinical and genomic analysis (TEST_1).
 
-Please read the following files from /Users/lynnlangit/Documents/GitHub/precision-medicine-mcp/data/patient-data/PAT001-OVC-2025/:
-- clinical_demographics.json
-- ca125_timeline.csv
-- PAT001_somatic_variants.vcf
+Please read the following files:
+- /Users/lynnlangit/Documents/GitHub/spatial-mcp/data/patient-data/PAT001-OVC-2025/clinical/patient_demographics.json
+- /Users/lynnlangit/Documents/GitHub/spatial-mcp/data/patient-data/PAT001-OVC-2025/clinical/lab_results.json
+- /Users/lynnlangit/Documents/GitHub/spatial-mcp/data/patient-data/PAT001-OVC-2025/genomics/somatic_variants.vcf
 
 Then:
-1. Use Epic to summarize patient clinical profile
-2. Use FGbio to analyze somatic variants
-3. Use TCGA to compare mutations to ovarian cancer cohort
-4. Synthesize findings and identify molecular subtype
+1. Use mockepic server to summarize patient clinical profile (demographics, BRCA1 status)
+2. Use mockepic to analyze CA-125 tumor marker trends (evidence of platinum resistance?)
+3. Use fgbio server to parse somatic variants (expect TP53 R175H, PIK3CA E545K, PTEN LOH)
+4. Use tcga server to compare mutations to TCGA ovarian cancer cohort and identify molecular subtype
+5. Synthesize findings into a clinical summary
 
 This is TEST_1 from the PatientOne workflow.
 ```
@@ -186,7 +187,7 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
 | **TEST_5** | Integration & Recommendations | 5-7 min | 5-10 min | ~$1 | ~$1 |
 | **TOTAL** | Complete Analysis | **25-35 min** | **2-4 hours** | **~$1** | **$15-45** |
 
-**Data sizes:** 315 KB spatial, 38 KB multi-omics, 4.1 MB imaging (placeholders)
+**Data sizes:** 315 KB spatial, 505 KB multi-omics, 4.1 MB imaging (total ~4.9 MB)
 
 #### Production Data (Realistic Hospital Volumes)
 
@@ -224,7 +225,7 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
 
 ### TEST_1: Clinical + Genomic Analysis
 **Servers:** Epic, FGbio, TCGA
-**Files:** 3 (clinical_demographics.json, ca125_timeline.csv, PAT001_somatic_variants.vcf)
+**Files:** 3 (patient_demographics.json, lab_results.json, somatic_variants.vcf)
 
 **What it does:**
 - Retrieves patient demographics and treatment history
@@ -243,7 +244,7 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
 
 ### TEST_2: Multi-Omics Resistance Analysis
 **Servers:** MultiOmics
-**Files:** 4 (pdx_rna_expression.csv, pdx_protein.csv, pdx_phospho.csv, pdx_metadata.csv)
+**Files:** 4 (pdx_rna_seq.csv, pdx_proteomics.csv, pdx_phosphoproteomics.csv, sample_metadata.csv)
 
 **What it does:**
 - Integrates RNA/Protein/Phospho data from 15 PDX samples

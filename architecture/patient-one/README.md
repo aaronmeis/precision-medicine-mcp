@@ -205,10 +205,10 @@ All synthetic patient data located in: `/data/patient-data/PAT001-OVC-2025/`
 
 | Modality | Files | Size | Content Description |
 |----------|-------|------|---------------------|
-| **Clinical** | 2 | 10.7 KB | `clinical_demographics.json`, `ca125_timeline.csv` |
-| **Genomic** | 1 | 2.3 KB | `PAT001_somatic_variants.vcf` (12 key variants) |
-| **Multiomics** | 4 | 504 KB | `pdx_rna_expression.csv` (1K genes), `pdx_protein.csv` (500), `pdx_phospho.csv` (300), `pdx_metadata.csv` |
-| **Spatial** | 4 | 559 KB | `visium_spots.csv` (900 spots), `visium_expression.csv` (31 genes), `visium_regions.csv` (6 regions), `visium_spatial_data.csv` (combined) |
+| **Clinical** | 2 | 10.7 KB | `patient_demographics.json`, `lab_results.json` |
+| **Genomic** | 1 | 2.3 KB | `somatic_variants.vcf` (12 key variants) |
+| **Multiomics** | 4 | 505 KB | `pdx_rna_seq.csv` (1K genes), `pdx_proteomics.csv` (500), `pdx_phosphoproteomics.csv` (300), `sample_metadata.csv` |
+| **Spatial** | 4 | 315 KB | `visium_gene_expression.csv` (900 spots × 31 genes), `visium_spatial_coordinates.csv`, `visium_region_annotations.csv` |
 | **Imaging** | 7 | 2.2 MB | H&E + IF (DAPI, CD3, CD8, Ki67, PanCK) + multiplex |
 | **TOTAL** | **18** | **~3.2 MB** | Complete precision medicine dataset |
 

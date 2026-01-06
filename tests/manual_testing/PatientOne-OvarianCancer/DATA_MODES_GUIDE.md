@@ -64,7 +64,7 @@ PatientOne supports two distinct operating modes to accommodate different use ca
 | **Cost** | **~$1 total** | **$8-26 total** | **$24-102 total** |
 | **Cost Breakdown** | Claude tokens only (~30K tokens = ~$1) | Compute ($7-24) + APIs (~$1) + Claude tokens (~$1) | Compute ($22-99) + APIs (~$1) + Claude tokens (~$1-2) |
 | **Claude Token Cost** | ~$1 | ~$1 | **~$1-2** (stays low - servers return summaries!) |
-| **Data Volume** | Minimal (synthetic) | 4.5 MB (315 KB spatial, 38 KB multi-omics) | 3-8 GB (100-500 MB spatial, 2.7 GB multi-omics raw) |
+| **Data Volume** | Minimal (synthetic) | 4.9 MB (315 KB spatial, 505 KB multi-omics) | 3-8 GB (100-500 MB spatial, 2.7 GB multi-omics raw) |
 | **Setup Required** | Minimal | Data files + environment config |
 | **File I/O** | Minimal (no writes) | Full (reads/writes) |
 | **API Keys** | Not needed | May be required (HF_TOKEN, etc.) |

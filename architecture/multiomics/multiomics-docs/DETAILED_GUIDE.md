@@ -237,9 +237,9 @@ MULTIOMICS_DRY_RUN="false" venv/bin/python -m pytest tests/ -v --cov
 
 ```
 I have PDX multi-omics data:
-- RNA: /data/multiomics/pdx_rna.csv
-- Protein: /data/multiomics/pdx_protein.csv
-- Phospho: /data/multiomics/pdx_phospho.csv
+- RNA: /data/multiomics/pdx_rna_seq.csv
+- Protein: /data/multiomics/pdx_proteomics.csv
+- Phospho: /data/multiomics/pdx_phosphoproteomics.csv
 - Metadata: /data/multiomics/sample_metadata.csv
 
 Please integrate these datasets with Z-score normalization.
