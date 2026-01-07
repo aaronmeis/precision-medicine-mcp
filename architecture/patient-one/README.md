@@ -272,31 +272,40 @@ All synthetic patient data located in: `/data/patient-data/PAT001-OVC-2025/`
 
 ## Outputs by Stakeholder
 
-### For Bioinformaticians (`patient-one-outputs/for-researchers/`)
-- **Integrated_Analysis_Report.pdf:** Complete multi-omics integration results with statistical analysis (p-values, FDR, effect sizes)
-- **Spatial_Analysis_Notebook.ipynb:** Reproducible Jupyter notebook with cell type deconvolution, differential expression, and visualization code
-- **Pathway_Enrichment_Results.csv:** Gene set enrichment analysis for all dysregulated pathways (GO_BP, KEGG, Reactome)
-- **QC_Metrics_Summary.pdf:** Data quality metrics across all modalities (alignment rates, sequencing depth, batch effects)
-- **Raw_Data_Matrices.zip:** Processed count matrices, normalized expression values, and metadata for downstream analysis
-- **Workflow_Manifest.json:** Complete computational workflow with tool versions, parameters, and execution logs
+### For Bioinformaticians (`patient-one-outputs/for-researchers/patient-001/`)
+
+**Data Files (CSV/JSON/TXT):**
+- **differential_expression.csv:** Differential expression results (tumor core vs stroma), 17 significant DEGs, log2FC, p-values, FDR
+- **spatial_autocorrelation.csv:** Moran's I spatial statistics for all 31 genes with z-scores and p-values
+- **cell_deconvolution.csv:** Cell type signature scores by tissue region (fibroblasts, immune, hypoxic, resistant)
+- **clinical_summary.txt:** Human-readable analysis report with molecular findings, spatial organization, treatment recommendations
+- **metadata.json:** Analysis metadata, patient ID, dataset statistics, configuration parameters
+
+**Visualizations (PNG, 300 DPI):**
+- **volcano_plot.png:** Differential expression visualization with 17 significant DEGs highlighted (TP53, KRT8, ABCB1, etc.)
+- **spatial_heatmap.png:** Spatial expression patterns for top 6 spatially variable genes (HIF1A, BCL2L1, CD3D, KRT8, MYC, VEGFA)
+- **cell_composition_heatmap.png:** Cell type enrichment heatmap across 6 tissue regions
+- **spatial_autocorrelation_plot.png:** Moran's I bar chart for top 15 genes ranked by spatial clustering strength
+- **summary_figure.png:** Publication-ready multi-panel figure (6 panels: DEGs, cell types, spatial patterns, statistics)
 
 ### For Developers (`patient-one-outputs/for-developer/`)
 - **MCP_Report_PAT001.pdf:** Technical validation report showing all MCP server calls, data flows, and integration points
+- **MCP_Report_PAT001_v2.0_NewSections.pdf:** Enhanced version with additional sections and analysis details
 - **MCP_Servers_Reference_Guide.pdf:** Complete documentation of 9 servers and 40 tools used
 - **Full_Test_Prompt.pdf:** End-to-end prompt that reproduces entire analysis
-- **API_Call_Logs.json:** Timestamped logs of all Anthropic API calls with token usage and costs
 
 ### For Care Teams (`patient-one-outputs/for-care-team/`)
-- **Spatial_Transcriptomics_Analysis.pdf:** Tissue region maps, immune landscape, spatial heterogeneity
-- **Histology_Imaging_Analysis.pdf:** Cell segmentation, Ki67 proliferation index, CD8+ T cell quantification
-- **Multiomics_Resistance_Analysis.pdf:** PI3K/AKT/mTOR pathway activation, drug resistance gene signatures
-- **Clinical_Actionability_Report.pdf:** Targetable alterations, clinical trial matching, evidence-based treatment recommendations
+- **spatial_transcriptomics_analysis.png:** Tissue region maps showing immune landscape and spatial heterogeneity
+- **histology_imaging_analysis.png:** Cell segmentation results with Ki67 proliferation index and CD8+ T cell quantification
+- **multiomics_resistance_analysis.png:** PI3K/AKT/mTOR pathway visualization showing resistance gene signatures
+- **MCP_Report_PAT001.pdf:** Complete technical report with clinical context and actionable findings
+- **generate_multiomics_figure.py:** Python script for regenerating multi-omics visualizations
 
 ### For Patients (`patient-one-outputs/for-patient/`)
-- **Medication_Guide.pdf:** Plain-language explanation of recommended therapies and how they work
-- **Patient_Summary.pdf:** Disease status, test results, next steps in accessible language
-- **Patient_Infographic.pdf:** Visual summary of tumor profile and treatment strategy
-- **FAQ_Sheet.pdf:** Common questions about ovarian cancer, treatment options, and clinical trials
+- **medication_guide.pdf:** Plain-language explanation of recommended therapies and how they work
+- **patient_summary.pdf:** Disease status, test results, next steps in accessible language
+- **patient_infographic.png:** Visual summary of tumor profile and treatment strategy
+- **HTML-versions/:** Web-friendly versions of medication guide and patient summary
 
 ---
 
