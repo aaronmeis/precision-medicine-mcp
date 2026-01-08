@@ -3,7 +3,9 @@ TEST 3: Spatial Transcriptomics Analysis
 
 Patient ID: PAT001-OVC-2025
 
-⚠️ IMPORTANT: Data has been copied to MCP-accessible location. Use spatialtools server to read files.
+⚠️ IMPORTANT: This test uses TABULAR DATA (CSV files), NOT images.
+Use ONLY the spatialtools server to read and analyze files.
+DeepCell is NOT needed - we have no images to segment.
 
 ## Spatial Analysis (use mcp-spatialtools)
 

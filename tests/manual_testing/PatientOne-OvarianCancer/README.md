@@ -221,6 +221,29 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
 
 ---
 
+## Imaging Modality Reference
+
+Understanding the difference between imaging types is critical for correct analysis:
+
+| Image Type | Microscopy Mode | Staining Method | Analysis Server(s) | Use Case |
+|------------|----------------|-----------------|-------------------|----------|
+| **H&E** | Brightfield | Chromogenic (Hematoxylin=blue nuclei, Eosin=pink cytoplasm) | OpenImageData | Tissue architecture, morphology, cellularity assessment |
+| **IF (single-plex)** | Fluorescence | Single fluorescent antibody | OpenImageData + DeepCell | Protein marker quantification (CD8, Ki67, etc.) |
+| **IF (multiplex)** | Fluorescence | Multiple fluorophores (2-7 colors) | OpenImageData + DeepCell | Cell phenotyping, protein co-localization |
+| **Spatial RNA-seq** | N/A (sequencing) | Tabular CSV data (no images) | SpatialTools only | Gene expression patterns across tissue |
+
+**Key Differences:**
+- **H&E:** Brightfield microscopy with colored (chromogenic) stains - NOT fluorescence
+- **IF:** Fluorescence microscopy with fluorescent antibodies - requires different analysis
+- **Spatial data:** No images, just CSV files with coordinates and expression values
+
+**When to use DeepCell:**
+- ✅ IF images requiring cell segmentation
+- ✅ H&E images requiring nuclear/cell segmentation
+- ❌ Tabular spatial data (CSV files) - use SpatialTools instead
+
+---
+
 ## Test Descriptions
 
 ### TEST_1: Clinical + Genomic Analysis
@@ -261,14 +284,16 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
 ---
 
 ### TEST_3: Spatial Transcriptomics
-**Servers:** SpatialTools, DeepCell
-**Files:** 3 (visium_spots.csv, visium_expression.csv, visium_regions.csv)
+**Servers:** SpatialTools
+**Files:** 3 (visium_gene_expression.csv, visium_spatial_coordinates.csv, visium_region_annotations.csv)
 
 **What it does:**
-- Processes 10x Visium spatial RNA-seq (900 spots, 31 genes)
+- Processes 10x Visium spatial RNA-seq **tabular data** (900 spots, 31 genes)
 - Identifies 6 tissue regions (tumor_core, proliferative, interface, stroma, etc.)
-- Maps spatial expression patterns
+- Maps spatial expression patterns from CSV files
 - Quantifies immune cell distribution
+
+**Note:** Uses only tabular CSV data, not images. DeepCell is NOT needed for this test.
 
 **Key Findings:**
 - Immune exclusion phenotype (CD8+ low in tumor core)
@@ -280,13 +305,15 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
 
 ### TEST_4: Histology & Imaging
 **Servers:** OpenImageData, DeepCell
-**Files:** 7 TIFF images (H&E, IF single-markers, multiplex)
+**Files:** 7 TIFF images (H&E brightfield, IF single-markers, multiplex IF)
 
 **What it does:**
-- Analyzes H&E histology (tissue architecture)
-- Processes immunofluorescence (DAPI, CD3, CD8, Ki67, PanCK)
-- Performs cell segmentation and phenotyping
+- Analyzes **H&E histology** using brightfield microscopy (tissue architecture, morphology)
+- Processes **immunofluorescence (IF) images** using fluorescence microscopy (DAPI, CD3, CD8, Ki67, PanCK)
+- Performs cell segmentation on IF images with DeepCell
 - Quantifies proliferation and immune infiltration
+
+**Note:** H&E uses chromogenic stains (brightfield), while IF uses fluorescent antibodies (fluorescence). These require different imaging modalities.
 
 **Key Findings:**
 - Tumor cellularity: 70-80%
