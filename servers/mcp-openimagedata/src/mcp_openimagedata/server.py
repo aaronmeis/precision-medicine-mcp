@@ -10,7 +10,11 @@ import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+import matplotlib
+matplotlib.use('Agg')  # Non-interactive backend for server use
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from PIL import Image
 from fastmcp import FastMCP
 
@@ -60,16 +64,30 @@ To enable real data processing, set: IMAGE_DRY_RUN=false
 # Configuration
 IMAGE_DIR = Path(os.getenv("IMAGE_DATA_DIR", "/workspace/images"))
 CACHE_DIR = Path(os.getenv("IMAGE_CACHE_DIR", "/workspace/cache/images"))
+OUTPUT_DIR = Path(os.getenv("IMAGE_OUTPUT_DIR", "/workspace/output"))
 MAX_IMAGE_SIZE_MB = int(os.getenv("MAX_IMAGE_SIZE_MB", "500"))
 DRY_RUN = os.getenv("IMAGE_DRY_RUN", "false").lower() == "true"
 
 
 def _ensure_directories() -> None:
     """Ensure required directories exist."""
-    IMAGE_DIR.mkdir(parents=True, exist_ok=True)
-    CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    (IMAGE_DIR / "he").mkdir(exist_ok=True)
-    (IMAGE_DIR / "if").mkdir(exist_ok=True)
+    try:
+        IMAGE_DIR.mkdir(parents=True, exist_ok=True)
+        (IMAGE_DIR / "he").mkdir(exist_ok=True)
+        (IMAGE_DIR / "if").mkdir(exist_ok=True)
+    except (OSError, PermissionError):
+        pass
+
+    try:
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    except (OSError, PermissionError):
+        pass
+
+    try:
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        (OUTPUT_DIR / "visualizations").mkdir(exist_ok=True)
+    except (OSError, PermissionError):
+        pass
 
 
 # ============================================================================
@@ -322,6 +340,348 @@ async def extract_image_features(
         "roi_count": 1,
         "processing_time_seconds": 3.0
     }
+
+
+# ============================================================================
+# VISUALIZATION TOOLS
+# ============================================================================
+
+
+@mcp.tool()
+async def generate_multiplex_composite(
+    channel_paths: List[str],
+    channel_names: List[str],
+    channel_colors: Optional[List[str]] = None,
+    output_filename: Optional[str] = None,
+    normalize: bool = True
+) -> Dict[str, Any]:
+    """Generate RGB composite from multiplex immunofluorescence channels.
+
+    Combines multiple fluorescence channels into a single RGB composite image.
+    Useful for visualizing multiplex IF with 2-7 fluorescent markers simultaneously.
+
+    Args:
+        channel_paths: List of paths to individual channel images (grayscale TIFF)
+        channel_names: List of marker names (e.g., ["DAPI", "TP53", "KI67"])
+        channel_colors: Optional list of colors for each channel (e.g., ["blue", "red", "green"])
+                       If None, defaults to standard colors based on position
+        output_filename: Custom output filename (default: multiplex_composite_TIMESTAMP.png)
+        normalize: Whether to normalize intensity per channel (default: True)
+
+    Returns:
+        Dictionary with:
+        - output_file: Path to saved composite image
+        - channels_combined: Number of channels combined
+        - channel_info: List of channel names and colors used
+        - description: Text description
+
+    Example:
+        >>> result = await generate_multiplex_composite(
+        ...     channel_paths=[
+        ...         "/data/PAT001_multiplex_DAPI.tiff",
+        ...         "/data/PAT001_multiplex_TP53.tiff",
+        ...         "/data/PAT001_multiplex_KI67.tiff"
+        ...     ],
+        ...     channel_names=["DAPI", "TP53", "KI67"],
+        ...     channel_colors=["blue", "red", "green"]
+        ... )
+    """
+    if DRY_RUN:
+        return add_dry_run_warning({
+            "output_file": str(OUTPUT_DIR / "visualizations" / "multiplex_composite_dryrun.png"),
+            "channels_combined": len(channel_names),
+            "channel_info": [{"name": name, "color": "auto"} for name in channel_names],
+            "description": f"DRY_RUN: Would generate RGB composite for {', '.join(channel_names)}",
+            "message": "Set IMAGE_DRY_RUN=false to generate real visualizations"
+        })
+
+    try:
+        # Validate inputs
+        if len(channel_paths) != len(channel_names):
+            return {
+                "status": "error",
+                "error": "Number of channel paths must match number of channel names",
+                "num_paths": len(channel_paths),
+                "num_names": len(channel_names)
+            }
+
+        if len(channel_paths) < 1 or len(channel_paths) > 7:
+            return {
+                "status": "error",
+                "error": "Must provide 1-7 channels (typical multiplex IF has 2-7 channels)"
+            }
+
+        # Default color mapping
+        default_colors = ["blue", "green", "red", "cyan", "magenta", "yellow", "white"]
+        if channel_colors is None:
+            channel_colors = default_colors[:len(channel_paths)]
+
+        # Color to RGB mapping
+        color_map = {
+            "blue": [0, 0, 255],
+            "green": [0, 255, 0],
+            "red": [255, 0, 0],
+            "cyan": [0, 255, 255],
+            "magenta": [255, 0, 255],
+            "yellow": [255, 255, 0],
+            "white": [255, 255, 255]
+        }
+
+        # Load and normalize channels
+        channel_arrays = []
+        for i, path in enumerate(channel_paths):
+            try:
+                img = np.array(Image.open(path))
+
+                # Normalize to 0-1 range if requested
+                if normalize:
+                    img_norm = (img - img.min()) / (img.max() - img.min() + 1e-8)
+                else:
+                    img_norm = img / 255.0 if img.max() > 1 else img
+
+                channel_arrays.append(img_norm)
+            except Exception as e:
+                return {
+                    "status": "error",
+                    "error": f"Failed to load channel {i} ({channel_names[i]}): {str(e)}",
+                    "path": path
+                }
+
+        # Verify all channels have same dimensions
+        shapes = [arr.shape for arr in channel_arrays]
+        if len(set(shapes)) > 1:
+            return {
+                "status": "error",
+                "error": "All channels must have the same dimensions",
+                "shapes": {name: shape for name, shape in zip(channel_names, shapes)}
+            }
+
+        # Create RGB composite
+        height, width = channel_arrays[0].shape
+        composite = np.zeros((height, width, 3), dtype=np.float32)
+
+        for channel_arr, color_name in zip(channel_arrays, channel_colors):
+            rgb_color = color_map.get(color_name.lower(), [255, 255, 255])
+            for c in range(3):
+                composite[:, :, c] += channel_arr * (rgb_color[c] / 255.0)
+
+        # Clip to valid range and convert to uint8
+        composite = np.clip(composite, 0, 1)
+        composite_uint8 = (composite * 255).astype(np.uint8)
+
+        # Create visualization with individual channels and composite
+        n_channels = len(channel_arrays)
+        fig, axes = plt.subplots(1, n_channels + 1, figsize=(5 * (n_channels + 1), 5))
+
+        # Plot individual channels
+        for idx, (arr, name, color) in enumerate(zip(channel_arrays, channel_names, channel_colors)):
+            axes[idx].imshow(arr, cmap='gray')
+            axes[idx].set_title(f'{name} ({color})', fontsize=12, fontweight='bold')
+            axes[idx].axis('off')
+
+        # Plot composite
+        axes[n_channels].imshow(composite_uint8)
+        axes[n_channels].set_title('RGB Composite', fontsize=12, fontweight='bold')
+        axes[n_channels].axis('off')
+
+        plt.tight_layout()
+
+        # Save
+        timestamp = pd.Timestamp.now().strftime("%Y%m%d_%H%M%S")
+        if output_filename is None:
+            output_filename = f"multiplex_composite_{timestamp}.png"
+
+        output_path = OUTPUT_DIR / "visualizations" / output_filename
+        fig.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close(fig)
+
+        # Generate description
+        channel_info = [{"name": name, "color": color} for name, color in zip(channel_names, channel_colors)]
+        description = f"Multiplex IF RGB composite combining {len(channel_names)} channels: {', '.join(channel_names)}. "
+        description += f"Colors: {', '.join([f'{name}={color}' for name, color in zip(channel_names, channel_colors)])}."
+
+        return {
+            "status": "success",
+            "output_file": str(output_path),
+            "channels_combined": len(channel_names),
+            "channel_info": channel_info,
+            "image_dimensions": {"width": width, "height": height},
+            "description": description,
+            "visualization_type": "multiplex_composite"
+        }
+
+    except Exception as e:
+        logger.error(f"Error generating multiplex composite: {e}")
+        return {
+            "status": "error",
+            "error": str(e),
+            "message": "Failed to generate multiplex composite. Check file paths and formats."
+        }
+
+
+@mcp.tool()
+async def generate_he_annotation(
+    he_image_path: str,
+    necrotic_regions: Optional[List[Dict[str, int]]] = None,
+    high_cellularity_regions: Optional[List[Dict[str, int]]] = None,
+    output_filename: Optional[str] = None,
+    necrotic_color: str = "red",
+    cellularity_color: str = "green"
+) -> Dict[str, Any]:
+    """Generate annotated H&E morphology visualization.
+
+    Overlays region annotations on H&E histology image to highlight areas
+    of interest such as necrotic regions and high cellularity areas.
+
+    Args:
+        he_image_path: Path to H&E histology image
+        necrotic_regions: List of bounding boxes for necrotic areas
+                         Each box: {"x": x_coord, "y": y_coord, "width": w, "height": h}
+        high_cellularity_regions: List of bounding boxes for high cellularity areas
+        output_filename: Custom output filename (default: he_annotation_TIMESTAMP.png)
+        necrotic_color: Color for necrotic region outlines (default: "red")
+        cellularity_color: Color for high cellularity outlines (default: "green")
+
+    Returns:
+        Dictionary with:
+        - output_file: Path to saved annotated image
+        - necrotic_regions_count: Number of necrotic regions annotated
+        - cellularity_regions_count: Number of high cellularity regions annotated
+        - description: Text description
+
+    Example:
+        >>> result = await generate_he_annotation(
+        ...     he_image_path="/data/PAT001_tumor_HE_20x.tiff",
+        ...     necrotic_regions=[
+        ...         {"x": 100, "y": 200, "width": 300, "height": 250},
+        ...         {"x": 800, "y": 600, "width": 200, "height": 180}
+        ...     ],
+        ...     high_cellularity_regions=[
+        ...         {"x": 400, "y": 100, "width": 350, "height": 300}
+        ...     ]
+        ... )
+    """
+    if DRY_RUN:
+        return add_dry_run_warning({
+            "output_file": str(OUTPUT_DIR / "visualizations" / "he_annotation_dryrun.png"),
+            "necrotic_regions_count": len(necrotic_regions) if necrotic_regions else 0,
+            "cellularity_regions_count": len(high_cellularity_regions) if high_cellularity_regions else 0,
+            "description": "DRY_RUN: Would generate H&E annotation",
+            "message": "Set IMAGE_DRY_RUN=false to generate real visualizations"
+        })
+
+    try:
+        # Load H&E image
+        he_img = np.array(Image.open(he_image_path))
+
+        # Create figure
+        fig, axes = plt.subplots(1, 2, figsize=(16, 8))
+
+        # Original H&E
+        axes[0].imshow(he_img)
+        axes[0].set_title('Original H&E', fontsize=14, fontweight='bold')
+        axes[0].axis('off')
+
+        # Annotated H&E
+        axes[1].imshow(he_img)
+
+        # Color mapping
+        color_map = {
+            "red": "red",
+            "green": "green",
+            "blue": "blue",
+            "yellow": "yellow",
+            "cyan": "cyan",
+            "magenta": "magenta"
+        }
+        necrotic_mpl_color = color_map.get(necrotic_color.lower(), "red")
+        cellularity_mpl_color = color_map.get(cellularity_color.lower(), "green")
+
+        # Draw necrotic regions
+        necrotic_count = 0
+        if necrotic_regions:
+            for region in necrotic_regions:
+                rect = plt.Rectangle(
+                    (region["x"], region["y"]),
+                    region["width"],
+                    region["height"],
+                    linewidth=3,
+                    edgecolor=necrotic_mpl_color,
+                    facecolor='none',
+                    linestyle='--'
+                )
+                axes[1].add_patch(rect)
+                necrotic_count += 1
+
+        # Draw high cellularity regions
+        cellularity_count = 0
+        if high_cellularity_regions:
+            for region in high_cellularity_regions:
+                rect = plt.Rectangle(
+                    (region["x"], region["y"]),
+                    region["width"],
+                    region["height"],
+                    linewidth=3,
+                    edgecolor=cellularity_mpl_color,
+                    facecolor='none',
+                    linestyle='-'
+                )
+                axes[1].add_patch(rect)
+                cellularity_count += 1
+
+        # Add legend
+        from matplotlib.patches import Patch
+        legend_elements = []
+        if necrotic_count > 0:
+            legend_elements.append(
+                Patch(facecolor='none', edgecolor=necrotic_mpl_color, linestyle='--',
+                      linewidth=3, label=f'Necrotic ({necrotic_count} regions)')
+            )
+        if cellularity_count > 0:
+            legend_elements.append(
+                Patch(facecolor='none', edgecolor=cellularity_mpl_color, linestyle='-',
+                      linewidth=3, label=f'High Cellularity ({cellularity_count} regions)')
+            )
+
+        if legend_elements:
+            axes[1].legend(handles=legend_elements, loc='upper right', fontsize=11)
+
+        axes[1].set_title('Annotated Morphology', fontsize=14, fontweight='bold')
+        axes[1].axis('off')
+
+        plt.tight_layout()
+
+        # Save
+        timestamp = pd.Timestamp.now().strftime("%Y%m%d_%H%M%S")
+        if output_filename is None:
+            output_filename = f"he_annotation_{timestamp}.png"
+
+        output_path = OUTPUT_DIR / "visualizations" / output_filename
+        fig.savefig(output_path, dpi=300, bbox_inches='tight')
+        plt.close(fig)
+
+        # Generate description
+        description = f"H&E morphology annotation showing {necrotic_count} necrotic regions ({necrotic_color}) and {cellularity_count} high cellularity regions ({cellularity_color})."
+
+        return {
+            "status": "success",
+            "output_file": str(output_path),
+            "necrotic_regions_count": necrotic_count,
+            "cellularity_regions_count": cellularity_count,
+            "total_annotations": necrotic_count + cellularity_count,
+            "description": description,
+            "visualization_type": "he_morphology_annotation",
+            "necrotic_color": necrotic_color,
+            "cellularity_color": cellularity_color
+        }
+
+    except Exception as e:
+        logger.error(f"Error generating H&E annotation: {e}")
+        return {
+            "status": "error",
+            "error": str(e),
+            "message": "Failed to generate H&E annotation. Check file path and format."
+        }
 
 
 # ============================================================================
