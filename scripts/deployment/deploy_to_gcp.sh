@@ -237,6 +237,11 @@ deploy_server() {
     print_info "Building and deploying from ${server_path}..."
     print_info "Resources: ${memory} memory, ${cpu} CPU"
 
+    # Stage shared utilities for Docker build
+    print_info "Staging shared utilities..."
+    mkdir -p "${server_path}/_shared_temp"
+    cp -r "${REPO_ROOT}/shared/utils" "${server_path}/_shared_temp/"
+
     # Build gcloud deploy command
     local deploy_cmd="gcloud run deploy ${server_name}"
     deploy_cmd+=" --source ${server_path}"
@@ -320,8 +325,15 @@ deploy_server() {
         fi
     else
         print_error "Failed to deploy ${server_name}"
+        # Cleanup staged files even on failure
+        print_info "Cleaning up staged files..."
+        rm -rf "${server_path}/_shared_temp"
         return 1
     fi
+
+    # Cleanup staged files after successful deployment
+    print_info "Cleaning up staged files..."
+    rm -rf "${server_path}/_shared_temp"
 
     echo ""
 }

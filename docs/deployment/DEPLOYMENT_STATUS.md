@@ -1,5 +1,113 @@
 # GCP Cloud Run Deployment Status
 
+---
+
+## Latest Update: January 9, 2026
+
+**Date:** 2026-01-09
+**Scope:** Redeployment of 2 servers with new visualization capabilities
+**Result:** ✅ **SUCCESS**
+
+### Updated Servers
+
+| Server | Previous Revision | New Revision | Status |
+|--------|-------------------|--------------|--------|
+| **mcp-spatialtools** | mcp-spatialtools-00004-xr9 | mcp-spatialtools-00005-r4s | ✅ Deployed |
+| **mcp-openimagedata** | mcp-openimagedata-00003-f2m | mcp-openimagedata-00004-vks | ✅ Deployed |
+
+### New Features Added
+
+**mcp-spatialtools (4 new visualization tools):**
+- `generate_spatial_heatmap` - Creates spatial coordinate heatmaps
+- `generate_gene_expression_heatmap` - Generates clustered gene expression heatmaps
+- `generate_region_composition_chart` - Produces region composition bar charts
+- `visualize_spatial_autocorrelation` - Visualizes Moran's I spatial autocorrelation
+
+**mcp-openimagedata (2 new visualization tools):**
+- `generate_multiplex_composite` - Creates RGB composite images from multiplex channels
+- `generate_he_annotation` - Generates annotated H&E images with region overlays
+
+### Dependencies Added
+
+**mcp-spatialtools:**
+- `matplotlib>=3.8.0` - Core plotting library
+- `seaborn>=0.13.0` - Statistical visualization
+
+**mcp-openimagedata:**
+- `matplotlib>=3.8.0` - Image rendering and annotation
+- `pandas>=2.2.0` - Timestamp generation for output files
+
+### Deployment Details
+
+**Configuration:**
+- Mode: Development (public access with `--allow-unauthenticated`)
+- Region: us-central1
+- Transport: SSE
+- Build context: Repository root with staged shared utilities
+
+**Resource Allocation:**
+- mcp-spatialtools: 4Gi memory, 2 CPU (unchanged)
+- mcp-openimagedata: 2Gi memory, 2 CPU (unchanged)
+
+**Deployment URLs:**
+- mcp-spatialtools: https://mcp-spatialtools-ondu7mwjpa-uc.a.run.app
+- mcp-openimagedata: https://mcp-openimagedata-ondu7mwjpa-uc.a.run.app
+
+### Issues Resolved
+
+**Issue: Docker Build Context for Shared Utilities**
+
+**Problem:**
+- Dockerfiles expected `_shared_temp/utils/` directory for shared utilities
+- Deployment script didn't stage these files before building
+- Build failed: `COPY _shared_temp/utils/ /app/shared/utils/` - directory not found
+
+**Solution:**
+Updated deployment script to stage shared utilities before build:
+```bash
+# Stage shared utilities for Docker build
+print_info "Staging shared utilities..."
+mkdir -p "${server_path}/_shared_temp"
+cp -r "${REPO_ROOT}/shared/utils" "${server_path}/_shared_temp/"
+```
+
+Added cleanup after deployment:
+```bash
+# Cleanup staged files
+rm -rf "${server_path}/_shared_temp"
+```
+
+### Files Modified
+
+**Deployment Script:**
+- `scripts/deployment/deploy_to_gcp.sh`
+  - Added staging logic before `gcloud run deploy`
+  - Added cleanup logic after deployment (success or failure)
+
+**No server code changes required** - existing implementations already complete
+
+### Verification
+
+Both servers verified running with new revisions:
+```bash
+$ gcloud run services describe mcp-spatialtools --region us-central1
+REVISION: mcp-spatialtools-00005-r4s
+TRAFFIC: 100%
+
+$ gcloud run services describe mcp-openimagedata --region us-central1
+REVISION: mcp-openimagedata-00004-vks
+TRAFFIC: 100%
+```
+
+### Tool Counts
+
+- **mcp-spatialtools**: 10 → 14 tools (added 4 visualization tools)
+- **mcp-openimagedata**: 3 → 5 tools (added 2 visualization tools)
+
+---
+
+## Initial Deployment: December 30, 2025
+
 **Date:** 2025-12-30
 **Result:** ✅ **COMPLETE SUCCESS - All 9 Servers Deployed**
 
