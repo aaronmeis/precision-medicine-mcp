@@ -335,5 +335,10 @@ Key Features:
 
 ---
 
-**Last Updated:** December 29, 2025
+**Last Updated:** January 9, 2026
 **Status:** Architecture documentation complete for 9 MCP servers
+
+**⚠️ Note on Tool References:** ASCII diagrams above may show abbreviated tool names. For complete, up-to-date tool lists:
+- mcp-spatialtools: 14 tools (10 analysis + 4 visualization) - 95% real implementation
+- mcp-openimagedata: 5 tools (fetch_histology_image, register_image_to_spatial, extract_image_features, generate_multiplex_composite, generate_he_annotation) - 60% real implementation
+- See each server's README for complete tool documentation
