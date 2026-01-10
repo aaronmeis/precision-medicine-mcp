@@ -18,67 +18,92 @@ For patient PAT001-OVC-2025, analyze histology and immunofluorescence images:
 
 ### Data Files Location:
 Files are in: `patient-data/PAT001-OVC-2025/imaging/`
-- PAT001_tumor_HE_20x.tiff (BRIGHTFIELD H&E)
-- PAT001_tumor_IF_CD8.tiff (FLUORESCENCE)
-- PAT001_tumor_IF_KI67.tiff (FLUORESCENCE)
-- PAT001_tumor_multiplex_IF_TP53_KI67_DAPI.tiff (FLUORESCENCE - 3 channels)
+
+**Test Files (4 files used in this test):**
+
+| File | Image Type | Microscopy | Format | Server(s) to Use | Purpose |
+|------|-----------|------------|--------|------------------|---------|
+| **PAT001_tumor_HE_20x.tiff** | H&E | Brightfield | RGB TIFF | **openimagedata ONLY** | Morphology assessment, necrosis ID, cellularity |
+| **PAT001_tumor_IF_CD8.tiff** | IF (single) | Fluorescence | Grayscale TIFF | **openimagedata + deepcell** | CD8+ T cell segmentation & quantification |
+| **PAT001_tumor_IF_KI67.tiff** | IF (single) | Fluorescence | Grayscale TIFF | **openimagedata + deepcell** | Ki67+ proliferation segmentation & index |
+| **PAT001_tumor_multiplex_IF_TP53_KI67_DAPI.tiff** | MxIF (3-channel) | Fluorescence | RGB TIFF (3 channels) | **openimagedata + deepcell** | Multi-marker phenotyping (TP53/Ki67 co-expression) |
+
+**Additional Available Files (not used in this test):**
+- PAT001_tumor_IF_CD3.tiff (fluorescence - CD3 T cells)
+- PAT001_tumor_IF_DAPI.tiff (fluorescence - nuclear stain)
+- PAT001_tumor_IF_PanCK.tiff (fluorescence - epithelial marker)
 
 ### Pre-Flight Validation:
 
 Before starting analysis, verify image quality:
 
 1. **File existence check:**
-   - Confirm all 4 TIFF files are accessible
-   - Check file sizes are reasonable (~300 KB each as placeholders, or larger for real images)
+   - Confirm all 4 test TIFF files are accessible
+   - Check file sizes are reasonable:
+     * H&E: ~800 KB (RGB)
+     * IF single-channel: ~268 KB each (grayscale)
+     * MxIF multiplex: ~63 KB (3-channel RGB)
 
 2. **Image format validation:**
-   - H&E image: Should be RGB or grayscale TIFF (brightfield microscopy)
-   - IF images: Should be single-channel grayscale TIFF (fluorescence)
-   - Multiplex IF: Should be 3-channel TIFF (TP53/KI67/DAPI)
+   - H&E image: Should be **RGB TIFF** (brightfield microscopy with chromogenic stains)
+   - IF images: Should be **grayscale TIFF** (single fluorescence channel)
+   - Multiplex IF: Should be **RGB TIFF** with 3 channels (TP53/KI67/DAPI fluorescence)
 
 3. **Image dimensions:**
-   - Check image width × height (typical: 1000-2000 pixels for 20× magnification)
+   - All test images: 512 × 512 pixels
    - Verify all images from same tissue section have consistent dimensions
+   - Note: Production images typically 1000-2000 pixels at 20× magnification
 
 4. **Imaging modality verification:**
-   - H&E: Confirm it's chromogenic staining (NOT fluorescence)
-   - IF images: Confirm fluorescence microscopy format
+   - H&E: Confirm it's **chromogenic staining** (RGB TIFF, NOT fluorescence)
+   - IF images: Confirm **fluorescence microscopy** format (grayscale TIFF for single-channel, RGB TIFF for multiplex)
 
 **If validation fails:** Report specific issues (missing files, incorrect format, dimension mismatches) but continue with best-effort analysis using available images.
 
 ### Analysis Steps:
 
-1. **H&E Histology Analysis (use openimagedata):**
-   Load PAT001_tumor_HE_20x.tiff
-   - This is a BRIGHTFIELD image with chromogenic stains (NOT fluorescence)
+1. **H&E Histology Analysis**
+   **Server:** mcp-openimagedata ONLY (no deepcell - visual morphology assessment)
+   **File:** PAT001_tumor_HE_20x.tiff
+
+   - This is a **BRIGHTFIELD** image with chromogenic stains (NOT fluorescence)
    - Hematoxylin stains nuclei blue, Eosin stains cytoplasm pink
    - Describe tissue architecture (glandular patterns, cell density)
    - Are there necrotic regions visible (pale/acellular areas)? (Expect: Yes)
    - Estimate tumor cellularity percentage using visual assessment (Expect: ~70-80%)
    - Overall tissue morphology consistent with HGSOC?
 
-2. **Immunofluorescence - CD8 T Cell Infiltration (use openimagedata + deepcell):**
-   Load PAT001_tumor_IF_CD8.tiff
-   - This is a FLUORESCENCE image (NOT H&E)
+2. **Immunofluorescence - CD8 T Cell Infiltration**
+   **Servers:** mcp-openimagedata (load image) → mcp-deepcell (segment & quantify)
+   **File:** PAT001_tumor_IF_CD8.tiff
+
+   - This is a **FLUORESCENCE** image (grayscale TIFF, NOT H&E)
+   - Use openimagedata to load the IF image
    - Use deepcell to segment nuclei and identify CD8+ cells
    - Quantify CD8+ T cells (cells/mm²)
    - Spatial distribution: Periphery vs infiltrating?
    - Expected: LOW infiltration (~5-15 cells/mm²), primarily at periphery (immune exclusion)
 
-3. **Immunofluorescence - Ki67 Proliferation (use openimagedata + deepcell):**
-   Load PAT001_tumor_IF_KI67.tiff
-   - This is a FLUORESCENCE image (NOT H&E)
+3. **Immunofluorescence - Ki67 Proliferation**
+   **Servers:** mcp-openimagedata (load image) → mcp-deepcell (segment & quantify)
+   **File:** PAT001_tumor_IF_KI67.tiff
+
+   - This is a **FLUORESCENCE** image (grayscale TIFF, NOT H&E)
+   - Use openimagedata to load the IF image
    - Use deepcell to segment cells and identify Ki67+ nuclei
    - Calculate Ki67 proliferation index (% positive cells)
    - Is proliferation uniform or heterogeneous across tissue?
    - Expected: HIGH proliferation (~45-55%), heterogeneous
 
-4. **Multiplex Immunofluorescence (use openimagedata + deepcell):**
-   Load PAT001_tumor_multiplex_IF_TP53_KI67_DAPI.tiff
-   - This is a FLUORESCENCE multiplex image with 3 channels:
+4. **Multiplex Immunofluorescence (MxIF)**
+   **Servers:** mcp-openimagedata (load & composite) → mcp-deepcell (segment & phenotype)
+   **File:** PAT001_tumor_multiplex_IF_TP53_KI67_DAPI.tiff
+
+   - This is a **FLUORESCENCE** multiplex image with 3 channels (RGB TIFF):
      * Channel 1 (Red): TP53 (mutant p53 accumulation)
      * Channel 2 (Green): KI67 (proliferation marker)
      * Channel 3 (Blue): DAPI (nuclear stain)
+   - Use openimagedata to load and optionally composite the channels
    - Use deepcell to segment cells based on DAPI channel
    - Quantify marker expression per cell:
      * TP53+ cells (% of total)

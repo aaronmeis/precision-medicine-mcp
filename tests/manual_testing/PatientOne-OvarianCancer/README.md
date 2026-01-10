@@ -319,17 +319,25 @@ The PatientOne workflow uses the **open-source DeepCell-TF library** (https://gi
 ---
 
 ### TEST_4: Histology & Imaging
-**Servers:** OpenImageData, DeepCell
-**Files:** 7 TIFF images (H&E brightfield, IF single-markers, multiplex IF)
+**Servers:** OpenImageData (H&E + MxIF), DeepCell (MxIF segmentation only)
+**Files:** 4 TIFF images used in test (7 available: H&E brightfield, IF single-markers, multiplex IF)
+
+**Test Files:**
+1. PAT001_tumor_HE_20x.tiff - H&E brightfield (openimagedata ONLY)
+2. PAT001_tumor_IF_CD8.tiff - IF fluorescence (openimagedata + deepcell)
+3. PAT001_tumor_IF_KI67.tiff - IF fluorescence (openimagedata + deepcell)
+4. PAT001_tumor_multiplex_IF_TP53_KI67_DAPI.tiff - MxIF 3-channel (openimagedata + deepcell)
+
+**Additional Available Files** (not used in test): CD3, DAPI, PanCK IF images
 
 **What it does:**
-- Analyzes **H&E histology** using brightfield microscopy (tissue architecture, morphology)
-- Processes **immunofluorescence (IF) images** using fluorescence microscopy (DAPI, CD3, CD8, Ki67, PanCK)
-- Performs cell segmentation on IF images with DeepCell
-- Quantifies proliferation and immune infiltration
-- **Generates visualizations:** Segmentation overlays, spatial distribution maps, phenotype analyses
+- Analyzes **H&E histology** using brightfield microscopy (tissue architecture, morphology) - openimagedata ONLY
+- Processes **MxIF/IF images** using fluorescence microscopy (CD8, Ki67, TP53/Ki67/DAPI multiplex)
+- Performs cell segmentation on fluorescence images with DeepCell (using DeepCell-TF library)
+- Quantifies proliferation and immune infiltration through single-cell analysis
+- **Generates visualizations:** Segmentation overlays, spatial distribution maps, phenotype analyses, MxIF composites
 
-**Note:** H&E uses chromogenic stains (brightfield), while IF uses fluorescent antibodies (fluorescence). These require different imaging modalities.
+**Note:** H&E uses chromogenic stains (brightfield, no segmentation in this workflow), while MxIF uses fluorescent antibodies (fluorescence, requires DeepCell segmentation for quantification).
 
 **Key Findings:**
 - Tumor cellularity: 70-80%
