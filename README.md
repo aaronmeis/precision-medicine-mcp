@@ -5,7 +5,6 @@
 [![Claude Desktop](https://img.shields.io/badge/Claude-Desktop-orange.svg)](https://claude.ai/download)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-*AI-Orchestrated Clinical Bioinformatics for Precision Oncology using custom MCP servers*
 <img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/data/images/repo-image.png">
 
 ## What and Why
