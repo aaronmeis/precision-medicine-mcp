@@ -21,6 +21,78 @@ The **mcp-multiomics** server provides comprehensive PDX multi-omics analysis wi
 
 ---
 
+## System Overview
+
+```mermaid
+graph TB
+    subgraph Input["📁 Input Data"]
+        RNA[RNA FPKM<br/>Gene expression<br/>CSV/TSV]
+        PROT[Protein TMT<br/>Protein abundance<br/>CSV/TSV]
+        PHOS[Phospho<br/>Phosphorylation<br/>CSV/TSV]
+        META[Metadata<br/>Sample info, batches<br/>CSV]
+    end
+
+    subgraph Preprocess["🔧 Preprocessing<br/>(3 tools)"]
+        VAL[Validate<br/>QC checks]
+        PREP[Preprocess<br/>Batch correction<br/>KNN imputation]
+        VIZ1[Visualize QC<br/>PCA, correlations]
+    end
+
+    subgraph Analysis["📊 Core Analysis<br/>(6 tools)"]
+        INT[Integrate<br/>Omics Data]
+        HALLA[HAllA<br/>Associations<br/>1000 features/chunk]
+        STOUF[Stouffer<br/>Meta-analysis<br/>+ FDR]
+        UP[Upstream<br/>Regulators<br/>Kinase/TF/Drugs]
+    end
+
+    subgraph Visualization["📈 Visualization"]
+        HEAT[Multiomics<br/>Heatmap]
+        PCA[PCA Plot<br/>Dim reduction]
+    end
+
+    subgraph Output["📋 Outputs"]
+        ASSOC[Associations<br/>RNA-Protein pairs<br/>p-values]
+        TARGETS[Therapeutic Targets<br/>Kinases, TFs, Drugs<br/>Ranked by score]
+        PLOTS[QC & Analysis Plots<br/>PCA, heatmaps<br/>PNG files]
+    end
+
+    RNA --> VAL
+    PROT --> VAL
+    PHOS --> VAL
+    META --> VAL
+
+    VAL --> PREP
+    PREP --> VIZ1
+    VIZ1 --> INT
+
+    INT --> HALLA
+    INT --> HEAT
+    INT --> PCA
+
+    HALLA --> STOUF
+    STOUF --> UP
+    STOUF --> ASSOC
+
+    UP --> TARGETS
+    HEAT --> PLOTS
+    PCA --> PLOTS
+    VIZ1 --> PLOTS
+
+    classDef inputStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef preprocessStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef analysisStyle fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef vizStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef outputStyle fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+
+    class Input inputStyle
+    class Preprocess preprocessStyle
+    class Analysis analysisStyle
+    class Visualization vizStyle
+    class Output outputStyle
+```
+
+---
+
 ## Server Architecture
 
 ### Server Name
