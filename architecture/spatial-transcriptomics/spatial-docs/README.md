@@ -10,9 +10,9 @@ This directory contains documentation for the core spatial transcriptomics workf
 
 | File | Description | Phase |
 |------|-------------|-------|
-| **FINAL_IMPLEMENTATION_SUMMARY.md** | Complete implementation summary for Phase 1 (mcp-fgbio) | Phase 1 |
 | **FINAL_TEST_RESULTS.md** | Comprehensive test results for Phase 1 | Phase 1 |
-| **PHASE_2_SUMMARY.md** | Phase 2 implementation (mcp-spatialtools, mcp-openimagedata) | Phase 2 |
+
+**Note:** Historical implementation summaries (FINAL_IMPLEMENTATION_SUMMARY.md, PHASE_2_SUMMARY.md) have been archived and removed. For current server status, see `/docs/SERVER_IMPLEMENTATION_STATUS.md`.
 
 ### User Guides
 
@@ -111,10 +111,10 @@ Documentation for these servers is in their respective directories.
 | Document | Created | Phase | Status |
 |----------|---------|-------|--------|
 | setup_guide.md | Oct 24, 2025 | Phase 1 | ✅ Current |
-| FINAL_IMPLEMENTATION_SUMMARY.md | Oct 24, 2025 | Phase 1 | ✅ Complete |
 | FINAL_TEST_RESULTS.md | Oct 24, 2025 | Phase 1 | ✅ Complete |
-| PHASE_2_SUMMARY.md | Oct 24, 2025 | Phase 2 | ✅ Complete |
-| MCP_POC_Example_Prompts.md | Oct 24, 2025 | All Phases | ✅ Current (updated for 9 servers) |
+| MCP_POC_Example_Prompts.md | Oct 24, 2025 | All Phases | ✅ Current (updated for 10 servers) |
+
+**Archived and removed (Jan 10, 2026):** FINAL_IMPLEMENTATION_SUMMARY.md, PHASE_2_SUMMARY.md
 
 ---
 

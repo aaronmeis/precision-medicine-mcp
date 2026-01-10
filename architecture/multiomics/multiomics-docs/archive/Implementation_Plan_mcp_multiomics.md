@@ -1,3 +1,13 @@
+---
+⚠️ **ARCHIVE - Historical Reference Only**
+
+This document is an archived implementation plan from the initial development of mcp-multiomics. The server has been implemented and is now in production. For current documentation, see:
+- Server README: `/servers/mcp-multiomics/README.md`
+- Architecture overview: `/architecture/multiomics/README.md`
+- Current status: `/docs/SERVER_IMPLEMENTATION_STATUS.md`
+
+---
+
 # Implementation Plan: mcp-multiomics Server
 
 ## Executive Summary
