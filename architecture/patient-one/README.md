@@ -423,12 +423,13 @@ All PatientOne analyses are:
 ## Related Documentation
 
 - **Main Project:** [Precision Medicine MCP Servers →](../../README.md)
-- **Spatial Workflow:** [Architecture →](../spatial/README.md)
+- **Spatial Transcriptomics Workflow:** [Architecture →](../spatial-transcriptomics/README.md)
+- **Imaging Analysis Workflow:** [Architecture →](../imaging/README.md)
 - **Multiomics Workflow:** [Architecture →](../multiomics/README.md)
 - **Testing Guide:** [PatientOne Implementation →](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
 
 ---
 
-**Last Updated:** 2025-12-29
+**Last Updated:** 2026-01-10
 **Version:** 1.0
 **Status:** Demonstration POC with synthetic data
