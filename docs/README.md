@@ -214,6 +214,15 @@ docs/
 - **Servers:** [servers/*/README.md](../servers/) - Individual server documentation
 - **Testing:** [tests/](../tests/) - Test implementations and results
 
+## 🏗️ Architecture Documentation
+
+Detailed workflow architectures for each analysis modality:
+
+- **[Multiomics Integration](../architecture/multiomics/README.md)** - RNA/Protein/Phospho integration workflow (mcp-multiomics)
+- **[Spatial Transcriptomics](../architecture/spatial-transcriptomics/README.md)** - Visium spatial RNA-seq pipeline (mcp-spatialtools)
+- **[Imaging Analysis](../architecture/imaging/README.md)** - H&E + MxIF workflows (mcp-openimagedata, mcp-deepcell)
+- **[PatientOne Use Case](../architecture/patient-one/README.md)** - End-to-end precision medicine workflow
+
 ---
 
 **Last Updated:** 2026-01-10

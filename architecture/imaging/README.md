@@ -1,7 +1,7 @@
 # Imaging Analysis Architecture
 
 **Status:** Partial Implementation (openimagedata: 60% real, deepcell: 0% mocked)
-**Last Updated:** January 10, 2026
+**Last Updated:** 2026-01-10
 
 ---
 

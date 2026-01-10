@@ -1,7 +1,7 @@
 # Spatial Transcriptomics Architecture
 
 **Status:** Production - 2 servers deployed (mcp-spatialtools, mcp-openimagedata)
-**Last Updated:** January 10, 2026
+**Last Updated:** 2026-01-10
 
 ---
 

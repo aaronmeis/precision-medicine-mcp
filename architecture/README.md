@@ -347,6 +347,18 @@ Key Features:
 
 ---
 
+## 📖 Operations & Deployment Documentation
+
+For deployment, testing, and production operations, see:
+
+- **[Server Implementation Status](../docs/SERVER_IMPLEMENTATION_STATUS.md)** - Production readiness matrix for all 10 servers
+- **[GCP Cloud Run Deployment](../docs/deployment/DEPLOYMENT_STATUS.md)** - Current deployment state (9 servers on GCP)
+- **[Hospital Deployment Guide](../docs/hospital-deployment/)** - HIPAA-compliant production setup
+- **[Cost Analysis](../docs/operations/COST_ANALYSIS.md)** - Token costs, compute estimates, ROI analysis
+- **[Testing Guide](../docs/testing/GCP_SERVER_TEST_PLAN.md)** - Automated testing procedures
+
+---
+
 **See subfolder READMEs for detailed architecture documentation:**
 - `multiomics/README.md` - Multiomics server architecture (TEST_2)
 - `spatial-transcriptomics/README.md` - Spatial transcriptomics pipeline architecture (TEST_3)
