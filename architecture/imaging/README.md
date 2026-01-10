@@ -74,8 +74,8 @@ graph TB
 - **[MXIF_WORKFLOW.md](MXIF_WORKFLOW.md)** - **MxIF fluorescence cell segmentation** (openimagedata → deepcell pipeline)
 
 ### Servers
-- **[OPENIMAGEDATA_SERVER.md](OPENIMAGEDATA_SERVER.md)** - Image loading and visualization (5 tools, 60% real)
-- **[DEEPCELL_SERVER.md](DEEPCELL_SERVER.md)** - Cell segmentation and phenotyping (4 tools, mocked)
+- **[mcp-openimagedata README](../../servers/mcp-openimagedata/README.md)** - Image loading and visualization (5 tools, 60% real)
+- **[mcp-deepcell README](../../servers/mcp-deepcell/README.md)** - Cell segmentation and phenotyping (4 tools, mocked)
 
 ### Reference
 - **[GLOSSARY.md](GLOSSARY.md)** - Imaging terminology (H&E, MxIF, DeepCell, segmentation)
@@ -175,7 +175,7 @@ Imaging analysis component for histology and multiplexed immunofluorescence (MxI
 
 **For users:** Read [HE_WORKFLOW.md](HE_WORKFLOW.md) and [MXIF_WORKFLOW.md](MXIF_WORKFLOW.md) → Run [PatientOne TEST_4_IMAGING](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_4_IMAGING.txt)
 
-**For developers:** See [OPENIMAGEDATA_SERVER.md](OPENIMAGEDATA_SERVER.md) and [DEEPCELL_SERVER.md](DEEPCELL_SERVER.md) for tool details
+**For developers:** See [mcp-openimagedata README](../../servers/mcp-openimagedata/README.md) and [mcp-deepcell README](../../servers/mcp-deepcell/README.md) for tool details
 
 ---
 

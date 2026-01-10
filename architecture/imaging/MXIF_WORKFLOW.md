@@ -257,7 +257,7 @@ MxIF preserves spatial relationships:
 ## See Also
 
 - [HE_WORKFLOW.md](HE_WORKFLOW.md) - H&E morphology workflow (no segmentation)
-- [OPENIMAGEDATA_SERVER.md](OPENIMAGEDATA_SERVER.md) - Image loading and visualization
-- [DEEPCELL_SERVER.md](DEEPCELL_SERVER.md) - Cell segmentation and phenotyping
+- [mcp-openimagedata README](../../servers/mcp-openimagedata/README.md) - Image loading and visualization
+- [mcp-deepcell README](../../servers/mcp-deepcell/README.md) - Cell segmentation and phenotyping
 - [GLOSSARY.md](GLOSSARY.md) - Imaging terminology
 - [PatientOne TEST_4](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_4_IMAGING.txt) - Complete imaging test
