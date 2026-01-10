@@ -8,6 +8,84 @@ The **Precision Medicine MCP System** is a production-ready AI-orchestrated plat
 
 ---
 
+## System Architecture
+
+```mermaid
+graph TB
+    subgraph Users["👥 Users"]
+        CLIN[Clinicians &<br/>Researchers]
+        BIO[Bioinformaticians]
+        ADMIN[Hospital IT]
+    end
+
+    subgraph Interface["💬 AI Interface"]
+        CLAUDE[Claude API<br/>Natural Language<br/>Orchestration]
+    end
+
+    subgraph Servers["🔧 10 MCP Servers (55+ Tools)"]
+        direction LR
+        subgraph Production["✅ Production Ready (4)"]
+            FGBIO[mcp-fgbio<br/>4 tools]
+            MULTI[mcp-multiomics<br/>10 tools]
+            SPATIAL[mcp-spatialtools<br/>14 tools]
+            EPIC[mcp-epic<br/>4 tools<br/>Local Only]
+        end
+
+        subgraph Partial["⚠️ Partial (1)"]
+            IMAGE[mcp-openimagedata<br/>5 tools<br/>60% real]
+        end
+
+        subgraph Mocked["❌ Mocked (5)"]
+            TCGA[mcp-tcga<br/>5 tools]
+            DEEP[mcp-deepcell<br/>4 tools]
+            HF[mcp-huggingface<br/>3 tools]
+            SEQ[mcp-seqera<br/>3 tools]
+            MOCK[mcp-mockepic<br/>3 tools]
+        end
+    end
+
+    subgraph Data["📁 Data Modalities"]
+        CLINICAL[Clinical<br/>Epic FHIR]
+        GENOMIC[Genomics<br/>VCF/FASTQ]
+        OMICS[Multi-Omics<br/>RNA/Protein/Phospho]
+        SPAT[Spatial<br/>Visium]
+        IMG[Imaging<br/>H&E/MxIF]
+    end
+
+    subgraph Output["📊 Outputs"]
+        REPORT[Treatment<br/>Recommendations]
+        VIZ[Visualizations<br/>& Reports]
+        COST[Cost Tracking<br/>~$1-2 tokens]
+    end
+
+    CLIN --> Interface
+    BIO --> Interface
+    ADMIN --> Interface
+
+    Interface --> Servers
+
+    Servers --> Data
+    Data --> Servers
+
+    Servers --> Output
+
+    style Users fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    style Interface fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style Production fill:#d4edda,stroke:#28a745,stroke-width:2px
+    style Partial fill:#fff3cd,stroke:#ffc107,stroke-width:2px
+    style Mocked fill:#f8d7da,stroke:#dc3545,stroke-width:1px
+    style Data fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    style Output fill:#d1ecf1,stroke:#0c5460,stroke-width:2px
+```
+
+**Key Points:**
+- **AI Orchestration**: Claude API coordinates all 10 MCP servers via natural language
+- **55+ Tools**: Specialized bioinformatics tools across genomics, multi-omics, spatial, and imaging
+- **Production Ready**: 4 servers (40%) ready for hospital deployment
+- **Cost Efficient**: ~$1-2 in Claude tokens per analysis (MCP servers return summaries, not raw data)
+
+---
+
 ## Value Proposition
 
 ### For Research Hospitals

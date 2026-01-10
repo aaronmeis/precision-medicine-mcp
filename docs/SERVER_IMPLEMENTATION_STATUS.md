@@ -43,6 +43,60 @@
 
 ---
 
+## Visual Server Status Matrix
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': {'fontSize':'14px'}}}%%
+graph LR
+    subgraph Production["✅ Production Ready (4/10 = 40%)"]
+        direction TB
+        FGBIO["mcp-fgbio<br/>95% Real<br/>4 tools"]
+        MULTI["mcp-multiomics<br/>85% Real<br/>10 tools"]
+        SPATIAL["mcp-spatialtools<br/>95% Real<br/>14 tools"]
+        EPIC["mcp-epic<br/>100% Real<br/>4 tools<br/>(Local Only)"]
+    end
+
+    subgraph Partial["⚠️ Partial Implementation (1/10 = 10%)"]
+        direction TB
+        IMAGE["mcp-openimagedata<br/>60% Real<br/>5 tools<br/>(3 real, 2 mocked)"]
+    end
+
+    subgraph Mocked["❌ Fully Mocked (5/10 = 50%)"]
+        direction TB
+        TCGA["mcp-tcga<br/>0% Real<br/>5 tools"]
+        DEEP["mcp-deepcell<br/>0% Real<br/>4 tools"]
+        HF["mcp-huggingface<br/>0% Real<br/>3 tools"]
+        SEQ["mcp-seqera<br/>0% Real<br/>3 tools"]
+        MOCK["mcp-mockepic<br/>0% by Design<br/>3 tools"]
+    end
+
+    style Production fill:#d4edda,stroke:#28a745,stroke-width:3px
+    style Partial fill:#fff3cd,stroke:#ffc107,stroke-width:3px
+    style Mocked fill:#f8d7da,stroke:#dc3545,stroke-width:3px
+
+    style FGBIO fill:#d4edda,stroke:#155724,stroke-width:2px
+    style MULTI fill:#d4edda,stroke:#155724,stroke-width:2px
+    style SPATIAL fill:#d4edda,stroke:#155724,stroke-width:2px
+    style EPIC fill:#d4edda,stroke:#155724,stroke-width:2px
+
+    style IMAGE fill:#fff3cd,stroke:#856404,stroke-width:2px
+
+    style TCGA fill:#f8d7da,stroke:#721c24,stroke-width:2px
+    style DEEP fill:#f8d7da,stroke:#721c24,stroke-width:2px
+    style HF fill:#f8d7da,stroke:#721c24,stroke-width:2px
+    style SEQ fill:#f8d7da,stroke:#721c24,stroke-width:2px
+    style MOCK fill:#f8d7da,stroke:#721c24,stroke-width:2px
+```
+
+**Color Legend:**
+- 🟢 **Green**: Production ready - safe for research use
+- 🟡 **Yellow**: Partial implementation - verify which tools are real
+- 🔴 **Red**: Mocked - synthetic data only, NOT for research decisions
+
+**Total Tools: 55 tools across 10 servers**
+
+---
+
 ## Epic FHIR Integration: mcp-epic vs mcp-mockepic
 
 **⚠️ IMPORTANT DISTINCTION:** This system includes TWO Epic FHIR servers with different purposes.
