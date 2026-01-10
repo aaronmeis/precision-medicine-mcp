@@ -344,13 +344,14 @@ Key Features:
 ---
 
 **See subfolder READMEs for detailed architecture documentation:**
-- `multiomics/README.md` - Multiomics server architecture
-- `spatial/README.md` - Spatial transcriptomics pipeline architecture
-- `patient-one/README.md` - PatientOne end-to-end use case
+- `multiomics/README.md` - Multiomics server architecture (TEST_2)
+- `spatial-transcriptomics/README.md` - Spatial transcriptomics pipeline architecture (TEST_3)
+- `imaging/README.md` - Imaging analysis architecture (TEST_4)
+- `patient-one/README.md` - PatientOne end-to-end use case (TEST_1-5)
 
 ---
 
-**Last Updated:** January 9, 2026
+**Last Updated:** January 10, 2026
 **Status:** Architecture documentation complete for 9 MCP servers
 
 **⚠️ Note on Tool References:** ASCII diagrams above may show abbreviated tool names. For complete, up-to-date tool lists:
