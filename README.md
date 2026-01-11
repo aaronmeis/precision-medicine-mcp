@@ -8,7 +8,7 @@
 <img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/data/images/repo-image.png">
 
 ## What and Why
-- The Problem: Multi-modal precision medicine is siloed and code-heavy
+- The Problem: multi-modal precision medicine is siloed and code-heavy
 - What the set of custom MCP servers does (PatientOne use case example):
   - Makes complex analysis significantly faster and easier
   - System coordinates disparate servers and stitches results together after being given a natural-language prompt
