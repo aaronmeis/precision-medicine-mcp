@@ -1,4 +1,4 @@
-# Precision Medicine MCP Servers - Architecture
+# Precision Medicine MCP Server Architectures by Analysis Type
 
 **Purpose:** Architecture documentation for modality-specific analysis workflows
 
