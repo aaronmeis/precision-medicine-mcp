@@ -9,9 +9,10 @@
 
 ## What and Why
 - The Problem: multi-modal precision medicine is siloed and code-heavy
-- This Solution: a set of custom MCP servers for analysis and data retrieval (PatientOne use case example):
-  - Makes complex analysis significantly faster and easier by presenting a customized, single interface for tools and data
+- This Solution: a set of custom MCP servers for analysis and data retrieval (PatientOne/Ovarian Cancer use case example):
+  - Makes complex analysis significantly faster and easier by presenting a customized, single interface for tools and data accessible using natural language questions
   - System coordinates disparate servers and stitches results together after being given a natural-language prompt
+  - Solution is extensible for other comorbidity types (i.e. other cancers, other diseases)
   - "What is an MCP Server?" [(article)](https://medium.com/@elisowski/mcp-explained-the-new-standard-connecting-ai-to-everything-79c5a1c98288)
 - What it is NOT: Not clinically validated yet
 - Who it’s for: Researchers, Clinicians, Platform Builders, Workflow Architects
@@ -23,19 +24,6 @@
 
 <kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-holistic.png" width=800></kbd>  
 
-- ANALYZE complete patient profiles using **natural language**
-- DEMONSTRATE end-to-end precision medicine workflows
-  - Using patient example of Ovarian Cancer (Stage IV HGSOC, platinum-resistant, BRCA1 mutation)
-  - Extensible for other comorbidities
-- USE 10 MCP servers (9 deployed + mcp-epic local) with 55+ bioinformatics tools
-  - Data Modalities: Clinical
-    - (Epic FHIR) + Genomic (FGbio, TCGA) +
-    - Multi-omics (RNA/Protein/Phospho) +
-    - Spatial (Visium) + Imaging (H&E, multiplex IF)
-  - Cost Estimates:
-    - Demonstration: DRY_RUN demo in 25-35 min (~$1 tokens only) or small files in 1-3 hours ($7-29)
-    - Production: Realistic hospital data in 2-4 hours ($24-92 pre-aligned) or 4-8 hours ($29-102 raw FASTQ)
-    - Includes: Compute + APIs + Claude tokens (~$1-2, stays low because servers return summaries)
 - LEARN More:
   - [PatientOne Documentation](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/tests/manual_testing/PatientOne-OvarianCancer/architecture)
   - [Quick Start](tests/manual_testing/PatientOne-OvarianCancer/README.md)
