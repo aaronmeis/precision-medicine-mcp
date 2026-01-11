@@ -29,70 +29,17 @@
 
  ---
 
-## Which Audiences is this example for?
+## 👥 Find Your Role
 
-This repository serves multiple audiences in the precision medicine ecosystem.  
-Find your role below and click the associated link to see more information about this example tailored for your role:
+Each guide includes workflows, examples, tools, and resources tailored to your needs:
 
-### 🔬 Bioinformaticians
-*Analyze multi-omics cancer data, build data pipelines, develop predictive models*
-
-**What you can do:** Spatial transcriptomics • Multi-omics integration • Tumor microenvironment mapping • Drug resistance mechanisms • Reproducible data pipelines
-
-**📖 [Full Details & Resources →](docs/guides/personas/bioinformaticians.md)**
-
----
-
-### 💻 MCP Developers
-*Build custom MCP servers or extend existing bioinformatics tools*
-
-**What you'll learn:** MCP server architecture • Testing best practices • External tool integration • Real vs mocked implementation strategies
-
-**📖 [Full Details & Resources →](docs/guides/personas/mcp-developers.md)**
-
----
-
-### 🛠️ Software Engineers
-*Deploy, integrate, or scale this system*
-
-**Quick Start (5 min):** Clone repo → Install dependencies → Configure Claude Desktop → Verify servers
-
-**Deployment options:** Local development • GCP Cloud Run (9 servers deployed ✅) • HPC clusters • Hospital production
-
-**📖 [Full Details & Resources →](docs/guides/personas/software-engineers.md)**
-
----
-
-### 🏥 Clinical Care Teams
-*Understand how AI-orchestrated bioinformatics supports clinical decision-making*
-
-**⚠️ RESEARCH USE ONLY** - Not validated for clinical decision-making or patient care
-
-**Educational value:** Precision medicine workflows • Multi-omics integration • Pathway analysis • FHIR & de-identification
-
-**📖 [Full Details & Resources →](docs/guides/personas/clinical-care-teams.md)**
-
----
-
-### 👥 Patients & Families
-*Understand precision medicine for ovarian cancer*
-
-**⚠️ RESEARCH DEMONSTRATION** - Always consult qualified oncologists for medical decisions
-
-**PatientOne Story:** Named in memory of a friend who passed from HGSOC in 2025, inspiring tools to help researchers understand and combat this disease.
-
-**📖 [Full Details & Resources →](docs/guides/personas/patients-and-families.md)**
-
----
-
-### 🎓 Students & Educators
-*Learn or teach precision medicine and bioinformatics*
-
-**Perfect for teaching:** 100% synthetic data • Low cost (~$0.32 per analysis) • Comprehensive coverage • Well-documented
-
-**Topics covered:** Precision oncology • Multi-omics integration • Spatial transcriptomics • AI orchestration • Statistical methods • Cloud deployment
-
-**📖 [Full Details & Resources →](docs/guides/personas/students-and-educators.md)**
+| Role | What You'll Do | Your Guide |
+|------|----------------|------------|
+| 🔬 **Researchers & Bioinformaticians** | Analyze multi-omics data, spatial transcriptomics, build reproducible pipelines | [Guide →](docs/guides/personas/bioinformaticians.md) |
+| 💻 **Developers & Engineers** | Build MCP servers, deploy to cloud, integrate bioinformatics systems | [MCP Dev →](docs/guides/personas/mcp-developers.md) • [DevOps →](docs/guides/personas/software-engineers.md) |
+| 🏥 **Clinical Teams & Administrators** | Understand precision medicine workflows, manage hospital deployments | [Guide →](docs/guides/personas/clinical-care-teams.md) |
+| 🎓 **Students & Educators** | Learn or teach precision medicine (100% synthetic data, ~$0.32/analysis) | [Guide →](docs/guides/personas/students-and-educators.md) |
+| 👥 **Patients & Families** | Understand precision medicine for ovarian cancer ⚠️ Research only | [Guide →](docs/guides/personas/patients-and-families.md) |
 
 ---
 
