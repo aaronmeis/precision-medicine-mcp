@@ -5,14 +5,14 @@ This directory contains sample data for testing and demonstrating the Precision 
 ## 📂 Directory Structure
 
 - **`patient-data/`** - Complete synthetic patient datasets for PatientOne workflow
-- **`images/`** - Sample histology and IF imaging data
-- **`multiomics/`** - Multi-omics analysis data (RNA/Protein/Phospho)
-- **`cache/`** - Cached analysis results
-- **`reference/`** - Reference genome and annotation files
-- **`aligned/`** - Aligned sequencing data
-- **`filtered/`** - Quality-filtered datasets
-- **`raw/`** - Raw input data
-- **`test_data/`** - Test fixtures for unit tests
+  - **`imaging/`** - Sample histology and IF imaging data
+  - **`multiomics/`** - Multi-omics analysis data (RNA/Protein/Phospho)
+  - **`cache/`** - Cached analysis results
+  - **`reference/`** - Reference genome and annotation files
+  - **`aligned/`** - Aligned sequencing data
+  - **`filtered/`** - Quality-filtered datasets
+  - **`raw/`** - Raw input data
+  - **`test_data/`** - Test fixtures for unit tests
 
 ## 🏥 PatientOne Synthetic Dataset
 
