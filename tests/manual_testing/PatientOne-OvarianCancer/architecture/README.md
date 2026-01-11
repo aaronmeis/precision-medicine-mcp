@@ -43,10 +43,6 @@ flowchart LR
     style TARGETS fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
     style TRIALS fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
 ```
-
----
-
-
 ---
 
 ## ⚠️ Research Use Only Disclaimer
