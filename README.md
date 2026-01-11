@@ -37,7 +37,7 @@
     - Production: Realistic hospital data in 2-4 hours ($24-92 pre-aligned) or 4-8 hours ($29-102 raw FASTQ)
     - Includes: Compute + APIs + Claude tokens (~$1-2, stays low because servers return summaries)
 - LEARN More:
-  - [PatientOne Documentation](architecture/patient-one/README.md)
+  - [PatientOne Documentation](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/tests/manual_testing/PatientOne-OvarianCancer/architecture)
   - [Quick Start](tests/manual_testing/PatientOne-OvarianCancer/README.md)
   - [Sample Outputs](architecture/patient-one/patient-one-outputs/)
   - [Executive Summary](docs/EXECUTIVE_SUMMARY.md) 
