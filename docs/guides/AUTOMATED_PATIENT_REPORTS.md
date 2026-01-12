@@ -365,28 +365,135 @@ mkdir -p ./results
 analyze_patient --patient-id patient-001 --output-dir ~/reports
 ```
 
+## Generating Patient-Friendly Summaries
+
+The automated report generator creates technical outputs designed for researchers and clinicians. To translate these findings into patient-friendly language, use the LLM-based translation workflow.
+
+### 3-Step Patient Summary Workflow
+
+**Step 1: Generate Technical Report** (Automated - 5 seconds)
+```bash
+analyze_patient --patient-id patient-001 --output-dir ./results
+```
+
+**Step 2: Translate to Patient Language** (LLM-based - 30 seconds)
+
+Use prompt templates to convert `clinical_summary.txt` into patient-friendly materials:
+
+1. **Disease Summary Report** - Full explanation of test results for patient education
+2. **Medication Guide** - Plain language guide to treatment options based on findings
+3. **Infographic Text** - Concise bullet points for visual materials
+
+```bash
+# Manual workflow (copy/paste into Claude Desktop or Claude API)
+# 1. Copy clinical_summary.txt content
+# 2. Open prompt template (docs/guides/prompts/patient-disease-summary-template.md)
+# 3. Fill template with clinical summary data
+# 4. Run through Claude to generate patient-friendly version
+# 5. Save output to results/patient-001/patient_summary.txt
+```
+
+**Step 3: Clinician Review** (Manual - 2-3 minutes)
+
+Oncologist or nurse practitioner reviews patient-friendly output for:
+- Medical accuracy
+- Appropriate tone and messaging
+- Alignment with treatment goals
+- Institutional compliance
+
+### Automated Integration (Optional)
+
+Add Claude API integration to `generate_patient_report.py`:
+
+```python
+import anthropic
+import os
+
+# After generating clinical_summary.txt, translate to patient-friendly
+def generate_patient_summary(clinical_summary_path: str) -> str:
+    client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+
+    # Load template and clinical summary
+    with open("docs/guides/prompts/patient-disease-summary-template.md") as f:
+        template = f.read()
+    with open(clinical_summary_path) as f:
+        clinical_data = f.read()
+
+    # Fill template
+    prompt = template.replace("{{CLINICAL_SUMMARY}}", clinical_data)
+
+    # Generate patient-friendly summary
+    message = client.messages.create(
+        model="claude-sonnet-4-5-20250929",
+        max_tokens=4000,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    return message.content[0].text
+
+# Usage in main script
+patient_summary = generate_patient_summary("./results/patient-001/clinical_summary.txt")
+with open("./results/patient-001/patient_summary.txt", 'w') as f:
+    f.write(patient_summary)
+```
+
+### Complete Workflow with Patient Summaries
+
+```bash
+# Step 1: Generate technical report
+analyze_patient --patient-id patient-001 --output-dir ./results
+
+# Step 2: Generate patient-friendly summary (if automated)
+python scripts/generate_patient_summary.py \
+  --clinical-summary ./results/patient-001/clinical_summary.txt \
+  --output ./results/patient-001/patient_summary.txt
+
+# Step 3: Review and approve
+cat ./results/patient-001/patient_summary.txt
+# Clinician reviews and edits if needed
+
+# Step 4: Share with patient
+cp ./results/patient-001/patient_summary.txt /path/to/patient/portal/
+```
+
+### Documentation
+
+For detailed guidance on creating patient-friendly summaries:
+
+- **[GENERATE_PATIENT_SUMMARIES.md](GENERATE_PATIENT_SUMMARIES.md)** - Complete guide to LLM-based translation
+- **[Prompt Templates](prompts/)** - Three copy-paste templates for Claude
+  - `patient-disease-summary-template.md` - Full test results explanation
+  - `patient-medication-guide-template.md` - Treatment options guide
+  - `patient-infographic-text-template.md` - Concise bullet points for visuals
+- **[Example Workflow](examples/patient-summary-example.md)** - PatientOne case study
+
 ## Next Steps
 
 **Enhance the report generator:**
 
-1. **Add PDF generation**
+1. **Add patient-friendly summary generation** (see above)
+   - Integrate Claude API for automatic translation
+   - Create clinician review workflow
+   - Deploy to patient portal
+
+2. **Add PDF generation**
    - Install: `pip install reportlab matplotlib`
    - Generate publication-quality PDFs
 
-2. **Add visualizations**
+3. **Add more visualizations**
    - Spatial heatmaps
    - PCA plots
    - Pathway enrichment dot plots
 
-3. **Upload to GCS**
+4. **Upload to GCS**
    - Save results to `gs://precision-medicine-poc-results/`
    - Enable team access
 
-4. **Email reports**
+5. **Email reports**
    - Automatically send to clinicians
    - Include summary + attachments
 
-5. **Compare multiple patients**
+6. **Compare multiple patients**
    - Cohort analysis
    - Survival correlations
    - Subgroup identification
