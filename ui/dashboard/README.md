@@ -12,7 +12,7 @@ Monitor and optimize your precision medicine MCP server architecture for product
 # 1. Install dependencies
 pip install -r requirements.txt
 
-# 2. Run dashboard
+# 2. Run dashboard (from `cd ui/dashboard`)
 streamlit run streamlit_app.py
 
 # 3. Open browser
