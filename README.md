@@ -15,16 +15,16 @@
   - Solution is **extensible** for other comorbidity types (i.e. other cancers, other diseases)
   - "What is an MCP Server?" [(article)](https://medium.com/@elisowski/mcp-explained-the-new-standard-connecting-ai-to-everything-79c5a1c98288)
 - What it is NOT: Not clinically validated yet
-- See it / Try it: <5 minute local demo (small subset of full example) - [recording](https://www.youtube.com/watch?v=LUldOHHX5Yo) | [code](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/tests/manual_testing/PatientOne-OvarianCancer)
+- See it / Try it: <5 minute local demo (small subset of full example) - [recording](https://www.youtube.com/watch?v=LUldOHHX5Yo) | [code](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/docs/test-docs/patient-one-scenario)
 
 ## Featured Use Case: PatientOne
 
 <kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-holistic.png" width=800></kbd>  
 
 - LEARN More:
-  - [PatientOne Documentation](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/tests/manual_testing/PatientOne-OvarianCancer/architecture)
-  - [Quick Start](tests/manual_testing/PatientOne-OvarianCancer/README.md)
-  - [Sample Outputs](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs)
+  - [PatientOne Documentation](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/docs/test-docs/patient-one-scenario/architecture)
+  - [Quick Start](docs/test-docs/patient-one-scenario/README.md)
+  - [Sample Outputs](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/docs/test-docs/patient-one-scenario/architecture)
   - [Executive Summary](docs/EXECUTIVE_SUMMARY.md)
 
  ---
@@ -35,11 +35,11 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 
 | Role | What You'll Do | Your Guide |
 |------|----------------|------------|
-| 🔬 **Researchers & Bioinformaticians** | Analyze multi-omics data, spatial transcriptomics, build reproducible pipelines | [Guide →](docs/guides/personas/bioinformaticians.md) |
-| 💻 **Developers & Engineers** | Build MCP servers, deploy to cloud, integrate bioinformatics systems | [MCP Dev →](docs/guides/personas/mcp-developers.md) • [DevOps →](docs/guides/personas/software-engineers.md) |
-| 🏥 **Clinical Teams & Administrators** | Understand precision medicine workflows, manage hospital deployments | [Guide →](docs/guides/personas/clinical-care-teams.md) |
-| 🎓 **Students & Educators** | Learn or teach precision medicine (100% synthetic data, ~$0.32/analysis) | [Guide →](docs/guides/personas/students-and-educators.md) |
-| 👥 **Patients & Families** | Understand precision medicine for ovarian cancer ⚠️ Research only | [Guide →](docs/guides/personas/patients-and-families.md) |
+| 🔬 **Researchers & Bioinformaticians** | Analyze multi-omics data, spatial transcriptomics, build reproducible pipelines | [Guide →](docs/guides/for-bioinformaticians.md) |
+| 💻 **Developers & Engineers** | Build MCP servers, deploy to cloud, integrate bioinformatics systems | [Guide →](docs/guides/for-developers.md) |
+| 🏥 **Clinical Teams & Administrators** | Understand precision medicine workflows, manage hospital deployments | [Guide →](docs/guides/for-clinicians.md) |
+| 🎓 **Students & Educators** | Learn or teach precision medicine (100% synthetic data, ~$0.32/analysis) | [Guide →](docs/guides/for-researchers.md) |
+| 👥 **Patients & Families** | Understand precision medicine for ovarian cancer ⚠️ Research only | [Guide →](docs/guides/for-patients.md) |
 
 ---
 
@@ -49,6 +49,6 @@ This project is dedicated to **PatientOne** - in memory of a dear friend who pas
 
 **For detailed acknowledgments, citations, and scientific references:**
 - [Complete Acknowledgments](ACKNOWLEDGMENTS.md)
-- [Scientific References & Publications](docs/REFERENCES.md)
+- [Scientific References & Publications](docs/architecture/references.md)
 
 ---
