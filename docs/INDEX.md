@@ -30,7 +30,7 @@ This is your central navigation hub for all documentation. Use this index to qui
 **Specialized Guides:**
 - **[Automated Patient Reports](./guides/AUTOMATED_PATIENT_REPORTS.md)** - Generate reports automatically
 - **[Patient Summaries](./guides/GENERATE_PATIENT_SUMMARIES.md)** - Create patient-friendly summaries
-- **[Add New Modality Server](./guides/ADD_NEW_MODALITY_SERVER.md)** - Extend the system with new data types
+- **[Add New Modality Server](./for-developers/ADD_NEW_MODALITY_SERVER.md)** - Extend the system with new data types
 
 ---
 

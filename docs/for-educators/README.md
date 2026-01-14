@@ -86,7 +86,7 @@ All major bioinformatics domains in one platform:
   - Treatment recommendations with rationale
   - Visualizations (plots, heatmaps)
 
-**See:** [PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
+**See:** [PatientOne Guide](../test-docs/patient-one-scenario/README.md)
 
 ### 3. Assess Student Work
 
@@ -97,7 +97,7 @@ All major bioinformatics domains in one platform:
 - Integration (20%) - Synthesis across modalities
 - Presentation (20%) - Clear visualizations and reporting
 
-**Example outputs:** [PatientOne Results](../../tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs/)
+**Example outputs:** [PatientOne Results](../test-docs/patient-one-scenario/architecture/outputs.md)
 
 ---
 
@@ -127,7 +127,7 @@ What clinical data is available for PatientOne (PAT001-OVC-2025)?
 
 ### 3. Complete PatientOne Workflow (25-35 minutes)
 
-Follow: [PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
+Follow: [PatientOne Guide](../test-docs/patient-one-scenario/README.md)
 
 **What you'll learn:**
 - Load and interpret clinical data
@@ -384,8 +384,8 @@ Follow: [PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/R
 ## Teaching Resources
 
 ### Instructor Materials
-- **[PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)** - Complete walkthrough
-- **[Example Outputs](../../tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs/)** - Expected results
+- **[PatientOne Guide](../test-docs/patient-one-scenario/README.md)** - Complete walkthrough
+- **[Example Outputs](../test-docs/patient-one-scenario/architecture/outputs.md)** - Expected results
 - **[Statistical Methods](../for-researchers/ANALYSIS_WORKFLOWS.md)** - Detailed method explanations
 - **[Cost Analysis](../../operations/cost-and-budget.md)** - Budgeting for classroom use
 
@@ -480,8 +480,8 @@ Production mode (real data): Requires institutional GCP account and varies by us
 
 ## Next Steps for Instructors
 
-1. **Try the demo** → [PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) (25-35 min)
-2. **Review example outputs** → [Results](../../tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs/)
+1. **Try the demo** → [PatientOne Guide](../test-docs/patient-one-scenario/README.md) (25-35 min)
+2. **Review example outputs** → [Results](../test-docs/patient-one-scenario/architecture/outputs.md)
 3. **Estimate costs** → [Cost Analysis](../../operations/cost-and-budget.md)
 4. **Plan integration** → Choose activities and timeline for your course
 5. **Request pilot** → Contact us for classroom support

@@ -399,7 +399,7 @@ For clinical decisions, consult qualified healthcare provider.
 1. `README.md` - Added production readiness status
 2. `architecture/README.md` - Added links to implementation status
 3. `architecture/patient-one/README.md` - Added research use disclaimer
-4. `tests/manual_testing/PatientOne-OvarianCancer/README.md` - Added comprehensive disclaimer
+4. `test-docs/patient-one-scenario/README.md` - Added comprehensive disclaimer
 
 ---
 

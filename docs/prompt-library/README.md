@@ -354,8 +354,8 @@ Have a useful prompt? Share it!
 
 ## Related Resources
 
-- **[PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)** - Complete walkthrough
-- **[Test Prompts](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/)** - 6 test scenarios
+- **[PatientOne Guide](../test-docs/patient-one-scenario/README.md)** - Complete walkthrough
+- **[Test Prompts](../test-docs/patient-one-scenario/test-prompts/)** - 6 test scenarios
 - **[Server Documentation](../../servers/README.md)** - Tool reference
 - **[For Researchers](../for-researchers/README.md)** - Analysis workflows
 

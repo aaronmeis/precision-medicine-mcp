@@ -54,13 +54,15 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 - [Risk Assessment](compliance/risk-assessment.md) - Comprehensive risk analysis and mitigation
 
 ### 🧪 Testing & QA
-- [Testing Overview](../tests/README.md) - 167 automated tests ✅
-- [Quick Test Prompts](../tests/manual_testing/QUICK_TEST_PROMPTS.md) - Rapid testing
-- [PatientOne Tests](../tests/manual_testing/PatientOne-OvarianCancer/) - End-to-end workflows
+- [Testing Overview](test-docs/test-coverage.md) - 167 automated tests ✅
+- [Quick Test Prompts](test-docs/manual-testing/quick-test-prompts.md) - Rapid testing
+- [PatientOne Scenario](test-docs/patient-one-scenario/README.md) - End-to-end workflows
+- [Test Code](../tests/README.md) - Python test suite
 
-### 🔧 Technical
-- [Error Handling & Retry Logic](technical/ERROR_HANDLING_RETRY_LOGIC.md) - Resilience patterns
-- [Clinical-Spatial Integration](guides/CLINICAL_SPATIAL_INTEGRATION.md) - Data integration
+### 🔧 Technical Architecture
+- [Error Handling & Retry Logic](architecture/error-handling.md) - Resilience patterns
+- [Clinical-Spatial Bridge](architecture/clinical-spatial-bridge.md) - Data integration
+- [Server Implementation Status](architecture/servers.md) - Production readiness
 
 ---
 
