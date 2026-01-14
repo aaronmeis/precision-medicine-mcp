@@ -45,13 +45,3 @@ Mock implementations for workflow demonstration:
 
 ---
 
-## 🔗 Related Documentation
-
-- 🏗️ [Architecture](../architecture/README.md) - Workflow architectures by modality
-- 🧪 [Testing](../tests/README.md) - 167 automated tests across all servers
-- 📖 [Deployment Status](../docs/deployment/DEPLOYMENT_STATUS.md) - 9 servers on GCP Cloud Run ✅
-- ✅ [Implementation Status](../docs/SERVER_IMPLEMENTATION_STATUS.md) - Detailed readiness matrix
-
----
-
-**Last Updated:** 2026-01-11
