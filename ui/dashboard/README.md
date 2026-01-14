@@ -540,7 +540,7 @@ def get_optimization_recommendations(server_metrics: Dict) -> List[str]:
 - **[Metrics Aggregator](metrics_aggregator.py)** - Data processing and analysis
 - **[Sample Metrics](sample_data/patientone_workflow.yaml)** - PatientOne workflow data
 - **[MCP Servers](../servers/)** - Individual server READMEs
-- **[Architecture](../architecture/)** - System design documentation
+- **[Architecture](../docs/architecture/)** - System design documentation
 
 ---
 

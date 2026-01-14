@@ -150,7 +150,7 @@ graph TB
 
 ## Development Resources
 
-- **Architecture:** [System Design](../../../architecture/README.md) • [PatientOne Architecture](../../../tests/manual_testing/PatientOne-OvarianCancer/architecture/README.md)
+- **Architecture:** [System Design](../../architecture/README.md) • [PatientOne Architecture](../../../tests/manual_testing/PatientOne-OvarianCancer/architecture/README.md)
 - **Best Reference:** [mcp-multiomics](../../../servers/mcp-multiomics/README.md) (91 tests, 68% coverage, HAllA integration)
 - **95% Real Example:** [mcp-spatialtools](../../../servers/mcp-spatialtools/) ([Implementation Status](../../../servers/mcp-spatialtools/SERVER_IMPLEMENTATION_STATUS.md))
 - **Testing Guide:** [Manual Testing Guide](../../../tests/manual_testing/Solution-Testing/MANUAL_TESTING_GUIDE.md)

@@ -952,7 +952,7 @@ See the main repository LICENSE file.
 
 ## Related Servers
 
-Part of the Precision Medicine MCP suite (demonstrated in [PatientOne](../../architecture/patient-one/README.md) workflow):
+Part of the Precision Medicine MCP suite (demonstrated in [PatientOne](../../docs/architecture/patient-one/README.md) workflow):
 
 - **mcp-epic** - Clinical EHR data (FHIR)
 - **mcp-fgbio** - Genomic reference data and FASTQ validation

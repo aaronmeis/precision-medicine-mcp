@@ -76,15 +76,15 @@ Detailed workflow architectures for each analysis type:
 
 | Modality | Servers | Documentation |
 |----------|---------|---------------|
-| 🧬 **Clinical Data** | mcp-epic, mcp-mockepic | [Architecture →](../architecture/clinical/README.md) |
-| 🧪 **Genomic Cohorts** | mcp-tcga | [Architecture →](../architecture/genomic/README.md) |
-| 🖼️ **Imaging** | mcp-openimagedata, mcp-deepcell | [Architecture →](../architecture/imaging/README.md) |
-| 🔬 **Multiomics** | mcp-multiomics | [Architecture →](../architecture/multiomics/README.md) |
-| 📍 **Spatial Transcriptomics** | mcp-spatialtools, mcp-fgbio | [Architecture →](../architecture/spatial-transcriptomics/README.md) |
-| 🤖 **AI/ML Inference** | mcp-huggingface | [Architecture →](../architecture/ai-ml/README.md) |
-| ⚙️ **Workflow Orchestration** | mcp-seqera | [Architecture →](../architecture/workflow/README.md) |
+| 🧬 **Clinical Data** | mcp-epic, mcp-mockepic | [Architecture →](architecture/clinical/README.md) |
+| 🧪 **Genomic Cohorts** | mcp-tcga | [Architecture →](architecture/genomic/README.md) |
+| 🖼️ **Imaging** | mcp-openimagedata, mcp-deepcell | [Architecture →](architecture/imaging/README.md) |
+| 🔬 **Multiomics** | mcp-multiomics | [Architecture →](architecture/multiomics/README.md) |
+| 📍 **Spatial Transcriptomics** | mcp-spatialtools, mcp-fgbio | [Architecture →](architecture/spatial-transcriptomics/README.md) |
+| 🤖 **AI/ML Inference** | mcp-huggingface | [Architecture →](architecture/ai-ml/README.md) |
+| ⚙️ **Workflow Orchestration** | mcp-seqera | [Architecture →](architecture/workflow/README.md) |
 
-**End-to-End Example:** [PatientOne Precision Medicine Workflow](../tests/manual_testing/PatientOne-OvarianCancer/architecture/README.md)
+**End-to-End Example:** [PatientOne Precision Medicine Workflow](test-docs/patient-one-scenario/architecture/overview.md)
 
 ---
 

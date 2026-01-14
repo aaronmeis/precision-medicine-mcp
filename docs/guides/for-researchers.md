@@ -13,7 +13,7 @@
 
 1. **Tutorials:** [PatientOne Quick Start](../../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Step-by-step walkthrough
 2. **Synthetic Data:** [PAT001-OVC-2025](../../../data/patient-data/PAT001-OVC-2025/README.md) - Clinical, genomics, spatial, imaging
-3. **Architecture:** [System Design](../../../architecture/) - Data flow, integration patterns
+3. **Architecture:** [System Design](../../architecture/) - Data flow, integration patterns
 4. **Hands-on:** Run DRY_RUN mode in 25-35 min for ~$0.32
 
 ## Educational Topics Covered

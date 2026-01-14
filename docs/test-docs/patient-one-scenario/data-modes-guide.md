@@ -981,7 +981,7 @@ convert input.png output.tiff
 ## Additional Resources
 
 ### Documentation
-- [PatientOne Architecture →](../../../architecture/patient-one/README.md)
+- [PatientOne Architecture →](architecture/overview.md)
 - [PatientOne Quick Start →](./README.md)
 - [MCP Server Configuration →](../../../desktop-configs/README.md)
 - [Test Coverage Report →](../../README.md)

@@ -492,7 +492,7 @@ export STAR_PATH=/path/to/STAR
 ### Documentation
 
 - **Main README:** `../../README.md`
-- **Architecture:** `../../architecture/spatial/README.md`
+- **Architecture:** `../../docs/architecture/spatial/README.md`
 - **Manual Testing Guide:** `../../manual_testing/PatientOne-OvarianCancer/README.md`
 
 ### Issues & Support

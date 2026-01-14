@@ -859,7 +859,7 @@ Use this checklist when adding your new server:
 
 **Questions about architecture?**
 - Review existing servers: [servers/](../../servers/)
-- Check architecture docs: [architecture/](../../architecture/)
+- Check architecture docs: [architecture/](../architecture/)
 
 **Questions about MCP protocol?**
 - MCP specification: https://modelcontextprotocol.io/
