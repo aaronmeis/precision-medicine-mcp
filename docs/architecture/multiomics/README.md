@@ -182,7 +182,7 @@ Which molecular pathways drive platinum resistance in High-Grade Serous Ovarian 
 
 **Note:** Tool 10 is a duplicate/deprecated tool not counted in primary workflow.
 
-**For detailed tool specifications:** See [mcp-multiomics README](../../servers/mcp-multiomics/README.md)
+**For detailed tool specifications:** See [mcp-multiomics README](../../../servers/mcp-multiomics/README.md)
 
 ### Resources (4 total)
 - `multiomics://config` - Server configuration and preprocessing settings
@@ -290,7 +290,7 @@ Which molecular pathways drive platinum resistance in High-Grade Serous Ovarian 
 For detailed implementation information, see:
 
 ### Server Documentation
-- **mcp-multiomics:** [/servers/mcp-multiomics/README.md](../../servers/mcp-multiomics/README.md)
+- **mcp-multiomics:** [/servers/mcp-multiomics/README.md](../../../servers/mcp-multiomics/README.md)
   - Tool specifications with parameters and returns
   - Installation and configuration
   - Example workflows
@@ -298,19 +298,19 @@ For detailed implementation information, see:
   - Testing procedures
 
 ### Deployment & Operations
-- **Current Status:** [SERVER_IMPLEMENTATION_STATUS.md](../../docs/SERVER_IMPLEMENTATION_STATUS.md)
-- **GCP Deployment:** [deployment/DEPLOYMENT_STATUS.md](../../docs/deployment/DEPLOYMENT_STATUS.md)
+- **Current Status:** [Server Status](../servers.md)
+- **GCP Deployment:** [deployment/DEPLOYMENT_STATUS.md](../../deployment/DEPLOYMENT_STATUS.md)
 
 ### Additional Resources
-- **Data Governance:** [DATA_GOVERNANCE.md](../../docs/operations/DATA_GOVERNANCE.md)
+- **Data Governance:** [DATA_GOVERNANCE.md](../../operations/DATA_GOVERNANCE.md)
 
 ---
 
 ## Quick Start
 
-**For users:** Read the [mcp-multiomics README](../../servers/mcp-multiomics/README.md) → Run [PatientOne TEST_2](../../test-docs/patient-one-scenario/test-prompts/test-2-multiomics-enhanced.md)
+**For users:** Read the [mcp-multiomics README](../../../servers/mcp-multiomics/README.md) → Run [PatientOne TEST_2](../../test-docs/patient-one-scenario/test-prompts/test-2-multiomics-enhanced.md)
 
-**For developers:** See [server README](../../servers/mcp-multiomics/README.md) for tool details and implementation
+**For developers:** See [server README](../../../servers/mcp-multiomics/README.md) for tool details and implementation
 
 ---
 

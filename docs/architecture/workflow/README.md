@@ -116,7 +116,7 @@ graph TB
 
 **DRY_RUN Mode:** Default true - simulates job submission without actual execution
 
-**For detailed specifications:** [mcp-seqera README](../../servers/mcp-seqera/README.md)
+**For detailed specifications:** [mcp-seqera README](../../../servers/README.md#mcp-seqera)
 
 ---
 
@@ -456,15 +456,15 @@ Local HPC: Fixed institutional cost
 ## 📖 Detailed Documentation
 
 ### Server Documentation
-- **mcp-seqera:** [/servers/mcp-seqera/README.md](../../servers/mcp-seqera/README.md)
+- **mcp-seqera:** [/servers/mcp-seqera/README.md](../../../servers/README.md#mcp-seqera)
   - Tool specifications with examples
   - Seqera Platform API integration
   - Compute environment configuration
   - DRY_RUN mode details
 
 ### Deployment & Operations
-- **GCP Deployment:** [/docs/deployment/DEPLOYMENT_STATUS.md](../../docs/deployment/DEPLOYMENT_STATUS.md)
-- **Server Status:** [/docs/SERVER_IMPLEMENTATION_STATUS.md](../../docs/SERVER_IMPLEMENTATION_STATUS.md)
+- **GCP Deployment:** [/docs/deployment/DEPLOYMENT_STATUS.md](../../deployment/DEPLOYMENT_STATUS.md)
+- **Server Status:** [Server Implementation Status](../servers.md)
 
 ### External Resources
 - **Seqera Platform:** [https://seqera.io/](https://seqera.io/)

@@ -93,7 +93,7 @@ graph TB
 - **[FASTQ_WORKFLOW.md](FASTQ_WORKFLOW.md)** - Raw sequencing alignment (implemented, not tested)
 
 ### Reference
-- **[mcp-spatialtools README](../../servers/mcp-spatialtools/README.md)** - All 14 spatialtools tools (10 analysis + 4 visualization)
+- **[mcp-spatialtools README](../../../servers/mcp-spatialtools/README.md)** - All 14 spatialtools tools (10 analysis + 4 visualization)
 - **[GLOSSARY.md](GLOSSARY.md)** - Terms and definitions
 
 ---

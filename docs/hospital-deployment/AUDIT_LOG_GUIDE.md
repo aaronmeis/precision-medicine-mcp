@@ -752,5 +752,5 @@ gcloud logging read \
 
 **Related Documents:**
 - [Operations Manual](OPERATIONS_MANUAL.md)
-- [HIPAA Compliance](HIPAA_COMPLIANCE.md)
+- [HIPAA Compliance](../compliance/hipaa.md)
 - [Admin Guide](ADMIN_GUIDE.md)

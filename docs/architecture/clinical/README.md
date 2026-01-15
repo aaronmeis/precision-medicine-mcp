@@ -102,7 +102,7 @@ graph TB
 **Rate Limiting:** 1000 requests/hour with exponential backoff
 **De-identification:** HIPAA Safe Harbor - removes all 18 identifiers
 
-**For detailed specifications:** [mcp-epic README](../../servers/mcp-epic/README.md)
+**For detailed specifications:** [mcp-epic README](../../../servers/README.md#mcp-epic)
 
 ---
 
@@ -122,7 +122,7 @@ graph TB
 **Use Case:** Development, testing, public demos (no credentials needed)
 **Resource:** `ehr://patients/mock` - Patient database metadata
 
-**For detailed specifications:** [mcp-mockepic README](../../servers/mcp-mockepic/README.md)
+**For detailed specifications:** [mcp-mockepic README](../../../servers/README.md#mcp-mockepic)
 
 ---
 
@@ -307,21 +307,21 @@ export DEIDENTIFY_ENABLED="true"
 ## 📖 Detailed Documentation
 
 ### Server Documentation
-- **mcp-epic:** [/servers/mcp-epic/README.md](../../servers/mcp-epic/README.md)
+- **mcp-epic:** [/servers/mcp-epic/README.md](../../../servers/README.md#mcp-epic)
   - OAuth 2.0 setup and credentials
   - De-identification implementation details
   - Tool specifications with examples
   - FHIR resource mapping
 
-- **mcp-mockepic:** [/servers/mcp-mockepic/README.md](../../servers/mcp-mockepic/README.md)
+- **mcp-mockepic:** [/servers/mcp-mockepic/README.md](../../../servers/README.md#mcp-mockepic)
   - Synthetic data generation methodology
   - Tool specifications with examples
   - Resource endpoints
   - DRY_RUN mode configuration
 
 ### Deployment & Operations
-- **Hospital Deployment:** [/docs/hospital-deployment/](../../docs/hospital-deployment/)
-- **HIPAA Compliance:** [/docs/hospital-deployment/HIPAA_COMPLIANCE.md](../../docs/hospital-deployment/HIPAA_COMPLIANCE.md)
+- **Hospital Deployment:** [/docs/hospital-deployment/](../hospital-deployment/)
+- **HIPAA Compliance:** [/docs/hospital-deployment/../../compliance/hipaa.md](../hospital-deployment/../../compliance/hipaa.md)
 - **GCP Healthcare API Setup:** [/infrastructure/GET_STARTED.md](../../infrastructure/GET_STARTED.md)
 
 ---
@@ -335,4 +335,4 @@ export DEIDENTIFY_ENABLED="true"
 
 ---
 
-**See also:** [Main Architecture](../README.md) | [Server Implementation Status](../../docs/SERVER_IMPLEMENTATION_STATUS.md)
+**See also:** [Main Architecture](../README.md) | [Server Implementation Status](../servers.md)

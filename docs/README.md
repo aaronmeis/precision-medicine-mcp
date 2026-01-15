@@ -43,7 +43,7 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 
 ### 🏥 Hospital Production
 - [Operations Manual](hospital-deployment/OPERATIONS_MANUAL.md) - System operations
-- [HIPAA Compliance](hospital-deployment/HIPAA_COMPLIANCE.md) - De-identification, audit logs
+- [HIPAA Compliance](hospital-deployment/compliance/hipaa.md) - De-identification, audit logs
 - [Admin Guide](hospital-deployment/ADMIN_GUIDE.md) - User management, monitoring
 - [User Guide](hospital-deployment/USER_GUIDE.md) - For clinicians and researchers
 - [Audit Log Guide](hospital-deployment/AUDIT_LOG_GUIDE.md) - 10-year retention

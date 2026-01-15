@@ -645,8 +645,8 @@ export MULTIOMICS_DRY_RUN=false
 
 ## Related Documentation
 
-- [Executive Summary](/docs/EXECUTIVE_SUMMARY.md) - High-level cost overview
-- [Risk Assessment](/docs/compliance/risk-assessment.md) - R6 (Unexpected costs)
+- [Executive Summary](../EXECUTIVE_SUMMARY.md) - High-level cost overview
+- [Risk Assessment](../compliance/risk-assessment.md) - R6 (Unexpected costs)
 - **Cost Utilities Source:** `shared/utils/cost_tracking.py`
 
 ---

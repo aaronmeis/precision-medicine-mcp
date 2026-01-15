@@ -196,7 +196,7 @@ Complete end-to-end precision medicine workflow for Stage IV ovarian cancer:
 - 📖 [pytest Documentation](https://docs.pytest.org/)
 - 📊 [pytest-cov Plugin](https://pytest-cov.readthedocs.io/)
 - 🔌 [MCP Protocol](https://modelcontextprotocol.io/)
-- ✅ [Server Implementation Status](../docs/SERVER_IMPLEMENTATION_STATUS.md)
+- ✅ [Server Implementation Status](../architecture/servers.md)
 
 ---
 

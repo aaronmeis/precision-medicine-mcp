@@ -109,7 +109,7 @@ graph TB
 
 **DRY_RUN Mode:** Default true - returns mock predictions without model loading
 
-**For detailed specifications:** [mcp-huggingface README](../../servers/mcp-huggingface/README.md)
+**For detailed specifications:** [mcp-huggingface README](../../../servers/README.md#mcp-huggingface)
 
 ---
 
@@ -423,15 +423,15 @@ embedding_vector = [0.23, -0.15, 0.88, ..., 0.42]  # 768 dimensions
 ## 📖 Detailed Documentation
 
 ### Server Documentation
-- **mcp-huggingface:** [/servers/mcp-huggingface/README.md](../../servers/mcp-huggingface/README.md)
+- **mcp-huggingface:** [/servers/mcp-huggingface/README.md](../../../servers/README.md#mcp-huggingface)
   - Tool specifications with examples
   - Model selection guide
   - Hugging Face API integration
   - DRY_RUN mode configuration
 
 ### Deployment & Operations
-- **GCP Deployment:** [/docs/deployment/DEPLOYMENT_STATUS.md](../../docs/deployment/DEPLOYMENT_STATUS.md)
-- **Server Status:** [/docs/SERVER_IMPLEMENTATION_STATUS.md](../../docs/SERVER_IMPLEMENTATION_STATUS.md)
+- **GCP Deployment:** [/docs/deployment/DEPLOYMENT_STATUS.md](../../deployment/DEPLOYMENT_STATUS.md)
+- **Server Status:** [Server Implementation Status](../servers.md)
 
 ### External Resources
 - **Hugging Face Models:** [https://huggingface.co/models](https://huggingface.co/models)

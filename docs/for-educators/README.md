@@ -386,8 +386,8 @@ Follow: [PatientOne Guide](../test-docs/patient-one-scenario/README.md)
 ### Instructor Materials
 - **[PatientOne Guide](../test-docs/patient-one-scenario/README.md)** - Complete walkthrough
 - **[Example Outputs](../test-docs/patient-one-scenario/architecture/outputs.md)** - Expected results
-- **[Statistical Methods](../for-researchers/ANALYSIS_WORKFLOWS.md)** - Detailed method explanations
-- **[Cost Analysis](../../operations/cost-and-budget.md)** - Budgeting for classroom use
+- **[Statistical Methods](../for-researchers/README.md)** - Detailed method explanations
+- **[Cost Analysis](../operations/cost-and-budget.md)** - Budgeting for classroom use
 
 ### Student Resources
 - **[Installation Guide](../getting-started/installation.md)** - Setup instructions
@@ -467,7 +467,7 @@ Production mode (real data): Requires institutional GCP account and varies by us
 
 1. **Try the demo** → [PatientOne Guide](../test-docs/patient-one-scenario/README.md) (25-35 min)
 2. **Review example outputs** → [Results](../test-docs/patient-one-scenario/architecture/outputs.md)
-3. **Estimate costs** → [Cost Analysis](../../operations/cost-and-budget.md)
+3. **Estimate costs** → [Cost Analysis](../operations/cost-and-budget.md)
 4. **Plan integration** → Choose activities and timeline for your course
 5. **Request pilot** → Contact us for classroom support
 

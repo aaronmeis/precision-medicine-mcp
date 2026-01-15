@@ -854,5 +854,5 @@ gcloud container images describe gcr.io/{PROJECT_ID}/mcp-fgbio:latest \
 **Related Documents:**
 - [User Guide](USER_GUIDE.md) - For end users
 - [Admin Guide](ADMIN_GUIDE.md) - For administrators
-- [HIPAA Compliance](HIPAA_COMPLIANCE.md) - Compliance documentation
+- [HIPAA Compliance](../compliance/hipaa.md) - Compliance documentation
 - [Runbooks](RUNBOOKS/) - Incident response procedures

@@ -55,7 +55,7 @@ The following files were explicitly checked against archiving criteria:
 | `docs/guides/for-clinicians.md` | `docs/clinical/CITL_WORKFLOW_GUIDE.md` | Jan 14, 2026 |
 | `docs/guides/for-bioinformaticians.md` | `docs/for-researchers/README.md` | Jan 14, 2026 |
 | `docs/guides/for-patients.md` | `docs/for-patients/README.md` | Jan 14, 2026 |
-| `docs/guides/ADD_NEW_MODALITY_SERVER.md` | `docs/for-developers/ADD_NEW_MODALITY_SERVER.md` | Jan 14, 2026 |
+| `do../../for-developers/ADD_NEW_MODALITY_SERVER.md` | `docs/for-developers/ADD_NEW_MODALITY_SERVER.md` | Jan 14, 2026 |
 
 **Note:** These files were **deleted, not archived** because:
 - Content was fully migrated to new locations

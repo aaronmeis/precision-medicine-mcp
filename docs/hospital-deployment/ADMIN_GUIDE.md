@@ -1165,5 +1165,5 @@ For additional troubleshooting, see:
 **Related Documents:**
 - [Operations Manual](OPERATIONS_MANUAL.md)
 - [User Guide](USER_GUIDE.md)
-- [HIPAA Compliance](HIPAA_COMPLIANCE.md)
+- [HIPAA Compliance](../compliance/hipaa.md)
 - [Runbooks](RUNBOOKS/)

@@ -54,7 +54,7 @@ graph LR
     style Output fill:#f1f8e9,stroke:#689f38,stroke-width:2px
 ```
 
-**7 Modalities • 10 Servers • 55 Tools** | [See detailed server status →](../../servers/README.md#-server-status)
+**7 Modalities • 10 Servers • 55 Tools** | [See detailed server status →](../../../servers/README.md#-server-status)
 
 ---
 
@@ -71,7 +71,7 @@ Technical system design documentation:
 
 ## 📊 Architecture by Analysis Modality
 
-📋 **[See Individual Server Status →](../../servers/README.md#-server-status)** - Detailed tools and documentation for all 10 servers
+📋 **[See Individual Server Status →](../../../servers/README.md#-server-status)** - Detailed tools and documentation for all 10 servers
 
 7 analysis modalities, 10 specialized servers, 55 tools:
 
@@ -235,12 +235,12 @@ Technical system design documentation:
 - [Cost Analysis](../operations/cost-and-budget.md) - Token costs, ROI analysis
 
 ### 🧬 Server Documentation
-- [Servers Directory](../../servers/) - Individual server READMEs (10 servers)
+- [Servers Directory](../../../servers/) - Individual server READMEs (10 servers)
 - [Testing Guide](../test-docs/test-coverage.md) - 167 automated tests ✅
 
 ### 🔧 Extensibility
-- **[ADD_NEW_MODALITY_SERVER.md](../guides/ADD_NEW_MODALITY_SERVER.md)** - Step-by-step guide for adding new modalities (metabolomics, radiomics, etc.)
-- **[Server Template](../../servers/mcp-server-boilerplate/)** - Reusable boilerplate with FastMCP patterns
+- **[ADD_NEW_MODALITY_SERVER.md](../for-developers/ADD_NEW_MODALITY_SERVER.md)** - Step-by-step guide for adding new modalities (metabolomics, radiomics, etc.)
+- **[Server Template](../../../servers/mcp-server-boilerplate/)** - Reusable boilerplate with FastMCP patterns
 - **Time estimate:** 4-8 hours from template to deployed server
 
 ### 📚 Main Docs

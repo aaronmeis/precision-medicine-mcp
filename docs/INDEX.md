@@ -157,7 +157,7 @@ This is your central navigation hub for all documentation. Use this index to qui
 - **Understand costs** → [Cost and Budget Guide](./operations/cost-and-budget.md)
 - **Deploy to production** → [Deployment Roadmap](./deployment/roadmap.md)
 - **Ensure HIPAA compliance** → [HIPAA Compliance](./compliance/hipaa.md)
-- **Add a new server** → [Add New Modality Server](./guides/ADD_NEW_MODALITY_SERVER.md)
+- **Add a new server** → [Add New Modality Server](./for-developers/ADD_NEW_MODALITY_SERVER.md)
 - **Review patient results** → [CITL Workflow](./clinical/citl-workflow.md)
 - **Test the system** → [PatientOne Scenario](./test-docs/patient-one-scenario/README.md)
 

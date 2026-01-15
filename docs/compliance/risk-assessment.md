@@ -53,7 +53,7 @@ This document summarizes the risk mitigation work completed for the Precision Me
 **Objective:** Document what's real vs. mocked in each server to prevent accidental deployment of synthetic data to production.
 
 **Deliverables:**
-- `docs/SERVER_IMPLEMENTATION_STATUS.md` (900+ lines)
+- `docs/architecture/servers.md` (900+ lines)
 - Production readiness assessment for all 9 servers
 - Real vs. mocked percentage breakdown
 - Integration testing requirements
@@ -365,7 +365,7 @@ For clinical decisions, consult qualified healthcare provider.
 ## Files Created/Modified
 
 ### New Documentation (7 files)
-1. `docs/SERVER_IMPLEMENTATION_STATUS.md` (900+ lines)
+1. `docs/architecture/servers.md` (900+ lines)
 2. `docs/DISCLAIMERS.md` (17,383 characters)
 3. `docs/ERROR_HANDLING_RETRY_LOGIC.md` (comprehensive guide)
 4. `docs/COST_TRACKING_MONITORING.md` (850+ lines)
@@ -398,7 +398,7 @@ For clinical decisions, consult qualified healthcare provider.
 ### Updated Documentation (4 files)
 1. `README.md` - Added production readiness status
 2. `architecture/README.md` - Added links to implementation status
-3. `architecture/patient-one/README.md` - Added research use disclaimer
+3. `test-docs/patient-one-scenario/README.md` - Added research use disclaimer
 4. `test-docs/patient-one-scenario/README.md` - Added comprehensive disclaimer
 
 ---

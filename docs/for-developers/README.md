@@ -249,7 +249,7 @@ graph TB
 
 ### Code Examples
 - **Server Template:** [Boilerplate](../../servers/mcp-server-boilerplate/)
-- **Example Outputs:** [PatientOne Developer Docs](../../tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs/for-developer/)
+- **Example Outputs:** [PatientOne Developer Docs](../../tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs/for-developer)
 
 ---
 

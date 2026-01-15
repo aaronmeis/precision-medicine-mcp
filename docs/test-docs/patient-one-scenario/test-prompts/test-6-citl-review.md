@@ -318,7 +318,7 @@ python scripts/citl_submit_review.py \
 ```
 
 **What this does:**
-1. Validates review against JSON schema (`schemas/citl_review_schema.json`)
+1. Validates review against JSON schema (`shared/schemas/citl_review_schema.json`)
 2. Generates digital signature (SHA-256 hash)
 3. Logs review to Cloud Logging for audit trail
 4. Creates signed review record (`*_signed.json`)
@@ -330,7 +330,7 @@ python scripts/citl_submit_review.py \
 ======================================================================
 Patient ID:     PAT001-OVC-2025
 Review File:    ./results/PAT001-OVC-2025/citl_review_completed.json
-Schema:         schemas/citl_review_schema.json
+Schema:         shared/schemas/citl_review_schema.json
 ======================================================================
 
 📂 Loading review data...

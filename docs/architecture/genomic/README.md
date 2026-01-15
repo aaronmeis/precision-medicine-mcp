@@ -103,7 +103,7 @@ graph TB
 
 **DRY_RUN Mode:** Default true - returns realistic mock data without GDC downloads
 
-**For detailed specifications:** [mcp-tcga README](../../servers/mcp-tcga/README.md)
+**For detailed specifications:** [mcp-tcga README](../../../servers/mcp-tcga/README.md)
 
 ---
 
@@ -357,15 +357,15 @@ PIK3CA H1047R: 8% cohort frequency (actionable mutation)
 ## 📖 Detailed Documentation
 
 ### Server Documentation
-- **mcp-tcga:** [/servers/mcp-tcga/README.md](../../servers/mcp-tcga/README.md)
+- **mcp-tcga:** [/servers/mcp-tcga/README.md](../../../servers/mcp-tcga/README.md)
   - Tool specifications with parameters
   - GDC API integration details
   - DRY_RUN mode configuration
   - Example queries and outputs
 
 ### Deployment & Operations
-- **GCP Deployment:** [/docs/deployment/DEPLOYMENT_STATUS.md](../../docs/deployment/DEPLOYMENT_STATUS.md)
-- **Server Status:** [/docs/SERVER_IMPLEMENTATION_STATUS.md](../../docs/SERVER_IMPLEMENTATION_STATUS.md)
+- **GCP Deployment:** [/docs/deployment/DEPLOYMENT_STATUS.md](../../deployment/DEPLOYMENT_STATUS.md)
+- **Server Status:** [Server Implementation Status](../servers.md)
 
 ---
 

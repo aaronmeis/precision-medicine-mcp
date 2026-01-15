@@ -65,7 +65,7 @@ STAR --version
 
 ### Genome Indices
 Download and build STAR indices for your reference genome.
-See [mcp-spatialtools/INSTALL_STAR.md](../../servers/mcp-spatialtools/INSTALL_STAR.md)
+See [mcp-spatialtools/INSTALL_STAR.md](../../../servers/mcp-spatialtools/INSTALL_STAR.md)
 
 ---
 
@@ -87,4 +87,4 @@ See [mcp-spatialtools/INSTALL_STAR.md](../../servers/mcp-spatialtools/INSTALL_ST
 
 **See Also:**
 - [CSV_WORKFLOW.md](CSV_WORKFLOW.md) - Current production workflow
-- [mcp-spatialtools INSTALL_STAR.md](../../servers/mcp-spatialtools/INSTALL_STAR.md)
+- [mcp-spatialtools INSTALL_STAR.md](../../../servers/mcp-spatialtools/INSTALL_STAR.md)

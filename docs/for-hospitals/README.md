@@ -287,7 +287,7 @@ See: [HIPAA Compliance Guide](../compliance/hipaa.md) for full details
 - **Administrators:** 8 hours (deployment, monitoring, troubleshooting)
 
 ### "What if we want to add new data modalities?"
-**A:** System is extensible by design. See: [Add New Modality Server Guide](../guides/ADD_NEW_MODALITY_SERVER.md)
+**A:** System is extensible by design. See: [Add New Modality Server Guide](../for-developers/ADD_NEW_MODALITY_SERVER.md)
 **Timeline:** 4-8 hours from template to deployed server
 
 ---

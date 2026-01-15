@@ -259,7 +259,7 @@ Expected: Should return information about available patient data.
 
 After installation, you have access to **10 MCP servers**:
 
-📋 **[Complete Server Status](/docs/architecture/servers.md)** - Detailed capabilities matrix
+📋 **[Complete Server Status](../architecture/servers.md)** - Detailed capabilities matrix
 
 **Quick Reference:**
 
@@ -456,9 +456,9 @@ python -m json.tool < ~/Library/Application\ Support/Claude/claude_desktop_confi
 **Now that you're set up:**
 
 1. ✅ Try the [Example Prompts](#usage-examples) above
-2. ✅ Explore [PatientOne Testing Scenario](/docs/test-docs/patient-one-scenario/README.md)
-3. ✅ Read [Test Prompts](/docs/test-docs/patient-one-scenario/test-prompts/) for comprehensive workflows
-4. ✅ Review [Architecture Documentation](/docs/architecture/README.md)
+2. ✅ Explore [PatientOne Testing Scenario](../test-docs/patient-one-scenario/README.md)
+3. ✅ Read [Test Prompts](../test-docs/patient-one-scenario/test-prompts/) for comprehensive workflows
+4. ✅ Review [Architecture Documentation](../architecture/README.md)
 
 **For Development:**
 - See [Developer Guide](../for-developers/README.md) - Architecture, contributing, building servers
@@ -469,10 +469,10 @@ python -m json.tool < ~/Library/Application\ Support/Claude/claude_desktop_confi
 
 ## Related Documentation
 
-- **[Architecture Overview](/docs/architecture/README.md)** - System design
-- **[Server Status](/docs/architecture/servers.md)** - Implementation status and capabilities
-- **[User Guides](/docs/guides/README.md)** - Role-specific guides
-- **[Test Documentation](/docs/test-docs/README.md)** - Testing strategies and prompts
+- **[Architecture Overview](../architecture/README.md)** - System design
+- **[Server Status](../architecture/servers.md)** - Implementation status and capabilities
+- **[User Guides](../guides/README.md)** - Role-specific guides
+- **[Test Documentation](../test-docs/README.md)** - Testing strategies and prompts
 
 ---
 

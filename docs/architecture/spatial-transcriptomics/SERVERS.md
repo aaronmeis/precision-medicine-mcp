@@ -8,12 +8,12 @@ This document provides quick links to the 3 core servers used in spatial transcr
 
 ## Server Overview
 
-📋 **[See Complete Server Status →](../../servers/README.md#-server-status)** - All 10 MCP servers with tools, status, and documentation
+📋 **[See Complete Server Status →](../../../servers/README.md#-server-status)** - All 10 MCP servers with tools, status, and documentation
 
 **Spatial Transcriptomics Servers:**
-- **mcp-fgbio** - Reference data and FASTQ validation (4 tools, 95% real) - [README](../../servers/mcp-fgbio/README.md)
-- **mcp-spatialtools** - Spatial analysis and visualization (14 tools, 95% real) - [README](../../servers/mcp-spatialtools/README.md)
-- **mcp-openimagedata** - Image data access (5 tools, 60% real) - [README](../../servers/mcp-openimagedata/README.md)
+- **mcp-fgbio** - Reference data and FASTQ validation (4 tools, 95% real) - [README](../../../servers/mcp-fgbio/README.md)
+- **mcp-spatialtools** - Spatial analysis and visualization (14 tools, 95% real) - [README](../../../servers/mcp-spatialtools/README.md)
+- **mcp-openimagedata** - Image data access (5 tools, 60% real) - [README](../../../servers/mcp-openimagedata/README.md)
 
 ---
 
@@ -28,7 +28,7 @@ This document provides quick links to the 3 core servers used in spatial transcr
 - Extract UMIs
 - Provide gene annotations
 
-**Documentation:** [/servers/mcp-fgbio/README.md](../../servers/mcp-fgbio/README.md)
+**Documentation:** [/servers/mcp-fgbio/README.md](../../../servers/mcp-fgbio/README.md)
 
 ---
 
@@ -44,7 +44,7 @@ This document provides quick links to the 3 core servers used in spatial transcr
 - Cell type deconvolution
 - **NEW:** 4 visualization tools (heatmaps, region charts, autocorrelation plots)
 
-**Documentation:** [/servers/mcp-spatialtools/README.md](../../servers/mcp-spatialtools/README.md)
+**Documentation:** [/servers/mcp-spatialtools/README.md](../../../servers/mcp-spatialtools/README.md)
 
 ---
 
@@ -57,7 +57,7 @@ This document provides quick links to the 3 core servers used in spatial transcr
 - Feature extraction
 - **NEW:** MxIF RGB composites and H&E annotation overlays
 
-**Documentation:** [/servers/mcp-openimagedata/README.md](../../servers/mcp-openimagedata/README.md)
+**Documentation:** [/servers/mcp-openimagedata/README.md](../../../servers/mcp-openimagedata/README.md)
 
 ---
 
@@ -65,7 +65,7 @@ This document provides quick links to the 3 core servers used in spatial transcr
 
 For deployment status of ALL 10 MCP servers (including multiomics, TCGA, seqera, etc.):
 
-**See:** [/docs/SERVER_IMPLEMENTATION_STATUS.md](../../docs/SERVER_IMPLEMENTATION_STATUS.md)
+**See:** [Server Implementation Status](../servers.md)
 
 ---
 

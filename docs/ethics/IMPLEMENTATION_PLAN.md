@@ -483,7 +483,7 @@ python scripts/audit/audit_bias.py \
 
 #### 6. Update Existing Documentation
 
-**6.1 Update `docs/hospital-deployment/HIPAA_COMPLIANCE.md`**
+**6.1 Update `docs/hospital-deployment/../compliance/hipaa.md`**
 - Add new section: "§8. Ethical AI & Bias Mitigation"
 - Cross-reference to `docs/ethics/ETHICS_AND_BIAS.md`
 - Position ethics as complementary to privacy compliance

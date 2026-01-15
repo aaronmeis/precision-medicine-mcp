@@ -73,8 +73,8 @@
 
 ### Getting Started
 - **[README.md](README.md)** *(this file)* - Navigation hub for researchers
-- **[ANALYSIS_WORKFLOWS.md](ANALYSIS_WORKFLOWS.md)** - Common bioinformatics workflows with examples
-- **[DATA_FORMATS.md](DATA_FORMATS.md)** - Input/output formats, data structure, file conventions
+- **ANALYSIS_WORKFLOWS.md (coming soon)** - Common bioinformatics workflows with examples
+- **DATA_FORMATS.md (coming soon)** - Input/output formats, data structure, file conventions
 
 ### Analysis Guides
 - **[SPATIAL_TRANSCRIPTOMICS.md](SPATIAL_TRANSCRIPTOMICS.md)** - Visium analysis, batch correction, pathway enrichment
@@ -87,7 +87,7 @@
 - **[DRUG_RESISTANCE.md](DRUG_RESISTANCE.md)** - Mechanism identification, pathway analysis
 
 ### Reproducibility & Publishing
-- **[REPRODUCIBILITY.md](REPRODUCIBILITY.md)** - Reproducible workflows, data provenance, versioning
+- **REPRODUCIBILITY.md (coming soon)** - Reproducible workflows, data provenance, versioning
 - **[PUBLICATION_GUIDELINES.md](PUBLICATION_GUIDELINES.md)** - Methods sections, citations, data availability
 
 ---
@@ -312,7 +312,7 @@ to identify concordant pathway activations.
 
 **Annual savings:** $577,600-585,500 (96% cost reduction)
 
-See: [Cost Analysis](../../operations/cost-and-budget.md) for detailed breakdown
+See: [Cost Analysis](../operations/cost-and-budget.md) for detailed breakdown
 
 ---
 
@@ -551,7 +551,7 @@ infiltration with spatial pathway enrichment scores."
 - Meta-analysis: Stouffer's Z-score
 - Batch correction: ComBat
 
-See: [Statistical Methods](ANALYSIS_WORKFLOWS.md#statistical-methods)
+See: Statistical Methods
 
 ### "How do I cite this platform?"
 **A:** Citation information will be provided upon publication. For now, reference the GitHub repository and specific tool versions used.
@@ -567,7 +567,7 @@ See: [Statistical Methods](ANALYSIS_WORKFLOWS.md#statistical-methods)
 - Spatial: 10x Visium format, Seurat objects
 - Imaging: TIFF, PNG, DICOM
 
-See: [DATA_FORMATS.md](DATA_FORMATS.md) for specifications
+See: DATA_FORMATS.md (coming soon) for specifications
 
 ### "How do I ensure reproducibility?"
 **A:** Platform automatically tracks:
@@ -576,7 +576,7 @@ See: [DATA_FORMATS.md](DATA_FORMATS.md) for specifications
 - Data provenance (file paths, checksums)
 - Random seeds
 
-See: [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for best practices
+See: REPRODUCIBILITY.md (coming soon) for best practices
 
 ---
 
@@ -584,8 +584,8 @@ See: [REPRODUCIBILITY.md](REPRODUCIBILITY.md) for best practices
 
 1. **Try the demo** → [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) (25-35 min)
 2. **Explore your modality** → [Server documentation](../../servers/README.md)
-3. **Design your workflow** → [Analysis Workflows](ANALYSIS_WORKFLOWS.md)
-4. **Scale to production** → [Cost Analysis](../../operations/cost-and-budget.md)
+3. **Design your workflow** → Analysis Workflows
+4. **Scale to production** → [Cost Analysis](../operations/cost-and-budget.md)
 
 ---
 

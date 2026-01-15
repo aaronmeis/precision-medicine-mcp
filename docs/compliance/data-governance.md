@@ -31,7 +31,7 @@ This data governance framework applies to:
 
 | Framework | Status | Documentation |
 |-----------|--------|---------------|
-| HIPAA (US) | ✅ Compliant | **[See HIPAA Compliance Guide](/docs/compliance/hipaa.md)** |
+| HIPAA (US) | ✅ Compliant | **[See HIPAA Compliance Guide](hipaa.md)** |
 | GDPR (EU) | ⚠️ Partial | See Section 1.1 below |
 | Common Rule (US Research) | ✅ Compliant | See Section 1.2 below |
 | FISMA (Federal) | ❌ Not Compliant | Not designed for federal systems |
@@ -47,7 +47,7 @@ This data governance framework applies to:
 
 **Applicability:** Processing personal data of EU residents.
 
-**📚 For HIPAA compliance, see: [HIPAA Compliance Guide](/docs/compliance/hipaa.md)**
+**📚 For HIPAA compliance, see: [HIPAA Compliance Guide](hipaa.md)**
 
 #### GDPR Principles
 
@@ -312,7 +312,7 @@ Required elements for informed consent:
 
 #### Safe Harbor Method (HIPAA)
 
-**📚 For detailed HIPAA de-identification requirements, see: [HIPAA Compliance Guide](/docs/compliance/hipaa.md#de-identification-validation)**
+**📚 For detailed HIPAA de-identification requirements, see: [HIPAA Compliance Guide](hipaa.md#de-identification-validation)**
 
 Removes all 18 HIPAA identifiers.
 
@@ -406,7 +406,7 @@ Add calibrated noise to query results to protect individual privacy while preser
 
 ## 6. Audit Trails & Monitoring
 
-**📚 For detailed HIPAA audit requirements, see: [HIPAA Compliance Guide](/docs/compliance/hipaa.md#audit-controls)**
+**📚 For detailed HIPAA audit requirements, see: [HIPAA Compliance Guide](hipaa.md#audit-controls)**
 
 ### 6.1 Audit Logging Requirements
 
@@ -467,7 +467,7 @@ Add calibrated noise to query results to protect individual privacy while preser
 
 ## 8. Incident Response
 
-**📚 For detailed HIPAA incident response procedures, see: [HIPAA Compliance Guide](/docs/compliance/hipaa.md#incident-response)**
+**📚 For detailed HIPAA incident response procedures, see: [HIPAA Compliance Guide](hipaa.md#incident-response)**
 
 ### 8.1 Data Breach Definition
 
@@ -543,9 +543,9 @@ A data breach occurs when:
 
 ## Related Documentation
 
-- **[HIPAA Compliance](/docs/compliance/hipaa.md)** - Detailed HIPAA compliance requirements
-- **[Risk Assessment](/docs/compliance/risk-assessment.md)** - Risk mitigation strategies
-- **[Disclaimers](/docs/compliance/disclaimers.md)** - Legal disclaimers
+- **[HIPAA Compliance](hipaa.md)** - Detailed HIPAA compliance requirements
+- **[Risk Assessment](../compliance/risk-assessment.md)** - Risk mitigation strategies
+- **[Disclaimers](../compliance/disclaimers.md)** - Legal disclaimers
 
 ---
 
