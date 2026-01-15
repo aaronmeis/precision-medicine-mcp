@@ -15,14 +15,14 @@ API key and secrets management, GCP Secret Manager integration.
 
 ## Quick Reference
 
-**Deployment Script:** `/scripts/deployment/deploy_to_gcp.sh`
+**Deployment Script:** `/infrastructure/deployment/deploy_to_gcp.sh`
 
 ```bash
 # Deploy single server (development)
-./scripts/deployment/deploy_to_gcp.sh --development --server mcp-spatialtools
+./infrastructure/deployment/deploy_to_gcp.sh --development --server mcp-spatialtools
 
 # Deploy all servers
-./scripts/deployment/deploy_to_gcp.sh --development
+./infrastructure/deployment/deploy_to_gcp.sh --development
 ```
 
 **Current Status (as of Jan 10, 2026):**

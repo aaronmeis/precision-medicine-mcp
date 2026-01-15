@@ -32,7 +32,7 @@ This test implements the formal Clinician-in-the-Loop (CitL) validation workflow
 ```bash
 cd /Users/lynnlangit/Documents/GitHub/spatial-mcp
 
-python scripts/generate_patient_report.py \
+python tools/reports/generate_patient_report.py \
   --patient-id PAT001-OVC-2025 \
   --output-dir ./results \
   --generate-draft
@@ -312,7 +312,7 @@ Create `./results/PAT001-OVC-2025/citl_review_completed.json`:
 ### Run Review Submission Script
 
 ```bash
-python scripts/citl_submit_review.py \
+python tools/reports/citl_submit_review.py \
   --patient-id PAT001-OVC-2025 \
   --review-file ./results/PAT001-OVC-2025/citl_review_completed.json
 ```
@@ -364,7 +364,7 @@ Guideline Compliance:
 ✅ Review submitted successfully!
 
 📍 Next Step: Finalize the approved report
-   python scripts/finalize_patient_report.py --patient-id PAT001-OVC-2025
+   python tools/reports/finalize_patient_report.py --patient-id PAT001-OVC-2025
 ```
 
 ### Verification
@@ -388,7 +388,7 @@ ls -lh ./results/PAT001-OVC-2025/*_signed.json
 ### Generate Final Clinical Report
 
 ```bash
-python scripts/finalize_patient_report.py \
+python tools/reports/finalize_patient_report.py \
   --patient-id PAT001-OVC-2025 \
   --output-dir ./results
 ```
@@ -496,7 +496,7 @@ cat ./results/PAT001-OVC-2025/citl_review_completed_signed.json | python -m json
 
 ```bash
 # Example: Re-run with stricter FDR and exclude regions
-python scripts/generate_patient_report.py \
+python tools/reports/generate_patient_report.py \
   --patient-id PAT001-OVC-2025 \
   --output-dir ./results \
   --generate-draft \
@@ -685,7 +685,7 @@ cat ./results/PAT001-OVC-2025/citl_review_completed_signed.json | python -m json
 **Solution:** Run generate_patient_report.py first
 ```bash
 # Generate draft report
-python scripts/generate_patient_report.py --patient-id PAT001-OVC-2025 --output-dir ./results --generate-draft
+python tools/reports/generate_patient_report.py --patient-id PAT001-OVC-2025 --output-dir ./results --generate-draft
 ```
 
 ---

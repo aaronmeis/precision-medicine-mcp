@@ -99,10 +99,10 @@ pytest -v -m "not slow"
 
 ```bash
 # Deploy to GCP Cloud Run (development)
-./scripts/deployment/deploy_to_gcp.sh --development --server mcp-{server}
+./infrastructure/deployment/deploy_to_gcp.sh --development --server mcp-{server}
 
 # Deploy to production
-./scripts/deployment/deploy_to_gcp.sh --production --server mcp-{server}
+./infrastructure/deployment/deploy_to_gcp.sh --production --server mcp-{server}
 
 # Check deployment
 curl https://mcp-{server}-{hash}.run.app/health

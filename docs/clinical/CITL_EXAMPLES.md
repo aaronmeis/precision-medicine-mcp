@@ -180,7 +180,7 @@
 **Next Steps:**
 1. Run finalization script:
    ```bash
-   python scripts/finalize_patient_report.py --patient-id PAT001-OVC-2025
+   python tools/reports/finalize_patient_report.py --patient-id PAT001-OVC-2025
    ```
 2. Present at tumor board (Tuesday)
 3. Discuss clinical trial enrollment with patient

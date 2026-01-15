@@ -544,7 +544,7 @@ All AI/ML-powered precision medicine analyses must undergo regular bias audits t
 
 ```bash
 # Run bias audit script
-python3 /opt/spatial-mcp/scripts/audit/audit_bias.py \
+python3 /opt/spatial-mcp/infrastructure/audit/audit_bias.py \
   --workflow patientone \
   --genomics-data data/genomics/quarterly_analysis_2026Q1.csv \
   --clinical-data data/fhir/patients_deidentified_2026Q1.json \
@@ -700,7 +700,7 @@ AI-generated precision medicine reports require formal clinician validation befo
 
 **Step 1: Generate Draft Report** (Automated, ~30 seconds)
 ```bash
-python scripts/generate_patient_report.py \
+python tools/reports/generate_patient_report.py \
   --patient-id PAT001-OVC-2025 \
   --output-dir ./results \
   --generate-draft
@@ -717,7 +717,7 @@ python scripts/generate_patient_report.py \
 
 **Step 3: Submit Review** (Automated, ~5 seconds)
 ```bash
-python scripts/citl_submit_review.py \
+python tools/reports/citl_submit_review.py \
   --patient-id PAT001-OVC-2025 \
   --review-file ./results/PAT001-OVC-2025/citl_review_completed.json
 ```
@@ -726,7 +726,7 @@ python scripts/citl_submit_review.py \
 
 **Step 4: Finalize Report** (Automated, ~10 seconds, if APPROVED)
 ```bash
-python scripts/finalize_patient_report.py --patient-id PAT001-OVC-2025
+python tools/reports/finalize_patient_report.py --patient-id PAT001-OVC-2025
 ```
 
 **Output:** `final_report_approved.json` with status "clinically_approved"

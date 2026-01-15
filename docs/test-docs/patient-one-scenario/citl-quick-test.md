@@ -16,7 +16,7 @@ cd /Users/lynnlangit/Documents/GitHub/spatial-mcp
 
 # Use spatialtools venv (has all dependencies)
 /Users/lynnlangit/Documents/GitHub/spatial-mcp/servers/mcp-spatialtools/venv/bin/python3 \
-  scripts/generate_patient_report.py \
+  tools/reports/generate_patient_report.py \
   --patient-id PAT001-OVC-2025 \
   --output-dir ./results \
   --generate-draft
@@ -126,7 +126,7 @@ EOF
 ```bash
 # Submit review with signature and audit logging
 /Users/lynnlangit/Documents/GitHub/spatial-mcp/servers/mcp-spatialtools/venv/bin/python3 \
-  scripts/citl_submit_review.py \
+  tools/reports/citl_submit_review.py \
   --patient-id PAT001-OVC-2025 \
   --review-file results/PAT001-OVC-2025/citl_review_completed.json \
   --skip-cloud-logging
@@ -163,7 +163,7 @@ cat citl_review_audit_trail.jsonl | tail -1 | python3 -m json.tool
 ```bash
 # Generate final approved report
 /Users/lynnlangit/Documents/GitHub/spatial-mcp/servers/mcp-spatialtools/venv/bin/python3 \
-  scripts/finalize_patient_report.py \
+  tools/reports/finalize_patient_report.py \
   --patient-id PAT001-OVC-2025 \
   --output-dir ./results
 ```
@@ -229,10 +229,10 @@ EOF
 **Then submit and try to finalize:**
 ```bash
 # Submit REVISE review
-python3 scripts/citl_submit_review.py --patient-id PAT001-OVC-2025 --review-file results/PAT001-OVC-2025/citl_review_completed.json --skip-cloud-logging
+python3 tools/reports/citl_submit_review.py --patient-id PAT001-OVC-2025 --review-file results/PAT001-OVC-2025/citl_review_completed.json --skip-cloud-logging
 
 # Try to finalize - should FAIL
-python3 scripts/finalize_patient_report.py --patient-id PAT001-OVC-2025
+python3 tools/reports/finalize_patient_report.py --patient-id PAT001-OVC-2025
 ```
 
 **Expected:** Finalization should fail with message about addressing revision instructions

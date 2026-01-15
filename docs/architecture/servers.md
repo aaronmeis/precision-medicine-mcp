@@ -442,7 +442,7 @@ See [Hospital Deployment Plan](../hospital-deployment/OPERATIONS_MANUAL.md) for 
 
 In addition to the MCP server tools, a standalone automated patient report generator script is available:
 
-**Script:** `scripts/generate_patient_report.py`
+**Script:** `tools/reports/generate_patient_report.py`
 **Documentation:** `docs/AUTOMATED_PATIENT_REPORTS.md`
 
 **Capabilities:**
@@ -460,7 +460,7 @@ In addition to the MCP server tools, a standalone automated patient report gener
 ```bash
 cd /path/to/spatial-mcp
 /path/to/servers/mcp-spatialtools/venv/bin/python3 \
-  scripts/generate_patient_report.py \
+  tools/reports/generate_patient_report.py \
   --patient-id patient-001 \
   --output-dir ./results
 ```

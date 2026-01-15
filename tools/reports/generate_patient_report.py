@@ -1323,7 +1323,7 @@ Key Findings:
             self.log(f"📍 Next Steps:")
             self.log(f"   1. Review draft report and quality checks")
             self.log(f"   2. Complete CitL review form: docs/clinical/CITL_REVIEW_TEMPLATE.md")
-            self.log(f"   3. Submit review: python scripts/citl_submit_review.py --patient-id {self.patient_id}")
+            self.log(f"   3. Submit review: python tools/reports/citl_submit_review.py --patient-id {self.patient_id}")
         else:
             self.log(f"✅ REPORT COMPLETE!")
         self.log(f"   Output directory: {self.patient_output_dir}")

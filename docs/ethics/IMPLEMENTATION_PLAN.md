@@ -197,7 +197,7 @@
    ```bash
    # Step 1: Collect workflow data (genomics, clinical, spatial)
    # Step 2: Run bias audit script
-   python scripts/audit/audit_bias.py --workflow patientone --output reports/
+   python infrastructure/audit/audit_bias.py --workflow patientone --output reports/
 
    # Step 3: Review HTML report
    open reports/bias_audit_2026-01-12.html
@@ -449,21 +449,21 @@ def stratify_results_by_group(
 
 ---
 
-#### 5. `scripts/audit/audit_bias.py` (~300 lines)
+#### 5. `infrastructure/audit/audit_bias.py` (~300 lines)
 
 **Purpose:** Standalone script to run bias audit on workflows
 
 **Usage:**
 ```bash
 # Audit PatientOne workflow
-python scripts/audit/audit_bias.py \
+python infrastructure/audit/audit_bias.py \
   --workflow patientone \
   --genomics-data data/genomics/patient001.vcf \
   --clinical-data data/fhir/patient001.json \
   --output reports/bias_audit_patient001.html
 
 # Audit with custom thresholds
-python scripts/audit/audit_bias.py \
+python infrastructure/audit/audit_bias.py \
   --workflow patientone \
   --min-representation 0.15 \
   --max-disparity 0.10 \

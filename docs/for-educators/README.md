@@ -54,7 +54,7 @@ All major bioinformatics domains in one platform:
 **Option A: Cloud-Based (Recommended for large classes)**
 ```bash
 # Deploy to GCP with DRY_RUN mode (synthetic data)
-./scripts/deployment/deploy_to_gcp.sh --development
+./infrastructure/deployment/deploy_to_gcp.sh --development
 
 # Students access via web interface (Streamlit UI)
 # No local installation needed

@@ -80,7 +80,7 @@ rm -rf "${server_path}/_shared_temp"
 ### Files Modified
 
 **Deployment Script:**
-- `scripts/deployment/deploy_to_gcp.sh`
+- `infrastructure/deployment/deploy_to_gcp.sh`
   - Added staging logic before `gcloud run deploy`
   - Added cleanup logic after deployment (success or failure)
 
@@ -223,7 +223,7 @@ RUN pip install --no-cache-dir -e .
 - mcp-multiomics: Added `ENV RPY2_CFFI_MODE=ABI`
 
 ### Deployment Script
-- `scripts/deployment/deploy_to_gcp.sh`
+- `infrastructure/deployment/deploy_to_gcp.sh`
 - Added `--update-env-vars MCP_TRANSPORT=sse` to gcloud deploy command
 
 ---

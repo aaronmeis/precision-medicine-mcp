@@ -513,7 +513,7 @@ As system administrator, you are responsible for scheduling and coordinating reg
    python3 --version  # Should be 3.11+
 
    # Test audit script
-   python3 /opt/spatial-mcp/scripts/audit/audit_bias.py --help
+   python3 /opt/spatial-mcp/infrastructure/audit/audit_bias.py --help
 
    # Check storage permissions
    gsutil ls gs://{project}-audit-reports/bias/
@@ -690,7 +690,7 @@ pip list | grep -E "(numpy|pandas|pytest)"
 pip install -r /opt/spatial-mcp/requirements.txt
 
 # Test with sample data
-python3 /opt/spatial-mcp/scripts/audit/audit_bias.py \
+python3 /opt/spatial-mcp/infrastructure/audit/audit_bias.py \
   --workflow patientone \
   --genomics-data /opt/spatial-mcp/data/sample/genomics.csv \
   --clinical-data /opt/spatial-mcp/data/sample/clinical.json \

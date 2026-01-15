@@ -723,7 +723,7 @@ and considering alternative anti-angiogenic approaches if indicated."
 2. Check file paths - ensure you're looking in correct patient directory
 3. Re-generate draft report:
    ```bash
-   python scripts/generate_patient_report.py --patient-id PAT001-OVC-2025 --output-dir ./results --generate-draft
+   python tools/reports/generate_patient_report.py --patient-id PAT001-OVC-2025 --output-dir ./results --generate-draft
    ```
 
 ---
@@ -983,7 +983,7 @@ Before submitting your review, confirm:
 
 **Ready to Submit:**
 ```bash
-python scripts/citl_submit_review.py \
+python tools/reports/citl_submit_review.py \
   --patient-id PAT001-OVC-2025 \
   --review-file ./results/PAT001-OVC-2025/citl_review_completed.json
 ```

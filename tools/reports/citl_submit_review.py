@@ -308,7 +308,7 @@ Examples:
     # Provide next steps based on decision
     if review_data['decision']['status'] == 'APPROVE':
         print(f"\n📍 Next Step: Finalize the approved report")
-        print(f"   python scripts/finalize_patient_report.py --patient-id {args.patient_id}")
+        print(f"   python tools/reports/finalize_patient_report.py --patient-id {args.patient_id}")
     elif review_data['decision']['status'] == 'REVISE':
         print(f"\n📍 Next Step: Address revision instructions in the review form")
         print(f"   Re-run analysis with adjusted parameters, then resubmit for review")

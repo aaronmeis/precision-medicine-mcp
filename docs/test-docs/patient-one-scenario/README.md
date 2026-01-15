@@ -522,7 +522,7 @@ Warning: "Limited data in African ancestry (<5 studies)"
 
 **Tools:**
 - `shared/utils/bias_detection.py` - Bias detection utilities
-- `scripts/audit/audit_bias.py` - Automated audit script
+- `infrastructure/audit/audit_bias.py` - Automated audit script
 - `tests/unit/test_bias_detection.py` - Test suite
 
 ### Key Takeaways

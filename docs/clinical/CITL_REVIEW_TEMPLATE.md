@@ -415,7 +415,7 @@ Example:
 1. Complete all required sections in this markdown template
 2. Use provided conversion script: `python scripts/convert_review_to_json.py`
 3. OR manually structure as JSON following `shared/schemas/citl_review_schema.json`
-4. Submit using: `python scripts/citl_submit_review.py --patient-id {{PATIENT_ID}} --review-file <path>`
+4. Submit using: `python tools/reports/citl_submit_review.py --patient-id {{PATIENT_ID}} --review-file <path>`
 
 **Typical completion time by status:**
 - **APPROVE:** 20-25 minutes (straightforward validation)

@@ -89,7 +89,7 @@ Comprehensive guide to understanding, estimating, tracking, and controlling cost
 - Requires pre-aligned spatial transcriptomics data
 - Integrates FHIR clinical data from GCP Healthcare API
 
-**Script:** `scripts/generate_patient_report.py`
+**Script:** `tools/reports/generate_patient_report.py`
 
 **Performance:**
 - Runtime: ~12 seconds per patient

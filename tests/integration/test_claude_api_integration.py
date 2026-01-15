@@ -29,7 +29,7 @@ def load_deployment_urls():
 
     if not urls_file.exists():
         print(f"{RED}Error: infrastructure/deployment_urls.txt not found{NC}")
-        print("Run ./scripts/deployment/deploy_to_gcp.sh first")
+        print("Run ./infrastructure/deployment/deploy_to_gcp.sh first")
         sys.exit(1)
 
     servers = {}

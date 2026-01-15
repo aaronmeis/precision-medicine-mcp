@@ -151,7 +151,7 @@ When adding a new server, you'll integrate with:
 ### 6. Deployment Layer
 - **GCP Cloud Run** - SSE transport for remote access
 - **Docker container** - Isolated environment per server
-- **Deployment script** - `/scripts/deployment/deploy_to_gcp.sh`
+- **Deployment script** - `/infrastructure/deployment/deploy_to_gcp.sh`
 
 ---
 
@@ -638,7 +638,7 @@ CMD ["python", "-m", "mcp_metabolomics"]
 **7.2 Deploy to Cloud Run**
 
 ```bash
-./scripts/deployment/deploy_to_gcp.sh --development --server mcp-metabolomics
+./infrastructure/deployment/deploy_to_gcp.sh --development --server mcp-metabolomics
 ```
 
 **7.3 Test Deployment**
@@ -757,7 +757,7 @@ FastMCP automatically generates docstrings into MCP tool schemas. Ensure:
 **Deployment steps:**
 ```bash
 # 1. Build and deploy
-./scripts/deployment/deploy_to_gcp.sh --development --server mcp-metabolomics
+./infrastructure/deployment/deploy_to_gcp.sh --development --server mcp-metabolomics
 
 # 2. Test deployment
 curl https://mcp-metabolomics-{hash}.run.app/health

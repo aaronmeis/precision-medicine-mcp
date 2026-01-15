@@ -1722,7 +1722,7 @@ datasets:
 ```bash
 cd /path/to/spatial-mcp
 
-python scripts/audit/audit_bias.py \
+python infrastructure/audit/audit_bias.py \
   --workflow patientone \
   --genomics-data data/genomics/patient_variants.vcf \
   --clinical-data data/fhir/patients_deidentified.json \

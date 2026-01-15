@@ -170,15 +170,15 @@ Complete analysis outputs for Patient-001, including:
 ## Reproducibility
 
 **Generated Using:**
-- Tool: `scripts/generate_patient_report.py`
+- Tool: `tools/reports/generate_patient_report.py`
 - Version: December 29, 2025
-- Command: `python scripts/generate_patient_report.py --patient-id patient-001 --output-dir ./results`
+- Command: `python tools/reports/generate_patient_report.py --patient-id patient-001 --output-dir ./results`
 - Environment: Python 3.11, spatialtools virtual environment
 - Dependencies: pandas, numpy, scipy, matplotlib, seaborn
 
 **Source Code:**
 - Repository: https://github.com/lynnlangit/precision-medicine-mcp
-- Script: `scripts/generate_patient_report.py`
+- Script: `tools/reports/generate_patient_report.py`
 - Documentation: `docs/AUTOMATED_PATIENT_REPORTS.md`
 
 ## Disclaimers
@@ -201,7 +201,7 @@ Complete analysis outputs for Patient-001, including:
 
 **For Developers:**
 - See `../for-developer/` for technical implementation details
-- Script: `scripts/generate_patient_report.py`
+- Script: `tools/reports/generate_patient_report.py`
 - Documentation: `docs/AUTOMATED_PATIENT_REPORTS.md`
 
 ## File Sizes

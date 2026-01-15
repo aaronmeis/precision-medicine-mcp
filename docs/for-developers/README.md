@@ -23,7 +23,7 @@
 2. **Copy boilerplate template** → `/servers/mcp-server-boilerplate/` (5 min)
 3. **Implement tools** → Use FastMCP patterns from mcp-multiomics (3-5 hours)
 4. **Write tests** → 50%+ coverage for production servers (1-2 hours)
-5. **Deploy** → GCP Cloud Run with `./scripts/deployment/deploy_to_gcp.sh` (30 min)
+5. **Deploy** → GCP Cloud Run with `./infrastructure/deployment/deploy_to_gcp.sh` (30 min)
 
 **Total Time:** 4-8 hours from template to deployed server
 
@@ -221,7 +221,7 @@ graph TB
 - **What:** Serverless container platform
 - **Why:** Auto-scales, pay-per-use, easy deployment
 - **Transport:** SSE (Server-Sent Events) for MCP
-- **Deployment:** `./scripts/deployment/deploy_to_gcp.sh`
+- **Deployment:** `./infrastructure/deployment/deploy_to_gcp.sh`
 
 ### Claude API
 - **What:** Anthropic's Sonnet 4.5 model with MCP client support
@@ -306,10 +306,10 @@ SERVER_DRY_RUN=false pytest tests/unit/mcp-{server}
 
 ```bash
 # Development deployment (DRY_RUN=true)
-./scripts/deployment/deploy_to_gcp.sh --development --server mcp-{server}
+./infrastructure/deployment/deploy_to_gcp.sh --development --server mcp-{server}
 
 # Production deployment (DRY_RUN=false)
-./scripts/deployment/deploy_to_gcp.sh --production --server mcp-{server}
+./infrastructure/deployment/deploy_to_gcp.sh --production --server mcp-{server}
 
 # Test deployment
 curl https://mcp-{server}-{hash}.run.app/health

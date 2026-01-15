@@ -130,12 +130,12 @@ This checklist guides you through three phases of bias auditing:
 
 - [ ] **Verify audit script is runnable**
   ```bash
-  python scripts/audit/audit_bias.py --help
+  python infrastructure/audit/audit_bias.py --help
   ```
 
 - [ ] **Test on sample data**
   ```bash
-  python scripts/audit/audit_bias.py \
+  python infrastructure/audit/audit_bias.py \
     --workflow patientone \
     --genomics-data data/genomics/sample.vcf \
     --output /tmp/test_audit.html
@@ -282,7 +282,7 @@ This checklist guides you through three phases of bias auditing:
 
 - [ ] **Execute bias audit script**
   ```bash
-  python scripts/audit/audit_bias.py \
+  python infrastructure/audit/audit_bias.py \
     --workflow patientone \
     --genomics-data data/genomics/patient_variants.vcf \
     --clinical-data data/fhir/patients_deidentified.json \

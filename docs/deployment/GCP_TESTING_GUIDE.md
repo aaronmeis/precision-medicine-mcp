@@ -273,7 +273,7 @@ python run_patientone_gcp.py
 
 ## Next Steps
 
-1. ✅ **Deploy servers:** `./scripts/deployment/deploy_to_gcp.sh`
+1. ✅ **Deploy servers:** `./infrastructure/deployment/deploy_to_gcp.sh`
 2. ✅ **Verify health:** `./tests/integration/test_gcp_servers.sh`
 3. ✅ **Test with Claude API:** Use Python SDK (examples above)
 4. ✅ **Set up authentication:** For production use
