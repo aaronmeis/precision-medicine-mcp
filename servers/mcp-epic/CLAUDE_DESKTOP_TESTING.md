@@ -137,7 +137,7 @@ This demonstrates:
 - Verify environment variables are set correctly
 
 ### Authentication Errors
-- Ensure service account key exists: `/Users/lynnlangit/Documents/GitHub/spatial-mcp/infrastructure/mcp-server-key.json`
+- Ensure service account key exists: `/Users/lynnlangit/Documents/GitHub/spatial-mcp/infrastructure/deployment/mcp-server-key.json`
 - Check GCP permissions (should have healthcare.fhirResourceReader role)
 
 ### No Data Returned

@@ -322,7 +322,7 @@ export DEIDENTIFY_ENABLED="true"
 ### Deployment & Operations
 - **Hospital Deployment:** [/docs/hospital-deployment/](../hospital-deployment/)
 - **HIPAA Compliance:** [/docs/hospital-deployment/../../compliance/hipaa.md](../hospital-deployment/../../compliance/hipaa.md)
-- **GCP Healthcare API Setup:** [/infrastructure/GET_STARTED.md](../../infrastructure/GET_STARTED.md)
+- **GCP Healthcare API Setup:** [/docs/deployment/GET_STARTED.md](../../deployment/GET_STARTED.md)
 
 ---
 

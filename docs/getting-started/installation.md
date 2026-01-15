@@ -183,7 +183,7 @@ SPATIAL_TIMEOUT_SECONDS=300
         "PYTHONPATH": "/absolute/path/to/spatial-mcp/servers/mcp-epic/src",
         "GCP_PROJECT_ID": "precision-medicine-poc",
         "GCP_REGION": "us-central1",
-        "GOOGLE_APPLICATION_CREDENTIALS": "/absolute/path/to/spatial-mcp/infrastructure/mcp-server-key.json"
+        "GOOGLE_APPLICATION_CREDENTIALS": "/absolute/path/to/spatial-mcp/infrastructure/deployment/mcp-server-key.json"
       }
     }
   }
@@ -402,7 +402,7 @@ python -m mcp_spatialtools
 **Fix:** Ensure service account key exists:
 
 ```bash
-ls -la /path/to/spatial-mcp/infrastructure/mcp-server-key.json
+ls -la /path/to/spatial-mcp/infrastructure/deployment/mcp-server-key.json
 ```
 
 ### Issue: "ModuleNotFoundError"

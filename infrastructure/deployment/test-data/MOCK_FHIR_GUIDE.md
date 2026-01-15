@@ -101,7 +101,7 @@ DATASET_ID = "precision-medicine-dataset"
 FHIR_STORE_ID = "identified-fhir-store"
 
 credentials = service_account.Credentials.from_service_account_file(
-    '/Users/lynnlangit/Documents/GitHub/spatial-mcp/infrastructure/mcp-server-key.json'
+    '/Users/lynnlangit/Documents/GitHub/spatial-mcp/infrastructure/deployment/mcp-server-key.json'
 )
 
 client = healthcare_v1.FhirStoresServiceClient(credentials=credentials)
