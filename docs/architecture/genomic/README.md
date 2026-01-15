@@ -374,7 +374,7 @@ PIK3CA H1047R: 8% cohort frequency (actionable mutation)
 - [Clinical Data](../clinical/README.md) - Diagnosis-cohort matching
 - [Multi-omics Integration](../multiomics/README.md) - RNA-protein validation
 - [Spatial Transcriptomics](../spatial-transcriptomics/README.md) - Spatial-bulk comparison
-- [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete precision medicine workflow
+- [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md) - Complete precision medicine workflow
 
 ---
 

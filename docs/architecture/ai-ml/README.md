@@ -445,7 +445,7 @@ embedding_vector = [0.23, -0.15, 0.88, ..., 0.42]  # 768 dimensions
 - [Spatial Transcriptomics](../spatial-transcriptomics/README.md) - Cell type deconvolution validation
 - [Multi-omics Integration](../multiomics/README.md) - Multi-modal feature fusion
 - [Genomic Analysis](../genomic/README.md) - Variant effect prediction
-- [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete precision medicine workflow
+- [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md) - Complete precision medicine workflow
 
 ---
 

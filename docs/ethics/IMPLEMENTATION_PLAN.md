@@ -501,7 +501,7 @@ python scripts/audit/audit_bias.py \
 - Highlight alignment with WHO/FDA/EU AI Act standards
 - Emphasize trust-building for clinical adoption
 
-**6.5 Update `tests/manual_testing/PatientOne-OvarianCancer/README.md`**
+**6.5 Update `test-docs/patient-one-scenario/README.md`**
 - Add reference to PATIENTONE_BIAS_AUDIT.md
 - Document expected findings and mitigations
 

@@ -207,7 +207,7 @@ Bridge spatial findings to mcp-multiomics for cross-modality integration.
 ## Testing
 
 ### PatientOne End-to-End Test
-**File:** [TEST_3_SPATIAL.txt](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_3_SPATIAL.txt)
+**File:** [TEST_3_SPATIAL](../../test-docs/patient-one-scenario/test-prompts/test-3-spatial.md)
 
 **Test execution:**
 - Duration: 3-5 minutes
@@ -236,4 +236,4 @@ pytest tests/ -v
 ## See Also
 - [mcp-spatialtools README](../../servers/mcp-spatialtools/README.md) - Detailed tool documentation
 - [OVERVIEW.md](OVERVIEW.md) - System architecture
-- [PatientOne README](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete end-to-end workflow
+- [PatientOne README](../../test-docs/patient-one-scenario/README.md) - Complete end-to-end workflow

@@ -260,4 +260,4 @@ MxIF preserves spatial relationships:
 - [mcp-openimagedata README](../../servers/mcp-openimagedata/README.md) - Image loading and visualization
 - [mcp-deepcell README](../../servers/mcp-deepcell/README.md) - Cell segmentation and phenotyping
 - [GLOSSARY.md](GLOSSARY.md) - Imaging terminology
-- [PatientOne TEST_4](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_4_IMAGING.txt) - Complete imaging test
+- [PatientOne TEST_4](../../test-docs/patient-one-scenario/test-prompts/test-4-imaging.md) - Complete imaging test

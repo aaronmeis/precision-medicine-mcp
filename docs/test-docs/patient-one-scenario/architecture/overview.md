@@ -332,8 +332,8 @@ PatientOne supports two modes:
 - **Actual Data mode**: Analyzes your real patient data files — requires configuration
 
 For detailed instructions:
-- [PatientOne Quick Start Guide →](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - How to run the tests
-- [Data Modes Configuration Guide →](../../tests/manual_testing/PatientOne-OvarianCancer/DATA_MODES_GUIDE.md) - DRY_RUN vs Actual Data setup
+- [PatientOne Quick Start Guide →](../README.md) - How to run the tests
+- [Data Modes Configuration Guide →](../data-modes-guide.md) - DRY_RUN vs Actual Data setup
 
 ### Test Prompts
 
@@ -424,7 +424,7 @@ All PatientOne analyses are:
 - **Spatial Transcriptomics Workflow:** [Architecture →](../spatial-transcriptomics/README.md)
 - **Imaging Analysis Workflow:** [Architecture →](../imaging/README.md)
 - **Multiomics Workflow:** [Architecture →](../multiomics/README.md)
-- **Testing Guide:** [PatientOne Implementation →](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
+- **Testing Guide:** [PatientOne Implementation →](../README.md)
 
 ---
 

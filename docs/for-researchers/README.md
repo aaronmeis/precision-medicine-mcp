@@ -20,8 +20,8 @@
 **Goal:** Comprehensive multi-modal analysis of Stage IV ovarian cancer case
 
 1. **Set up environment** → [Installation Guide](../getting-started/installation.md) (10 min)
-2. **Run PatientOne workflow** → [PatientOne Guide](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) (25-35 min)
-3. **Review results** → [Example Outputs](../../tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-outputs/for-researchers/)
+2. **Run PatientOne workflow** → [PatientOne Guide](../test-docs/patient-one-scenario/README.md) (25-35 min)
+3. **Review results** → [Example Outputs](../test-docs/patient-one-scenario/architecture/outputs.md)
 
 **What you'll analyze:**
 - Clinical: Stage IV HGSOC, platinum-resistant

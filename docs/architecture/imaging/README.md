@@ -173,7 +173,7 @@ Imaging analysis component for histology and multiplexed immunofluorescence (MxI
 
 ## Quick Start
 
-**For users:** Read [HE_WORKFLOW.md](HE_WORKFLOW.md) and [MXIF_WORKFLOW.md](MXIF_WORKFLOW.md) → Run [PatientOne TEST_4_IMAGING](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_4_IMAGING.txt)
+**For users:** Read [HE_WORKFLOW.md](HE_WORKFLOW.md) and [MXIF_WORKFLOW.md](MXIF_WORKFLOW.md) → Run [PatientOne TEST_4_IMAGING](../../test-docs/patient-one-scenario/test-prompts/test-4-imaging.md)
 
 **For developers:** See [mcp-openimagedata README](../../servers/mcp-openimagedata/README.md) and [mcp-deepcell README](../../servers/mcp-deepcell/README.md) for tool details
 
@@ -183,8 +183,8 @@ Imaging analysis component for histology and multiplexed immunofluorescence (MxI
 
 - [Spatial Transcriptomics](../spatial-transcriptomics/README.md) - Gene expression analysis (TEST_3)
 - [Multiomics Integration](../multiomics/README.md) - RNA/Protein/Phospho integration (TEST_2)
-- [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete end-to-end workflow
+- [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md) - Complete end-to-end workflow
 
 ---
 
-**See also:** [Main Architecture](../README.md) | [PatientOne README](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
+**See also:** [Main Architecture](../README.md) | [PatientOne README](../../test-docs/patient-one-scenario/README.md)

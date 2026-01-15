@@ -300,7 +300,7 @@ export DEIDENTIFY_ENABLED="true"
 - Multi-omics reveals PI3K/AKT pathway activation
 - TCGA comparison: Patient in high-risk group based on mutation profile
 
-**Test File:** [TEST_1_CLINICAL.txt](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_1_CLINICAL.txt)
+**Test File:** [TEST_1_CLINICAL](../../test-docs/patient-one-scenario/test-prompts/test-1-clinical-genomic.md)
 
 ---
 
@@ -331,7 +331,7 @@ export DEIDENTIFY_ENABLED="true"
 - [Multi-omics Integration](../multiomics/README.md) - Biomarker-expression correlation
 - [Spatial Transcriptomics](../spatial-transcriptomics/README.md) - Clinical-spatial outcome linkage
 - [Genomic Cohorts](../genomic/README.md) - Patient-cohort comparison
-- [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete precision medicine workflow
+- [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md) - Complete precision medicine workflow
 
 ---
 

@@ -281,7 +281,7 @@ Which molecular pathways drive platinum resistance in High-Grade Serous Ovarian 
 - ABCB1 overexpression (drug efflux)
 - Predicted targets: Alpelisib (PIK3CA), Venetoclax (BCL2)
 
-**Test File:** [TEST_2_MULTIOMICS.txt](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_2_MULTIOMICS.txt)
+**Test File:** [TEST_2_MULTIOMICS](../../test-docs/patient-one-scenario/test-prompts/test-2-multiomics-enhanced.md)
 
 ---
 
@@ -308,7 +308,7 @@ For detailed implementation information, see:
 
 ## Quick Start
 
-**For users:** Read the [mcp-multiomics README](../../servers/mcp-multiomics/README.md) → Run [PatientOne TEST_2](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_2_MULTIOMICS.txt)
+**For users:** Read the [mcp-multiomics README](../../servers/mcp-multiomics/README.md) → Run [PatientOne TEST_2](../../test-docs/patient-one-scenario/test-prompts/test-2-multiomics-enhanced.md)
 
 **For developers:** See [server README](../../servers/mcp-multiomics/README.md) for tool details and implementation
 
@@ -318,8 +318,8 @@ For detailed implementation information, see:
 
 - [Spatial Transcriptomics](../spatial-transcriptomics/README.md) - Gene expression spatial patterns (TEST_3)
 - [Imaging Analysis](../imaging/README.md) - Histology and cell segmentation (TEST_4)
-- [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete precision medicine workflow
+- [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md) - Complete precision medicine workflow
 
 ---
 
-**See also:** [Main Architecture](../README.md) | [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
+**See also:** [Main Architecture](../README.md) | [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md)

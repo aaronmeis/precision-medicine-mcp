@@ -478,7 +478,7 @@ Local HPC: Fixed institutional cost
 - [Spatial Transcriptomics](../spatial-transcriptomics/README.md) - FASTQ alignment integration
 - [Genomic Analysis](../genomic/README.md) - Variant calling workflows
 - [Multi-omics Integration](../multiomics/README.md) - Large-scale preprocessing
-- [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md) - Complete precision medicine workflow
+- [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md) - Complete precision medicine workflow
 
 ---
 

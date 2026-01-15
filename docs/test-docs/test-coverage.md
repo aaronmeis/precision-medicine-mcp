@@ -132,7 +132,7 @@ python test_all_gcp_servers.py
 
 ## 🏥 PatientOne Test Suite
 
-**Location:** `/tests/manual_testing/PatientOne-OvarianCancer/`
+**Location:** `/docs/test-docs/patient-one-scenario/`
 
 Complete end-to-end precision medicine workflow for Stage IV ovarian cancer:
 

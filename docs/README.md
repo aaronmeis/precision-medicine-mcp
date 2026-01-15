@@ -20,11 +20,11 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 
 | Role | What You'll Do | Your Guide |
 |------|----------------|------------|
-| 🔬 **Researchers & Bioinformaticians** | Analyze multi-omics data, spatial transcriptomics, build pipelines | [Guide →](guides/personas/bioinformaticians.md) |
-| 💻 **Developers & Engineers** | Build MCP servers, deploy to cloud, integrate systems | [Guide →](guides/personas/mcp-developers.md) • [Guide →](guides/personas/software-engineers.md) |
-| 🏥 **Clinical Teams & Administrators** | Understand precision medicine workflows, manage deployments | [Guide →](guides/personas/clinical-care-teams.md) |
-| 🎓 **Students & Educators** | Learn or teach precision medicine and bioinformatics | [Guide →](guides/personas/students-and-educators.md) |
-| 👥 **Patients & Families** | Understand precision medicine for ovarian cancer | [Guide →](guides/personas/patients-and-families.md) |
+| 🔬 **Researchers & Bioinformaticians** | Analyze multi-omics data, spatial transcriptomics, build pipelines | [Guide →](for-researchers/README.md) |
+| 💻 **Developers & Engineers** | Build MCP servers, deploy to cloud, integrate systems | [Guide →](for-developers/README.md) |
+| 🏥 **Clinical Teams & Administrators** | Understand precision medicine workflows, manage deployments | [Guide →](for-hospitals/README.md) |
+| 🎓 **Students & Educators** | Learn or teach precision medicine and bioinformatics | [Guide →](for-educators/README.md) |
+| 👥 **Patients & Families** | Understand precision medicine for ovarian cancer | [Guide →](for-patients/README.md) |
 
 ---
 
@@ -32,7 +32,7 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 
 ### 🚀 Getting Started
 - [Installation Guide](getting-started/installation.md) - Complete setup (Quick Start: 5 min)
-- [Quick Test Prompts](../tests/manual_testing/QUICK_TEST_PROMPTS.md) - Copy-paste queries
+- [Quick Test Prompts](test-docs/manual-testing/quick-test-prompts.md) - Copy-paste queries
 - [Automated Patient Reports](guides/AUTOMATED_PATIENT_REPORTS.md) - Generate analysis reports
 
 ### ☁️ Deployment

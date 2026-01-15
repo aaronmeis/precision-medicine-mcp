@@ -109,7 +109,7 @@ Spatial transcriptomics component of the Precision Medicine MCP system. Processe
 
 ## Quick Start
 
-**For users:** Read [CSV_WORKFLOW.md](CSV_WORKFLOW.md) → Run [PatientOne TEST_3_SPATIAL.txt](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_3_SPATIAL.txt)
+**For users:** Read [CSV_WORKFLOW.md](CSV_WORKFLOW.md) → Run [PatientOne TEST_3_SPATIAL](../../test-docs/patient-one-scenario/test-prompts/test-3-spatial.md)
 
 **For developers:** See [OVERVIEW.md](OVERVIEW.md) for architecture
 
@@ -117,4 +117,4 @@ Spatial transcriptomics component of the Precision Medicine MCP system. Processe
 
 ---
 
-**See also:** [Main Architecture](../README.md) | [PatientOne Workflow](../../tests/manual_testing/PatientOne-OvarianCancer/README.md)
+**See also:** [Main Architecture](../README.md) | [PatientOne Workflow](../../test-docs/patient-one-scenario/README.md)

@@ -72,5 +72,5 @@ For deployment status of ALL 10 MCP servers (including multiomics, TCGA, seqera,
 ## Related Documentation
 
 - **Spatial Workflows:** [CSV_WORKFLOW.md](CSV_WORKFLOW.md), [FASTQ_WORKFLOW.md](FASTQ_WORKFLOW.md)
-- **PatientOne Tests:** [/tests/manual_testing/PatientOne-OvarianCancer/](../../tests/manual_testing/PatientOne-OvarianCancer/)
+- **PatientOne Tests:** [test-docs/patient-one-scenario/](../../test-docs/patient-one-scenario/)
 - **Main Architecture:** [../README.md](../README.md)
