@@ -11,9 +11,9 @@ HIPAA, data governance, and regulatory compliance documentation.
 
 ## Quick Links
 
-- [Main Documentation Index](../INDEX.md)
-- [Operations Manual](../deployment/hospital-deployment/operations-manual.md)
-- [Admin Guide](../deployment/hospital-deployment/admin-guide.md)
+- [Main Documentation Index](../../INDEX.md)
+- [Operations Manual](../OPERATIONS_MANUAL.md)
+- [Admin Guide](../ADMIN_GUIDE.md)
 
 ---
 

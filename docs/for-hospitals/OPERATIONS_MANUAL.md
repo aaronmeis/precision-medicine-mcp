@@ -741,8 +741,8 @@ python tools/reports/finalize_patient_report.py --patient-id PAT001-OVC-2025
 
 ### Related Documentation
 
-- [CITL_WORKFLOW_GUIDE.md](../clinical/CITL_WORKFLOW_GUIDE.md) - Complete reviewer training
-- [CITL_EXAMPLES.md](../clinical/CITL_EXAMPLES.md) - Example APPROVE/REVISE/REJECT reviews
+- [CITL_WORKFLOW_GUIDE.md](citl-workflows/CITL_WORKFLOW_GUIDE.md) - Complete reviewer training
+- [CITL_EXAMPLES.md](citl-workflows/CITL_EXAMPLES.md) - Example APPROVE/REVISE/REJECT reviews
 - [TEST_6_CITL_REVIEW.txt](../../tests/manual_testing/PatientOne-OvarianCancer/implementation/TEST_6_CITL_REVIEW.txt) - End-to-end test
 
 ---
@@ -854,5 +854,5 @@ gcloud container images describe gcr.io/{PROJECT_ID}/mcp-fgbio:latest \
 **Related Documents:**
 - [User Guide](USER_GUIDE.md) - For end users
 - [Admin Guide](ADMIN_GUIDE.md) - For administrators
-- [HIPAA Compliance](../compliance/hipaa.md) - Compliance documentation
+- [HIPAA Compliance](compliance/hipaa.md) - Compliance documentation
 - [Runbooks](RUNBOOKS/) - Incident response procedures

@@ -254,7 +254,7 @@ Step-by-step checklist for deploying the Precision Medicine MCP Platform at your
 **Related Resources:**
 - 🔒 [Security Overview](SECURITY_OVERVIEW.md)
 - 📊 [ROI Analysis](../for-funders/ROI_ANALYSIS.md)
-- 📖 [HIPAA Compliance](../compliance/hipaa.md)
+- 📖 [HIPAA Compliance](compliance/hipaa.md)
 
 ---
 
