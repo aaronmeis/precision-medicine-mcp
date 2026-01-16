@@ -35,8 +35,8 @@
 - **[Production Roadmap](../deployment/roadmap.md)** - 6-month deployment timeline
 
 ### Security & Compliance
-- **[HIPAA Compliance](../compliance/hipaa.md)** - De-identification, audit logging, encryption
-- **[Data Governance](../compliance/data-governance.md)** - Data retention, privacy policies
+- **[HIPAA Compliance](https://github.com/lynnlangit/precision-medicine-mcp/blob/main/docs/hospital-deployment/compliance/hipaa.md)** - De-identification, audit logging, encryption
+- **[Data Governance](https://github.com/lynnlangit/precision-medicine-mcp/blob/main/docs/hospital-deployment/compliance/data-governance.md)** - Data retention, privacy policies
 - **[Security Guide](../deployment/security.md)** - API keys, secrets management, GCP Secret Manager
 
 ### User Management
