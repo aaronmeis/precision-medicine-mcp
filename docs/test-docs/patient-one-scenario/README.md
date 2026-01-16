@@ -212,8 +212,6 @@ Run all modular tests sequentially for comprehensive precision medicine analysis
   - 3-4× more expensive due to 300-1500× larger data files
   - **Token costs stay low** (~$1-2) because MCP servers return summaries, not raw 3-8 GB files!
 
-📊 **[Full Cost Analysis & ROI →](../../../docs/hospital-deployment/operations/COST_ANALYSIS.md)**
-
 **Instructions:**
 1. Open each `TEST_*.txt` file in `implementation/` directory
 2. Copy/paste the prompt into Claude Desktop
