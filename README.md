@@ -83,6 +83,27 @@ graph LR
 
 **Server Status:** 4 production-ready | 1 at 95% | 5 mocked for demo | [Details →](servers/README.md)
 
+___
+
+## What and Why
+
+**The Problem:** Multi-modal precision medicine is siloed and code-heavy - **too slow** for urgent patient care decisions.
+
+**This Solution:**
+- Natural language interface for complex bioinformatics
+- AI orchestrates 10 specialized servers automatically
+- 40 hours manual work → 35 minutes AI-orchestrated
+- Extensible to other cancers and diseases
+
+**What it is NOT:** Not clinically validated yet (research use only)
+
+**See it / Try it:** [<5 minute demo video](https://www.youtube.com/watch?v=LUldOHHX5Yo) | [Code](docs/test-docs/patient-one-scenario)
+
+**Quick Links:**
+- 📚 [Documentation Hub](docs/README.md)
+- 🏗️ [Architecture Details](docs/architecture/README.md)
+- 🧪 [Testing Guide](tests/README.md)
+
 ---
 
 ## Repository Structure
@@ -133,27 +154,6 @@ precision-medicine-mcp/
 │   └── reports/            # Patient report generation, CitL submission
 └── ui/                     # Streamlit chat, Jupyter notebook
 ```
-
----
-
-## What and Why
-
-**The Problem:** Multi-modal precision medicine is siloed and code-heavy - **too slow** for urgent patient care decisions.
-
-**This Solution:**
-- Natural language interface for complex bioinformatics
-- AI orchestrates 10 specialized servers automatically
-- 40 hours manual work → 35 minutes AI-orchestrated
-- Extensible to other cancers and diseases
-
-**What it is NOT:** Not clinically validated yet (research use only)
-
-**See it / Try it:** [<5 minute demo video](https://www.youtube.com/watch?v=LUldOHHX5Yo) | [Code](docs/test-docs/patient-one-scenario)
-
-**Quick Links:**
-- 📚 [Documentation Hub](docs/README.md)
-- 🏗️ [Architecture Details](docs/architecture/README.md)
-- 🧪 [Testing Guide](tests/README.md)
 
 ---
 
