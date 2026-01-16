@@ -32,21 +32,6 @@
 
 ---
 
-## Featured Use Case: PatientOne
-
-<kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-holistic.png" width=800></kbd>
-
-**Stage IV High-Grade Serous Ovarian Cancer** - Platinum-resistant, 70% 5-year mortality
-
-**What This Demonstrates:**
-- Clinical data (Epic FHIR) + Genomics (VCF) + Multi-omics (RNA/Protein/Phospho)
-- Spatial transcriptomics (10x Visium) + Imaging (H&E, MxIF)
-- Natural language queries → AI orchestration → 35-minute analysis
-
-**📖 Full Case Study:** [PatientOne Documentation →](docs/test-docs/patient-one-scenario/README.md)
-
----
-
 ## System Overview
 
 ```mermaid
@@ -84,6 +69,21 @@ graph LR
 **Server Status:** 4 production-ready | 1 at 95% | 5 mocked for demo | [Details →](servers/README.md)
 
 ___
+
+## Featured Use Case: PatientOne
+
+<kbd><img src="https://github.com/lynnlangit/precision-medicine-mcp/blob/main/tests/manual_testing/PatientOne-OvarianCancer/architecture/patient-one-holistic.png" width=800></kbd>
+
+**Stage IV High-Grade Serous Ovarian Cancer** - Platinum-resistant, 70% 5-year mortality
+
+**What This Demonstrates:**
+- Clinical data (Epic FHIR) + Genomics (VCF) + Multi-omics (RNA/Protein/Phospho)
+- Spatial transcriptomics (10x Visium) + Imaging (H&E, MxIF)
+- Natural language queries → AI orchestration → 35-minute analysis
+
+**📖 Full Case Study:** [PatientOne Documentation →](docs/test-docs/patient-one-scenario/README.md)
+
+---
 
 ## What and Why
 
