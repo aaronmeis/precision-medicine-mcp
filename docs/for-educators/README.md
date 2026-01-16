@@ -442,22 +442,6 @@ Production mode (real data): Requires institutional GCP account and varies by us
 
 ---
 
-## Next Steps for Instructors
-
-1. **Try the demo** → [PatientOne Guide](../test-docs/patient-one-scenario/README.md) (25-35 min)
-2. **Review example outputs** → [Results](../test-docs/patient-one-scenario/architecture/outputs.md)
-3. **Estimate costs** → [Cost Analysis](../for-hospitals/operations/cost-and-budget.md)
-4. **Plan integration** → Choose activities and timeline for your course
-5. **Request pilot** → Contact us for classroom support
-
-## Next Steps for Students
-
-1. **Set up environment** → [Installation Guide](../getting-started/installation.md) (10-15 min)
-2. **Try first analysis** → Simple clinical query (5 min)
-3. **Complete PatientOne** → Full workflow (25-35 min)
-4. **Explore advanced topics** → Custom workflows, server development
-
----
 
 **Related Resources:**
 - 🔬 [Researcher Guide](../for-researchers/README.md) - For bioinformatics details
