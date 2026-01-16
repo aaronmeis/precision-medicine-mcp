@@ -13,11 +13,9 @@
 
 ---
 
-## 💰 For Funders & Decision-Makers
-
-**[See Funding Opportunities →](FUNDING.md)** | **[Executive Summary →](docs/EXECUTIVE_SUMMARY.md)**
-
-**$3,098-3,176 savings per patient** | Production-ready for HIPAA-compliant hospital deployment
+## 💰 For Decision-Makers
+-  **[Executive Summary of Precision Medicine MCP](docs/EXECUTIVE_SUMMARY.md)**
+-  **[Why MCP for Healthcare?](docs/WHY_MCP_FOR_HEALTHCARE.md)**
 
 ---
 
@@ -25,12 +23,12 @@
 
 | You Are... | Start Here | Time to Value |
 |------------|------------|---------------|
-| 💰 **Funder/Grant Reviewer** | [FUNDING.md](FUNDING.md) | 5 min |
 | 🏥 **Hospital IT/Admin** | [Hospital Deployment](docs/for-hospitals/README.md) | 30 min overview |
 | 🔬 **Bioinformatician** | [Researcher Guide](docs/for-researchers/README.md) | 25-35 min demo |
 | 💻 **MCP Developer** | [Developer Guide](docs/for-developers/README.md) | 1 hour setup |
 | 🎓 **Educator/Student** | [Educational Guide](docs/for-educators/README.md) | 25 min tutorial |
 | 👥 **Patient/Family** | [Patient Resources](docs/for-patients/README.md) | 10 min read |
+| 💰 **Funder/Grant Reviewer** | [FUNDING.md](FUNDING.md) | 5 min |
 
 ---
 
@@ -153,7 +151,6 @@ precision-medicine-mcp/
 **See it / Try it:** [<5 minute demo video](https://www.youtube.com/watch?v=LUldOHHX5Yo) | [Code](docs/test-docs/patient-one-scenario)
 
 **Quick Links:**
-- 🤔 [Why MCP for Healthcare?](docs/WHY_MCP_FOR_HEALTHCARE.md)
 - 📚 [Documentation Hub](docs/README.md)
 - 🏗️ [Architecture Details](docs/architecture/README.md)
 - 🧪 [Testing Guide](tests/README.md)
