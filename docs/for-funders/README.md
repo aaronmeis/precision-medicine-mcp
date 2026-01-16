@@ -44,9 +44,9 @@
 - **[Testing Coverage](../../tests/README.md)** - 167 automated tests, 68% coverage
 
 ### Compliance & Risk
-- **[Risk Assessment](../compliance/risk-assessment.md)** - Technical, financial, compliance, adoption risks
-- **[HIPAA Compliance](../compliance/hipaa.md)** - De-identification, audit logging, security
-- **[Bias Audit Framework](../ethics/README.md)** - FDA AI/ML SaMD aligned bias detection
+- **[Risk Assessment](../for-hospitals/compliance/risk-assessment.md)** - Technical, financial, compliance, adoption risks
+- **[HIPAA Compliance](../for-hospitals/compliance/hipaa.md)** - De-identification, audit logging, security
+- **[Bias Audit Framework](../for-hospitals/ethics/README.md)** - FDA AI/ML SaMD aligned bias detection
 
 ---
 
@@ -96,7 +96,7 @@
 
 **For Grant Applications:**
 - Full budget breakdown available in [FUNDING.md](../../FUNDING.md)
-- IRB-ready bias audit reports: [Ethics Framework](../ethics/README.md)
+- IRB-ready bias audit reports: [Ethics Framework](../for-hospitals/ethics/README.md)
 - Technical specifications: [Architecture](../architecture/README.md)
 
 **For Institutional Partnerships:**
