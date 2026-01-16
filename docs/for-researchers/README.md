@@ -69,29 +69,6 @@
 
 ---
 
-## Documents in This Section
-
-### Getting Started
-- **[README.md](README.md)** *(this file)* - Navigation hub for researchers
-- **ANALYSIS_WORKFLOWS.md (coming soon)** - Common bioinformatics workflows with examples
-- **DATA_FORMATS.md (coming soon)** - Input/output formats, data structure, file conventions
-
-### Analysis Guides
-- **[SPATIAL_TRANSCRIPTOMICS.md](SPATIAL_TRANSCRIPTOMICS.md)** - Visium analysis, batch correction, pathway enrichment
-- **[MULTIOMICS_INTEGRATION.md](MULTIOMICS_INTEGRATION.md)** - RNA/Protein/Phospho integration, meta-analysis
-- **[CLINICAL_GENOMIC.md](CLINICAL_GENOMIC.md)** - FHIR + VCF integration, variant-phenotype mapping
-
-### Research Use Cases
-- **[PATIENT_STRATIFICATION.md](PATIENT_STRATIFICATION.md)** - Clustering, subtype identification
-- **[BIOMARKER_DISCOVERY.md](BIOMARKER_DISCOVERY.md)** - Differential expression, validation cohorts
-- **[DRUG_RESISTANCE.md](DRUG_RESISTANCE.md)** - Mechanism identification, pathway analysis
-
-### Reproducibility & Publishing
-- **REPRODUCIBILITY.md (coming soon)** - Reproducible workflows, data provenance, versioning
-- **[PUBLICATION_GUIDELINES.md](PUBLICATION_GUIDELINES.md)** - Methods sections, citations, data availability
-
----
-
 ## Data Modalities
 
 ```mermaid
