@@ -141,20 +141,3 @@ graph LR
 4. See 40 hours → 35 minutes in action
 
 ---
-
-## Contact & Next Steps
-
-**For Hospital Partnerships:**
-- Email: [contact info placeholder]
-- GitHub: https://github.com/lynnlangit/precision-medicine-mcp
-- Documentation: See `/docs` folder
-
-**For Grant Funding:**
-- Full budget breakdown available
-- 6-month pilot available for $15K-30K
-- Happy to provide IRB-ready bias audit reports
-- Dedicated to PatientOne memory
-
----
-
-**Last Updated:** 2025-01-13
