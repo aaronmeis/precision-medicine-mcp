@@ -39,9 +39,6 @@ Ready-to-use test prompts for the complete PatientOne workflow:
 5. [Test 5: Integration](./patient-one-scenario/test-prompts/test-5-integration.md)
 6. [Test 6: CitL Review](./patient-one-scenario/test-prompts/test-6-citl-review.md)
 
-#### Architecture
-- [Overview](./patient-one-scenario/architecture/overview.md) - PatientOne architecture
-- [Outputs](./patient-one-scenario/architecture/outputs.md) - Expected outputs and artifacts
 
 ---
 
