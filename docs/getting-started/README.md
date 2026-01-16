@@ -10,6 +10,7 @@ Quick start guides for new users of the Precision Medicine MCP system.
   - Troubleshooting guide
 - **Claude Desktop Example Configuration Files**
   - Example desktop config files (JSON)
+  - IMPORTANT: you will have to edit file paths for your environment setup
 
 
 
