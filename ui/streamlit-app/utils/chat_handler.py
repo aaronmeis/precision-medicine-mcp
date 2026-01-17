@@ -49,6 +49,27 @@ class ChatHandler:
             for server in mcp_servers
         ]
 
+        # Build system prompt instructing Claude to use MCP tools
+        server_descriptions = []
+        for server in mcp_servers:
+            server_descriptions.append(f"- {server['name']}: Available for bioinformatics analysis")
+
+        system_prompt = f"""You are a bioinformatics assistant with access to specialized analysis tools via MCP servers.
+
+IMPORTANT: When users ask you to perform analysis, you MUST use the appropriate MCP tool rather than providing theoretical responses.
+
+Available MCP servers:
+{chr(10).join(server_descriptions)}
+
+Guidelines:
+- When asked to perform pathway enrichment, spatial analysis, or other bioinformatics tasks, USE THE TOOLS
+- Call the appropriate MCP tool to get real analysis results
+- After receiving tool results, interpret and explain them to the user
+- Provide actionable insights based on the actual analysis output
+- If you don't have access to a required tool, let the user know
+
+Do not simulate or describe what an analysis would show - actually perform it using the available tools."""
+
         try:
             response = self.client.beta.messages.create(
                 model=model,
@@ -57,6 +78,7 @@ class ChatHandler:
                 messages=messages,
                 mcp_servers=mcp_servers,
                 tools=tools,
+                system=system_prompt,
                 betas=["mcp-client-2025-11-20"]
             )
             return response
