@@ -16,6 +16,7 @@
 ## 💰 For Decision-Makers
 -  **[Executive Summary of Precision Medicine MCP](docs/EXECUTIVE_SUMMARY.md)**
 -  **[Why MCP for Healthcare?](docs/WHY_MCP_FOR_HEALTHCARE.md)**
+-  **See it / Try it:** [<5 minute demo video - shows a subset of available functionality](https://www.youtube.com/watch?v=LUldOHHX5Yo) 
 
 ---
 
@@ -81,25 +82,8 @@ ___
 - Spatial transcriptomics (10x Visium) + Imaging (H&E, MxIF)
 - Natural language queries → AI orchestration → 35-minute analysis
 
-**📖 Full Case Study:** [PatientOne Documentation →](docs/test-docs/patient-one-scenario/README.md)
-
----
-
-## What and Why
-
-**The Problem:** Multi-modal precision medicine is siloed and code-heavy - **too slow** for urgent patient care decisions.
-
-**This Solution:**
-- Natural language interface for complex bioinformatics
-- AI orchestrates 10 specialized servers automatically
-- 40 hours manual work → 35 minutes AI-orchestrated
-- Extensible to other cancers and diseases
-
-**What it is NOT:** Not clinically validated yet (research use only)
-
-**See it / Try it:** [<5 minute demo video](https://www.youtube.com/watch?v=LUldOHHX5Yo) | [Code](docs/test-docs/patient-one-scenario)
-
-**Quick Links:**
+**Learn More**
+- 📖 Full Case Study:** [PatientOne Documentation →](docs/test-docs/patient-one-scenario/README.md)
 - 📚 [Prompt Library](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/docs/prompt-library)
 - 🏗️ [Architecture Details](docs/architecture/README.md)
 - 📚 [Documentation Hub](docs/README.md)
