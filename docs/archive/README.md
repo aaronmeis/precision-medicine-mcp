@@ -133,4 +133,4 @@ A: Quarterly. Extremely old docs (>2 years) may be permanently deleted after not
 **Related:**
 - [Documentation Index](../INDEX.md) - Current active documentation
 - [For Developers](../for-developers/README.md) - How to maintain documentation
-- [CONTRIBUTING](../../CONTRIBUTING.md) - Documentation contribution guidelines
+- [CONTRIBUTING](../for-developers/CONTRIBUTING.md) - Documentation contribution guidelines

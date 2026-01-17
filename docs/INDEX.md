@@ -28,8 +28,8 @@ This is your central navigation hub for all documentation. Use this index to qui
 - **[For Patients & Families](./for-patients/README.md)** - Understanding precision medicine results (plain language)
 
 **Specialized Guides:**
-- **[Automated Patient Reports](./guides/AUTOMATED_PATIENT_REPORTS.md)** - Generate reports automatically
-- **[Patient Summaries](./guides/GENERATE_PATIENT_SUMMARIES.md)** - Create patient-friendly summaries
+- **[Automated Patient Reports](./for-developers/automation-guides/AUTOMATED_PATIENT_REPORTS.md)** - Generate reports automatically
+- **[Patient Summaries](./for-developers/automation-guides/GENERATE_PATIENT_SUMMARIES.md)** - Create patient-friendly summaries
 - **[Add New Modality Server](./for-developers/ADD_NEW_MODALITY_SERVER.md)** - Extend the system with new data types
 
 ---
@@ -50,8 +50,8 @@ This is your central navigation hub for all documentation. Use this index to qui
 
 **Day-to-day operations and management:**
 
-- **[Cost and Budget Management](./operations/cost-and-budget.md)** - Cost estimation, tracking, and optimization
-- **[Data Governance](./compliance/data-governance.md)** - Data handling policies and procedures
+- **[Cost and Budget Management](./for-hospitals/operations/cost-and-budget.md)** - Cost estimation, tracking, and optimization
+- **[Data Governance](./for-hospitals/compliance/data-governance.md)** - Data handling policies and procedures
 
 ---
 
@@ -59,11 +59,11 @@ This is your central navigation hub for all documentation. Use this index to qui
 
 **Regulatory compliance and data security:**
 
-- **[Compliance Overview](./compliance/README.md)** - Compliance framework summary
-- **[HIPAA Compliance](./compliance/hipaa.md)** - De-identification, audit logging, encryption
-- **[Data Governance](./compliance/data-governance.md)** - GDPR, Common Rule, IRB requirements
-- **[Risk Assessment](./compliance/risk-assessment.md)** - Risk mitigation strategies (if exists)
-- **[Disclaimers](./compliance/disclaimers.md)** - Legal disclaimers and limitations
+- **[Compliance Overview](./for-hospitals/compliance/README.md)** - Compliance framework summary
+- **[HIPAA Compliance](./for-hospitals/compliance/hipaa.md)** - De-identification, audit logging, encryption
+- **[Data Governance](./for-hospitals/compliance/data-governance.md)** - GDPR, Common Rule, IRB requirements
+- **[Risk Assessment](./for-hospitals/compliance/risk-assessment.md)** - Risk mitigation strategies (if exists)
+- **[Disclaimers](./for-hospitals/compliance/disclaimers.md)** - Legal disclaimers and limitations
 
 ---
 
@@ -74,12 +74,12 @@ This is your central navigation hub for all documentation. Use this index to qui
 - **[Deployment Roadmap](./deployment/roadmap.md)** - Production deployment planning
 - **[Security Guide](./deployment/security.md)** - API keys, secrets management, GCP Secret Manager
 - **[POC Deployment](./deployment/poc-deployment/)** - Proof-of-concept deployment guides
-- **[Hospital Deployment](./deployment/hospital-deployment/)** - Enterprise deployment
-  - [Operations Manual](./deployment/hospital-deployment/operations-manual.md)
-  - [Admin Guide](./deployment/hospital-deployment/admin-guide.md)
-  - [User Guide](./deployment/hospital-deployment/user-guide.md)
-  - [Audit Log Guide](./deployment/hospital-deployment/audit-log-guide.md)
-  - [Runbooks](./deployment/hospital-deployment/runbooks/) - Incident response procedures
+- **[Hospital Deployment](./for-hospitals/)** - Enterprise deployment
+  - [Operations Manual](./for-hospitals/OPERATIONS_MANUAL.md)
+  - [Admin Guide](./for-hospitals/ADMIN_GUIDE.md)
+  - [User Guide](./for-hospitals/USER_GUIDE.md)
+  - [Audit Log Guide](./for-hospitals/AUDIT_LOG_GUIDE.md)
+  - [Runbooks](./for-hospitals/RUNBOOKS/) - Incident response procedures
 
 ---
 
@@ -102,10 +102,10 @@ This is your central navigation hub for all documentation. Use this index to qui
 
 **Clinical decision support and review processes:**
 
-- **[Clinical Overview](./clinical/README.md)** - Clinical workflows overview
-- **[CITL Workflow](./clinical/citl-workflow.md)** - Clinician-in-the-Loop workflow
-- **[CITL Review Template](./clinical/citl-review-template.md)** - Review form template
-- **[CITL Examples](./clinical/citl-examples.md)** - Example reviews
+- **[Clinical Overview](./for-hospitals/citl-workflows/)** - Clinical workflows overview
+- **[CITL Workflow](./for-hospitals/citl-workflows/CITL_WORKFLOW_GUIDE.md)** - Clinician-in-the-Loop workflow
+- **[CITL Review Template](./for-hospitals/citl-workflows/CITL_REVIEW_TEMPLATE.md)** - Review form template
+- **[CITL Examples](./for-hospitals/citl-workflows/CITL_EXAMPLES.md)** - Example reviews
 
 ---
 
@@ -113,10 +113,10 @@ This is your central navigation hub for all documentation. Use this index to qui
 
 **Ethical considerations and bias auditing:**
 
-- **[Ethics Overview](./ethics/README.md)** - Ethics framework
-- **[Bias Framework](./ethics/bias-framework.md)** - Bias detection and mitigation
-- **[Audit Checklist](./ethics/audit-checklist.md)** - Step-by-step bias audit
-- **[Implementation](./ethics/implementation.md)** - Implementation guidelines
+- **[Ethics Overview](./for-hospitals/ethics/README.md)** - Ethics framework
+- **[Bias Framework](./for-hospitals/ethics/ETHICS_AND_BIAS.md)** - Bias detection and mitigation
+- **[Audit Checklist](./for-hospitals/ethics/BIAS_AUDIT_CHECKLIST.md)** - Step-by-step bias audit
+- **[Implementation](./for-hospitals/ethics/IMPLEMENTATION_PLAN.md)** - Implementation guidelines
 
 ---
 
@@ -124,8 +124,8 @@ This is your central navigation hub for all documentation. Use this index to qui
 
 **Example data, prompts, and templates:**
 
-- **[Example Patients](./guides/examples/)** - Sample patient data and analyses
-- **[Prompt Templates](./guides/prompts/)** - Reusable analysis prompts
+- **[Example Patients](./for-developers/automation-guides/examples/)** - Sample patient data and analyses
+- **[Prompt Templates](./for-developers/automation-guides/prompts/)** - Reusable analysis prompts
 
 ---
 
@@ -146,19 +146,19 @@ This is your central navigation hub for all documentation. Use this index to qui
 
 - **Installation:** [5-Minute Quick Start](./getting-started/installation.md#quick-start-5-minutes)
 - **Test It:** [PatientOne Quick Test](./test-docs/patient-one-scenario/quick-reference.md)
-- **Costs:** [Cost Overview](./operations/cost-and-budget.md#cost-overview)
-- **HIPAA:** [HIPAA Quick Reference](./compliance/hipaa.md#executive-summary)
+- **Costs:** [Cost Overview](./for-hospitals/operations/cost-and-budget.md#cost-overview)
+- **HIPAA:** [HIPAA Quick Reference](./for-hospitals/compliance/hipaa.md#executive-summary)
 
 ### By Task
 
 **I want to:**
 - **Install the system** → [Installation Guide](./getting-started/installation.md)
 - **Run my first analysis** → [Quick Test Prompts](./test-docs/manual-testing/quick-test-prompts.md)
-- **Understand costs** → [Cost and Budget Guide](./operations/cost-and-budget.md)
+- **Understand costs** → [Cost and Budget Guide](./for-hospitals/operations/cost-and-budget.md)
 - **Deploy to production** → [Deployment Roadmap](./deployment/roadmap.md)
-- **Ensure HIPAA compliance** → [HIPAA Compliance](./compliance/hipaa.md)
+- **Ensure HIPAA compliance** → [HIPAA Compliance](./for-hospitals/compliance/hipaa.md)
 - **Add a new server** → [Add New Modality Server](./for-developers/ADD_NEW_MODALITY_SERVER.md)
-- **Review patient results** → [CITL Workflow](./clinical/citl-workflow.md)
+- **Review patient results** → [CITL Workflow](./for-hospitals/citl-workflows/CITL_WORKFLOW_GUIDE.md)
 - **Test the system** → [PatientOne Scenario](./test-docs/patient-one-scenario/README.md)
 
 ### By Role
@@ -169,7 +169,7 @@ This is your central navigation hub for all documentation. Use this index to qui
 - **Researcher/Bioinformatician** → [For Researchers](./for-researchers/README.md) - Workflows, analysis, production servers
 - **Educator/Professor** → [For Educators](./for-educators/README.md) - Teaching materials, course integration
 - **Patient/Family** → [For Patients](./for-patients/README.md) - Understanding results (plain language)
-- **Clinician** → [CITL Workflow](./clinical/CITL_WORKFLOW_GUIDE.md) - Clinical workflow integration
+- **Clinician** → [CITL Workflow](./for-hospitals/citl-workflows/CITL_WORKFLOW_GUIDE.md) - Clinical workflow integration
 
 ---
 

@@ -18,7 +18,7 @@ This document outlines the prioritized path to move the Precision Medicine MCP P
 
 All 9 MCP servers successfully deployed to Google Cloud Platform and tested.
 
-📋 **[See Server Status →](../servers/README.md#-server-status)** - Complete status, tools, and implementation details for all 10 servers
+📋 **[See Server Status →](../../servers/README.md#-server-status)** - Complete status, tools, and implementation details for all 10 servers
 
 **Test Results:** 9/9 servers passed functional testing via Claude API
 
@@ -35,8 +35,8 @@ All 9 MCP servers successfully deployed to Google Cloud Platform and tested.
 - Test/mock data only
 
 **See:**
-- [Deployment Status](deployment/DEPLOYMENT_STATUS.md) - Full deployment details
-- [GCP Testing Guide](deployment/GCP_TESTING_GUIDE.md) - Testing with Claude API
+- [Deployment Status](DEPLOYMENT_STATUS.md) - Full deployment details
+- [GCP Testing Guide](GCP_TESTING_GUIDE.md) - Testing with Claude API
 
 ---
 

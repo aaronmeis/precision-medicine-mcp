@@ -128,7 +128,7 @@ Annual Savings:
 - ✅ **Azure AD SSO** for user authentication
 - ✅ **SOC 2 Type II** compliant infrastructure (GCP Cloud Run)
 
-See: [Security Overview](../deployment/security.md) | [HIPAA Compliance](../compliance/hipaa.md)
+See: [Security Overview](../deployment/security.md) | [HIPAA Compliance](../for-hospitals/compliance/hipaa.md)
 
 ### "How much does deployment cost?"
 
@@ -198,7 +198,7 @@ See: [FUNDING.md](../../FUNDING.md) for detailed budget breakdown
 
 **For Hospital IT:**
 - Security review: [Security Guide](../deployment/security.md)
-- HIPAA compliance: [HIPAA Guide](../compliance/hipaa.md)
+- HIPAA compliance: [HIPAA Guide](../for-hospitals/compliance/hipaa.md)
 - Deployment timeline: [Production Roadmap](../deployment/roadmap.md)
 
 ---

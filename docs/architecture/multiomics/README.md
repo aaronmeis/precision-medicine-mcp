@@ -302,7 +302,7 @@ For detailed implementation information, see:
 - **GCP Deployment:** [deployment/DEPLOYMENT_STATUS.md](../../deployment/DEPLOYMENT_STATUS.md)
 
 ### Additional Resources
-- **Data Governance:** [DATA_GOVERNANCE.md](../../operations/DATA_GOVERNANCE.md)
+- **Data Governance:** [data-governance.md](../../for-hospitals/compliance/data-governance.md)
 
 ---
 

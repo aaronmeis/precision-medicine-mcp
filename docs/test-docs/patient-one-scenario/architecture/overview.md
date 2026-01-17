@@ -57,7 +57,7 @@ flowchart LR
 
 **All data is synthetic.** Any resemblance to actual patients is coincidental.
 
-**See [complete disclaimers →](../../docs/DISCLAIMERS.md)**
+**See [complete disclaimers →](../../../for-hospitals/compliance/disclaimers.md)**
 
 ---
 
@@ -421,9 +421,9 @@ All PatientOne analyses are:
 ## Related Documentation
 
 - **Main Project:** [Precision Medicine MCP Servers →](../../README.md)
-- **Spatial Transcriptomics Workflow:** [Architecture →](../spatial-transcriptomics/README.md)
-- **Imaging Analysis Workflow:** [Architecture →](../imaging/README.md)
-- **Multiomics Workflow:** [Architecture →](../multiomics/README.md)
+- **Spatial Transcriptomics Workflow:** [Architecture →](../../../architecture/spatial-transcriptomics/README.md)
+- **Imaging Analysis Workflow:** [Architecture →](../../../architecture/imaging/README.md)
+- **Multiomics Workflow:** [Architecture →](../../../architecture/multiomics/README.md)
 - **Testing Guide:** [PatientOne Implementation →](../README.md)
 
 ---

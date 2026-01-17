@@ -28,7 +28,7 @@ PatientOne supports two distinct operating modes to accommodate different use ca
 - **Actual Data (Production):** 2-4 hours (pre-aligned) or 4-8 hours (raw FASTQ), $24-102 total
   - **Key insight:** Token costs stay low (~$1-2) even with 3-8 GB files because MCP servers return summaries!
 
-**[→ See Full Cost Analysis & ROI](../../operations/cost-and-budget.md)**
+**[→ See Full Cost Analysis & ROI](../../for-hospitals/operations/cost-and-budget.md)**
 
 ---
 

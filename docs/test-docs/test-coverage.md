@@ -17,7 +17,7 @@
 
 ## 📋 Coverage by Server
 
-📋 **[See Server Status →](../servers/README.md#-server-status)** - Complete server status and implementation details
+📋 **[See Server Status →](../../servers/README.md#-server-status)** - Complete server status and implementation details
 
 | Server | Coverage | Tests | Status | Production Ready |
 |--------|----------|-------|--------|------------------|
@@ -126,7 +126,7 @@ python test_all_gcp_servers.py
 - Tool discovery via MCP protocol
 - Response time < 5 seconds (excluding cold starts)
 
-📖 **Server URLs:** [Deployment Status](../docs/deployment/DEPLOYMENT_STATUS.md)
+📖 **Server URLs:** [Deployment Status](../deployment/DEPLOYMENT_STATUS.md)
 
 ---
 
@@ -144,9 +144,9 @@ Complete end-to-end precision medicine workflow for Stage IV ovarian cancer:
 
 **Modes:**
 - **DRY_RUN** (default): Synthetic data demo (~$0.32, 25-35 min)
-- **Real Data**: Your own patient data ([Configuration Guide](manual_testing/PatientOne-OvarianCancer/DATA_MODES_GUIDE.md))
+- **Real Data**: Your own patient data ([Configuration Guide](patient-one-scenario/data-modes-guide.md))
 
-📖 **[PatientOne Quick Start →](manual_testing/PatientOne-OvarianCancer/README.md)**
+📖 **[PatientOne Quick Start →](patient-one-scenario/README.md)**
 
 ---
 

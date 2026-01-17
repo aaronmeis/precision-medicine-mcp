@@ -34,7 +34,7 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 ### 🚀 Getting Started
 - [Installation Guide](getting-started/installation.md) - Complete setup (Quick Start: 5 min)
 - [Quick Test Prompts](test-docs/manual-testing/quick-test-prompts.md) - Copy-paste queries
-- [Automated Patient Reports](guides/AUTOMATED_PATIENT_REPORTS.md) - Generate analysis reports
+- [Automated Patient Reports](for-developers/automation-guides/AUTOMATED_PATIENT_REPORTS.md) - Generate analysis reports
 
 ### ☁️ Deployment
 - [Deployment Status](deployment/DEPLOYMENT_STATUS.md) - 9 servers on GCP Cloud Run ✅
@@ -42,17 +42,17 @@ Each guide includes workflows, examples, tools, and resources tailored to your n
 - [Security](deployment/SECURITY.md) - POC security considerations
 
 ### 🏥 Hospital Production
-- [Operations Manual](hospital-deployment/OPERATIONS_MANUAL.md) - System operations
-- [HIPAA Compliance](hospital-deployment/compliance/hipaa.md) - De-identification, audit logs
-- [Admin Guide](hospital-deployment/ADMIN_GUIDE.md) - User management, monitoring
-- [User Guide](hospital-deployment/USER_GUIDE.md) - For clinicians and researchers
-- [Audit Log Guide](hospital-deployment/AUDIT_LOG_GUIDE.md) - 10-year retention
-- [Runbooks](hospital-deployment/RUNBOOKS/) - Incident response (server-down, SSO, Epic)
+- [Operations Manual](for-hospitals/OPERATIONS_MANUAL.md) - System operations
+- [HIPAA Compliance](for-hospitals/compliance/hipaa.md) - De-identification, audit logs
+- [Admin Guide](for-hospitals/ADMIN_GUIDE.md) - User management, monitoring
+- [User Guide](for-hospitals/USER_GUIDE.md) - For clinicians and researchers
+- [Audit Log Guide](for-hospitals/AUDIT_LOG_GUIDE.md) - 10-year retention
+- [Runbooks](for-hospitals/RUNBOOKS/) - Incident response (server-down, SSO, Epic)
 
 ### 💰 Cost & Governance
-- [Cost and Budget Management](operations/cost-and-budget.md) - Cost analysis, tracking, and optimization
-- [Data Governance](operations/DATA_GOVERNANCE.md) - Privacy, retention policies
-- [Risk Assessment](compliance/risk-assessment.md) - Comprehensive risk analysis and mitigation
+- [Cost and Budget Management](for-hospitals/operations/cost-and-budget.md) - Cost analysis, tracking, and optimization
+- [Data Governance](for-hospitals/compliance/data-governance.md) - Privacy, retention policies
+- [Risk Assessment](for-hospitals/compliance/risk-assessment.md) - Comprehensive risk analysis and mitigation
 
 ### 🧪 Testing & QA
 - [Testing Overview](test-docs/test-coverage.md) - 167 automated tests ✅

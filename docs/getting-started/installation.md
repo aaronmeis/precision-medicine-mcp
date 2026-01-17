@@ -471,7 +471,7 @@ python -m json.tool < ~/Library/Application\ Support/Claude/claude_desktop_confi
 
 - **[Architecture Overview](../architecture/README.md)** - System design
 - **[Server Status](../architecture/servers.md)** - Implementation status and capabilities
-- **[User Guides](../guides/README.md)** - Role-specific guides
+- **[Documentation Index](../INDEX.md)** - Role-specific guides and documentation
 - **[Test Documentation](../test-docs/README.md)** - Testing strategies and prompts
 
 ---

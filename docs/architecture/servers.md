@@ -20,7 +20,7 @@
 
 ## Quick Reference
 
-📋 **[See Server Status Table →](../servers/README.md#-server-status)** - Tools, status, and documentation for all 10 servers
+📋 **[See Server Status Table →](../../servers/README.md#-server-status)** - Tools, status, and documentation for all 10 servers
 
 **Production Ready Count:** 4/10 servers (40%)
 **Fully Mocked Count:** 5/10 servers (50%)

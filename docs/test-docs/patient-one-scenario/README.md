@@ -60,7 +60,7 @@ CRITICAL LIMITATIONS:
 ╚═══════════════════════════════════════════════════════════════════════════╝
 ```
 
-**See [DISCLAIMERS.md](../../../docs/DISCLAIMERS.md) for complete safety guidelines.**
+**See [disclaimers.md](../../for-hospitals/compliance/disclaimers.md) for complete safety guidelines.**
 
 ---
 
@@ -590,7 +590,7 @@ pwd  # Note current directory
 - Servers return realistic synthetic responses
 
 **To use your own data:**
-- See the [📘 Data Modes Guide](./DATA_MODES_GUIDE.md) for complete instructions on:
+- See the [📘 Data Modes Guide](./data-modes-guide.md) for complete instructions on:
   - Switching from DRY_RUN to Actual Data mode
   - Configuring environment variables
   - Setting up data file directories
