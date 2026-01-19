@@ -659,25 +659,4 @@ gcloud run deploy streamlit-mcp-chat \
 - [ ] Batch file processing (analyze multiple FASTQ files)
 - [ ] Interactive parameter tuning for MCP tools
 
-**Want to contribute?** Open an issue or pull request on GitHub!
 
-## Support
-
-- **Issues:** [GitHub Issues](https://github.com/lynnlangit/precision-medicine-mcp/issues)
-- **Documentation:** [Main README](../../README.md)
-- **MCP Spec:** [Model Context Protocol](https://modelcontextprotocol.io/)
-- **Anthropic Docs:** [Claude API](https://docs.anthropic.com/)
-
-## License
-
-See the main repository [LICENSE](../../LICENSE) file.
-
----
-
-**Built with:**
-- [Streamlit](https://streamlit.io/) - Web UI framework
-- [Anthropic Claude API](https://www.anthropic.com/) - AI model
-- [Model Context Protocol](https://modelcontextprotocol.io/) - MCP standard
-- [GCP Cloud Run](https://cloud.google.com/run) - Server hosting
-
-**Part of the Precision Medicine MCP suite** - Enabling AI-driven bioinformatics for cancer research.
