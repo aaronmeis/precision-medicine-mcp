@@ -80,7 +80,17 @@ Do not simulate or describe what an analysis would show - actually perform it us
                 path = file_info['path']
                 original_name = file_info.get('original_name', filename)
 
-                file_desc = f"""- **{original_name}**
+                # Check if this is a GCS file or local file
+                is_gcs = metadata.get('source') == 'gcs'
+
+                if is_gcs:
+                    file_desc = f"""- **{original_name}** (GCS)
+  - GCS URI: {path}
+  - Bucket: {metadata.get('bucket', 'unknown')}
+  - Path: {metadata.get('blob_path', 'unknown')}
+  - Type: {metadata['extension']}"""
+                else:
+                    file_desc = f"""- **{original_name}**
   - File path: {path}
   - Type: {metadata['extension']}
   - Size: {metadata['size_mb']:.2f} MB"""
@@ -88,17 +98,26 @@ Do not simulate or describe what an analysis would show - actually perform it us
                 if not metadata.get('is_binary', False):
                     file_desc += f"\n  - Lines: {metadata.get('line_count', 'N/A')}"
 
-                    # For small text files, include content inline (< 50KB)
-                    if metadata['size_bytes'] < 50000:
+                    # For small text files, include content inline
+                    content = None
+
+                    # Check if GCS content was pre-loaded
+                    if '_gcs_content' in metadata:
+                        content = metadata['_gcs_content']
+                    # For local files under 50KB, read content
+                    elif not is_gcs and metadata.get('size_bytes', 0) < 50000:
                         try:
                             with open(path, 'r') as f:
                                 content = f.read()
-                            # Truncate if too long
-                            if len(content) > 10000:
-                                content = content[:10000] + "\n\n[... truncated ...]"
-                            file_desc += f"\n  - Content preview:\n```\n{content}\n```"
                         except Exception:
                             pass  # Skip if can't read
+
+                    # Include content if available
+                    if content:
+                        # Truncate if too long
+                        if len(content) > 10000:
+                            content = content[:10000] + "\n\n[... truncated ...]"
+                        file_desc += f"\n  - Content preview:\n```\n{content}\n```"
 
                 file_descriptions.append(file_desc)
 
@@ -109,10 +128,12 @@ The user has uploaded {len(uploaded_files)} file(s) for analysis.
 
 {chr(10).join(file_descriptions)}
 
-For small text files (shown above with content), you can analyze the content directly without needing to call MCP tools.
-For larger files or when you need specialized analysis tools, you can reference the file path in MCP tool calls.
+FILE ACCESS GUIDELINES:
+1. **Small text files with content preview**: Analyze the content directly without calling MCP tools
+2. **GCS files (gs://...)**: MCP servers on Cloud Run can access these directly - pass the GCS URI to MCP tool calls
+3. **Local file paths**: MCP servers may not access these - prefer analyzing inline content
 
-Note: Since MCP servers are deployed remotely, they may not have direct access to local file paths. When possible, analyze the file content shown above directly."""
+When calling MCP tools with GCS files, use the GCS URI (gs://bucket/path) as the file path parameter."""
 
         try:
             response = self.client.beta.messages.create(

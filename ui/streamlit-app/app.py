@@ -32,8 +32,14 @@ from utils import (
 from utils.auth import require_authentication, display_user_info, display_logout_button
 from utils.audit_logger import get_audit_logger
 
-# Import file validation
+# Import file validation and GCS handling
 from utils.file_validator import validate_uploaded_file, sanitize_filename
+from utils.gcs_handler import (
+    is_gcs_path,
+    validate_gcs_uri,
+    get_gcs_file_metadata,
+    get_gcs_file_content
+)
 
 # Page configuration
 st.set_page_config(
@@ -291,6 +297,55 @@ def render_sidebar():
                         st.error("Invalid file")
                         for error in errors:
                             st.write(f"- {error}")
+
+        # GCS Path Input Section
+        st.caption("Or provide GCS bucket path")
+
+        gcs_uri = st.text_input(
+            "GCS URI",
+            placeholder="gs://bucket-name/path/to/file.fastq",
+            help="Enter a Google Cloud Storage URI to access files from GCS",
+            key="gcs_uri_input"
+        )
+
+        if gcs_uri and gcs_uri.strip():
+            # Validate GCS URI
+            is_valid, error = validate_gcs_uri(gcs_uri)
+
+            if is_valid:
+                # Get file metadata
+                success, metadata, meta_error = get_gcs_file_metadata(gcs_uri, use_mock=True)
+
+                if success:
+                    # Store GCS file reference
+                    st.session_state.uploaded_files[metadata['sanitized_filename']] = {
+                        'path': gcs_uri,  # Store GCS path directly
+                        'metadata': metadata,
+                        'original_name': metadata['filename'],
+                        'source': 'gcs'
+                    }
+
+                    # Show success
+                    with st.expander(f"✅ {metadata['filename']} (GCS)", expanded=False):
+                        st.success("Valid GCS URI")
+                        col1, col2 = st.columns(2)
+                        col1.metric("Bucket", metadata['bucket'])
+                        col2.metric("Type", metadata['extension'])
+                        st.caption(f"Path: {metadata['blob_path']}")
+
+                        # Try to get content for small files
+                        if not metadata.get('is_binary', False):
+                            success_content, content, content_error = get_gcs_file_content(gcs_uri, max_size_bytes=50000)
+                            if success_content:
+                                st.caption(f"✅ Content loaded ({len(content)} chars)")
+                                # Store content in metadata for inline inclusion
+                                metadata['_gcs_content'] = content
+                            else:
+                                st.caption(f"⚠️ Content not loaded: {content_error}")
+                else:
+                    st.error(f"Error: {meta_error}")
+            else:
+                st.error(f"Invalid GCS URI: {error}")
 
         # Show currently uploaded files
         if st.session_state.uploaded_files:

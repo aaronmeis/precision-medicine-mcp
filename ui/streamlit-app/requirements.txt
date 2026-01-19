@@ -4,8 +4,9 @@
 streamlit>=1.30.0
 anthropic>=0.40.0
 
-# HIPAA-compliant audit logging
-google-cloud-logging>=3.8.0
+# Google Cloud integration
+google-cloud-logging>=3.8.0  # HIPAA-compliant audit logging
+google-cloud-storage>=2.10.0  # GCS file access
 
 # Optional: For loading .env files
 python-dotenv>=1.0.0
