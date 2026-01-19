@@ -6,6 +6,87 @@ A visual chat interface for testing deployed MCP servers on GCP Cloud Run. Provi
 
 <img src="../../data/images/streamlit-ui-preview.png" width="800" alt="Streamlit Chat UI Preview">
 
+## Architecture: GCS File Analysis Flow
+
+The following diagram shows how a user request flows through the system when analyzing files stored in Google Cloud Storage:
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant Streamlit as Streamlit UI<br/>(Cloud Run)
+    participant GCS as Google Cloud Storage<br/>(GCS Bucket)
+    participant Claude as Claude API<br/>(Anthropic)
+    participant MCP as MCP Server<br/>(spatialtools on Cloud Run)
+
+    Note over User,MCP: Step 1: User Provides GCS File Path
+    User->>Streamlit: Enter GCS URI:<br/>gs://precision-medicine-data/patient-001/spatial.h5ad
+    Streamlit->>Streamlit: Validate GCS URI format<br/>(gcs_handler.validate_gcs_uri)
+
+    opt Small File (< 50KB)
+        Streamlit->>GCS: Get file metadata & download content
+        GCS-->>Streamlit: Return file metadata + content
+        Streamlit->>Streamlit: Store content for inline inclusion
+    end
+
+    opt Large File
+        Streamlit->>GCS: Get file metadata only
+        GCS-->>Streamlit: Return metadata (size, type, path)
+        Streamlit->>Streamlit: Store GCS URI path
+    end
+
+    Streamlit-->>User: ✅ Valid GCS URI<br/>Display file metadata
+
+    Note over User,MCP: Step 2: User Asks Analysis Question
+    User->>Streamlit: "Perform cell type deconvolution<br/>on the spatial transcriptomics data"
+
+    Streamlit->>Streamlit: Prepare chat message<br/>+ file context in system prompt
+
+    Note over User,MCP: Step 3: Send Request to Claude API
+    Streamlit->>Claude: messages.create(<br/>  messages=[user query],<br/>  mcp_servers=[spatialtools],<br/>  tools=[mcp_toolset],<br/>  system=prompt with GCS URI<br/>)
+
+    Note over Claude: Claude analyzes request<br/>and decides to use MCP tool
+
+    Note over User,MCP: Step 4: Claude Calls MCP Tool
+    Claude->>MCP: Tool Call: cell_type_deconvolution<br/>Parameters: {<br/>  "spatial_data": "gs://...spatial.h5ad",<br/>  "method": "card"<br/>}
+
+    Note over User,MCP: Step 5: MCP Server Processes Request
+    MCP->>GCS: Access file using service account<br/>GET gs://precision-medicine-data/.../spatial.h5ad
+    GCS-->>MCP: Return file data (stream)
+
+    MCP->>MCP: Load H5AD file<br/>Run cell type deconvolution<br/>Generate results
+
+    Note over User,MCP: Step 6: Return Analysis Results
+    MCP-->>Claude: Tool Result: {<br/>  "cell_types": ["CD8+ T-cells", "B-cells", ...],<br/>  "proportions": {...},<br/>  "spatial_distribution": {...}<br/>}
+
+    Note over Claude: Claude interprets results<br/>and formats response
+
+    Claude-->>Streamlit: API Response:<br/>- Text content with interpretation<br/>- mcp_tool_use blocks<br/>- mcp_tool_result blocks
+
+    Note over User,MCP: Step 7: Display Results to User
+    Streamlit->>Streamlit: Extract orchestration trace<br/>(trace_utils.extract_tool_calls)
+    Streamlit->>Streamlit: Format response text<br/>(chat_handler.format_response)
+
+    Streamlit-->>User: Display:<br/>1. Claude's interpretation<br/>2. Analysis results<br/>3. Orchestration trace showing spatialtools call
+
+    Note over User: User sees:<br/>✅ Cell types identified<br/>✅ Spatial distribution analyzed<br/>🔍 Trace shows spatialtools→cell_type_deconvolution
+```
+
+### Key Architecture Benefits
+
+- **☁️ Cloud-to-Cloud Transfer** - MCP servers access GCS directly (no local bottleneck)
+- **🔒 Service Account Security** - IAM-based access control for GCS buckets
+- **⚡ Inline Optimization** - Small files (< 50KB) analyzed directly by Claude
+- **💰 Cost Efficient** - Data stays within GCP region (free egress within us-central1)
+- **🏥 HIPAA Compliant** - No data leaves GCP infrastructure when configured properly
+
+### Flow Summary
+
+1. **File Registration** - User enters `gs://bucket/path/file` → Streamlit validates and fetches metadata
+2. **Query Processing** - User asks analysis question → Streamlit builds system prompt with GCS URI
+3. **Tool Orchestration** - Claude API selects appropriate MCP tool and passes GCS URI
+4. **Cloud Analysis** - MCP server accesses GCS file directly and performs bioinformatics analysis
+5. **Results Display** - Claude interprets results → User sees interpretation + orchestration trace
+
 ## Features
 
 - 💬 **Chat Interface** - Natural language interaction with MCP servers
