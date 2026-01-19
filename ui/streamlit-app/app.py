@@ -7,8 +7,10 @@ Provides a Claude Desktop-like experience for bioinformatics workflows.
 import streamlit as st
 import os
 import uuid
+import tempfile
 from typing import List, Dict
 from datetime import datetime
+from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -29,6 +31,9 @@ from utils import (
 # Import authentication and audit logging
 from utils.auth import require_authentication, display_user_info, display_logout_button
 from utils.audit_logger import get_audit_logger
+
+# Import file validation
+from utils.file_validator import validate_uploaded_file, sanitize_filename
 
 # Page configuration
 st.set_page_config(
@@ -96,6 +101,45 @@ def initialize_session_state():
     # Initialize trace storage
     if "traces" not in st.session_state:
         st.session_state.traces = {}  # message_index -> OrchestrationTrace
+
+    # Initialize uploaded files storage
+    if "uploaded_files" not in st.session_state:
+        st.session_state.uploaded_files = {}  # filename -> {'path': temp_path, 'metadata': dict}
+
+
+def prepare_file_for_mcp(uploaded_file, metadata: Dict) -> str:
+    """Prepare uploaded file for MCP server access.
+
+    Writes validated file to a temporary directory and returns the path
+    for MCP servers to access.
+
+    Args:
+        uploaded_file: Streamlit UploadedFile object
+        metadata: File metadata dict from validation
+
+    Returns:
+        str: Absolute path to the temporary file
+
+    Example:
+        >>> temp_path = prepare_file_for_mcp(uploaded_file, metadata)
+        >>> # Pass temp_path to MCP tool call
+    """
+    # Create a temp directory if it doesn't exist
+    temp_dir = Path(tempfile.gettempdir()) / "mcp_uploads"
+    temp_dir.mkdir(exist_ok=True)
+
+    # Use sanitized filename
+    sanitized_name = metadata['sanitized_filename']
+    temp_path = temp_dir / sanitized_name
+
+    # Write file content
+    content = uploaded_file.read()
+    uploaded_file.seek(0)  # Reset file pointer
+
+    with open(temp_path, 'wb') as f:
+        f.write(content)
+
+    return str(temp_path)
 
 
 def render_sidebar():
@@ -201,6 +245,68 @@ def render_sidebar():
                 }.get(x, x),
                 help="Choose how to display the orchestration trace"
             )
+
+        st.markdown("---")
+
+        # File Upload Section
+        st.subheader("📁 File Upload")
+        st.caption("Upload bioinformatics data files")
+
+        uploaded_files = st.file_uploader(
+            "Choose files",
+            type=['fasta', 'fa', 'fna', 'fastq', 'fq', 'vcf', 'gff', 'gtf', 'bed',
+                  'csv', 'tsv', 'tab', 'txt', 'json', 'h5ad', 'h5',
+                  'png', 'jpg', 'jpeg', 'tiff', 'tif'],
+            accept_multiple_files=True,
+            help="Upload sequence files, annotations, tabular data, or images"
+        )
+
+        if uploaded_files:
+            st.caption(f"{len(uploaded_files)} file(s) selected")
+
+            for uploaded_file in uploaded_files:
+                # Validate each file
+                is_valid, errors, metadata = validate_uploaded_file(uploaded_file)
+
+                if is_valid:
+                    # Store validated file
+                    temp_path = prepare_file_for_mcp(uploaded_file, metadata)
+                    st.session_state.uploaded_files[metadata['sanitized_filename']] = {
+                        'path': temp_path,
+                        'metadata': metadata,
+                        'original_name': uploaded_file.name
+                    }
+
+                    # Show success with file info
+                    with st.expander(f"✅ {uploaded_file.name}", expanded=False):
+                        st.success("Valid file")
+                        col1, col2 = st.columns(2)
+                        col1.metric("Size", f"{metadata['size_mb']:.2f} MB")
+                        col2.metric("Type", metadata['extension'])
+                        if not metadata.get('is_binary', False):
+                            st.caption(f"Lines: {metadata.get('line_count', 'N/A')}")
+                else:
+                    # Show validation errors
+                    with st.expander(f"❌ {uploaded_file.name}", expanded=True):
+                        st.error("Invalid file")
+                        for error in errors:
+                            st.write(f"- {error}")
+
+        # Show currently uploaded files
+        if st.session_state.uploaded_files:
+            st.caption(f"📎 {len(st.session_state.uploaded_files)} file(s) available for MCP")
+
+            # Button to clear all uploaded files
+            if st.button("Clear Files", key="clear_files"):
+                # Clean up temp files
+                for file_info in st.session_state.uploaded_files.values():
+                    try:
+                        if os.path.exists(file_info['path']):
+                            os.remove(file_info['path'])
+                    except Exception:
+                        pass
+                st.session_state.uploaded_files = {}
+                st.rerun()
 
         st.markdown("---")
 
