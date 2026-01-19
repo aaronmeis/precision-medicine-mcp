@@ -88,16 +88,31 @@ Do not simulate or describe what an analysis would show - actually perform it us
                 if not metadata.get('is_binary', False):
                     file_desc += f"\n  - Lines: {metadata.get('line_count', 'N/A')}"
 
+                    # For small text files, include content inline (< 50KB)
+                    if metadata['size_bytes'] < 50000:
+                        try:
+                            with open(path, 'r') as f:
+                                content = f.read()
+                            # Truncate if too long
+                            if len(content) > 10000:
+                                content = content[:10000] + "\n\n[... truncated ...]"
+                            file_desc += f"\n  - Content preview:\n```\n{content}\n```"
+                        except Exception:
+                            pass  # Skip if can't read
+
                 file_descriptions.append(file_desc)
 
             system_prompt += f"""
 
 UPLOADED FILES AVAILABLE:
-The user has uploaded {len(uploaded_files)} file(s) for analysis. When the user refers to "the uploaded file" or "my file", use these file paths in your MCP tool calls:
+The user has uploaded {len(uploaded_files)} file(s) for analysis.
 
 {chr(10).join(file_descriptions)}
 
-When performing analysis, use the file path shown above as the input to MCP tools."""
+For small text files (shown above with content), you can analyze the content directly without needing to call MCP tools.
+For larger files or when you need specialized analysis tools, you can reference the file path in MCP tool calls.
+
+Note: Since MCP servers are deployed remotely, they may not have direct access to local file paths. When possible, analyze the file content shown above directly."""
 
         try:
             response = self.client.beta.messages.create(
