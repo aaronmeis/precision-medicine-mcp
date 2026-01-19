@@ -86,7 +86,7 @@ ___
 - 📖 Full Case Study:** [PatientOne Documentation →](docs/test-docs/patient-one-scenario/README.md)
 - 📚 [Prompt Library](https://github.com/lynnlangit/precision-medicine-mcp/tree/main/docs/prompt-library)
 - 🏗️ [Architecture Details](docs/architecture/README.md)
-- 📚 [Documentation Hub](docs/README.md)
+- 📚 [Documentation Hub](docs/INDEX.md)
 
 ---
 

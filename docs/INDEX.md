@@ -11,8 +11,8 @@ This is your central navigation hub for all documentation. Use this index to qui
 **New to the Precision Medicine MCP system? Start here:**
 
 - **[Installation Guide](./getting-started/installation.md)** - Complete setup instructions (Quick Start: 5 minutes)
-- **[README](./README.md)** - Project overview and quick links
 - **[Executive Summary](./EXECUTIVE_SUMMARY.md)** - High-level overview for decision-makers
+- **[Why MCP for Healthcare?](./WHY_MCP_FOR_HEALTHCARE.md)** - Understand MCP architecture advantages
 
 ---
 
@@ -170,6 +170,58 @@ This is your central navigation hub for all documentation. Use this index to qui
 - **Educator/Professor** → [For Educators](./for-educators/README.md) - Teaching materials, course integration
 - **Patient/Family** → [For Patients](./for-patients/README.md) - Understanding results (plain language)
 - **Clinician** → [CITL Workflow](./for-hospitals/citl-workflows/CITL_WORKFLOW_GUIDE.md) - Clinical workflow integration
+
+---
+
+## 🗂️ Repository Structure
+
+Complete directory structure showing all major components:
+
+```
+precision-medicine-mcp/
+├── ACKNOWLEDGMENTS.md      # Credits & scientific references
+├── FUNDING.md              # Investment opportunities & ROI
+├── LICENSE                 # Apache 2.0 License
+├── README.md               # Main repository README
+├── data/                   # Synthetic patient data (100% safe for demos)
+├── docs/                   # Documentation organized by audience
+│   ├── for-funders/        # ROI analysis, competitive landscape, grant talking points
+│   ├── for-hospitals/      # Deployment checklist, security overview, operations
+│   ├── for-developers/     # Architecture, contributing guide, quick reference
+│   ├── for-researchers/    # Analysis workflows, bioinformatics methods
+│   ├── for-educators/      # Classroom guides, learning objectives
+│   ├── for-patients/       # Patient-friendly resources
+│   ├── demos/              # 90-second pitch, full PatientOne demo
+│   ├── prompt-library/     # 20+ ready-to-use clinical prompts
+│   ├── getting-started/    # Installation, quick start, desktop-configs
+│   ├── architecture/       # System design & modality workflows
+│   ├── deployment/         # GCP deployment status & guides
+│   └── test-docs/          # Testing guides & PatientOne scenarios
+├── infrastructure/         # Deployment, audit, environment setup
+│   ├── deployment/         # GCP deployment scripts
+│   ├── audit/              # Bias detection and audit tools
+│   └── hospital-deployment/  # Hospital-specific infrastructure
+├── servers/                # 10 MCP servers (Python)
+│   ├── mcp-deepcell/       # Cell segmentation
+│   ├── mcp-epic/           # Epic FHIR integration
+│   ├── mcp-fgbio/          # Reference genomes, FASTQ QC
+│   ├── mcp-huggingface/    # AI/ML inference
+│   ├── mcp-mockepic/       # Mock Epic for testing
+│   ├── mcp-multiomics/     # Multi-omics integration
+│   ├── mcp-openimagedata/  # Imaging data (H&E, MxIF)
+│   ├── mcp-seqera/         # Workflow orchestration
+│   ├── mcp-spatialtools/   # Spatial transcriptomics
+│   └── mcp-tcga/           # TCGA cohort data
+├── shared/                 # Shared Python packages
+│   ├── common/             # Common utilities
+│   ├── models/             # Data models
+│   ├── schemas/            # JSON schemas (CitL review, etc.)
+│   └── utils/              # Helper functions
+├── tests/                  # 167 automated tests
+├── tools/                  # Automation & reporting tools
+│   └── reports/            # Patient report generation, CitL submission
+└── ui/                     # Streamlit chat, Jupyter notebook
+```
 
 ---
 
