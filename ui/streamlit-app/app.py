@@ -397,7 +397,7 @@ def render_chat_history(show_trace: bool = False, trace_style: str = "log"):
 
                     # Add export buttons if trace has data
                     if trace.tool_calls:
-                        render_trace_export(trace)
+                        render_trace_export(trace, trace_id=i)
 
 
 def handle_user_input(prompt: str, model: str, max_tokens: int):

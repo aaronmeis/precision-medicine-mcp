@@ -249,8 +249,13 @@ def render_trace(
         render_trace_log(trace)  # Default
 
 
-def render_trace_export(trace: OrchestrationTrace):
-    """Render export options for the trace."""
+def render_trace_export(trace: OrchestrationTrace, trace_id: int = 0):
+    """Render export options for the trace.
+
+    Args:
+        trace: OrchestrationTrace object
+        trace_id: Unique identifier for this trace (e.g., message index)
+    """
     col1, col2 = st.columns(2)
 
     with col1:
@@ -278,7 +283,8 @@ def render_trace_export(trace: OrchestrationTrace):
             "📥 Download JSON",
             data=trace_json,
             file_name="orchestration_trace.json",
-            mime="application/json"
+            mime="application/json",
+            key=f"download_json_{trace_id}"
         )
 
     with col2:
@@ -288,7 +294,8 @@ def render_trace_export(trace: OrchestrationTrace):
             "📥 Download Mermaid",
             data=mermaid_code,
             file_name="orchestration_diagram.mmd",
-            mime="text/plain"
+            mime="text/plain",
+            key=f"download_mermaid_{trace_id}"
         )
 
 
