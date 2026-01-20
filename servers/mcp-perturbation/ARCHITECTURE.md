@@ -2,7 +2,9 @@
 
 ## Overview
 
-The mcp-perturbation server predicts how patient cells will respond to treatments using GEARS (Graph-Enhanced Gene Activation and Repression Simulator), a state-of-the-art graph neural network published in Nature Biotechnology 2024.
+The mcp-perturbation server predicts how patient cells will respond to treatments using GEARS (Graph-Enhanced Gene Activation and Repression Simulator), a state-of-the-art graph neural network published in Nature Biotechnology 2024.  
+
+The mcp-perturbation server predicts how patient cancer cells will respond to treatments (like checkpoint inhibitor immunotherapy) by using GEARS graph neural networks to simulate gene expression changes without performing actual experiments.
 
 ---
 
