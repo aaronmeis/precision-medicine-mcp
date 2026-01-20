@@ -45,7 +45,7 @@ graph LR
         CLAUDE[Claude API<br/>Natural Language]
     end
 
-    subgraph Servers["🔧 10 MCP Servers"]
+    subgraph Servers["🔧 11 MCP Servers"]
         S1[Clinical<br/>FHIR]
         S2[Genomics<br/>VCF/FASTQ]
         S3[Multi-omics<br/>Integration]
@@ -67,7 +67,6 @@ graph LR
     style Output fill:#d1ecf1
 ```
 
-**Server Status:** 4 production-ready | 1 at 95% | 5 mocked for demo | [Details →](servers/README.md)
 
 ___
 
