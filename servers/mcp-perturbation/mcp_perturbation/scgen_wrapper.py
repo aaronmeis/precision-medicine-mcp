@@ -1,7 +1,7 @@
 """Wrapper for scGen model operations."""
 
 import scanpy as sc
-import scgen
+from scvi.model import SCGEN
 import anndata as ad
 import numpy as np
 from pathlib import Path
@@ -39,7 +39,7 @@ class ScGenWrapper:
         """
         self.model_dir = Path(model_dir)
         self.model_dir.mkdir(parents=True, exist_ok=True)
-        self.model: Optional[scgen.SCGEN] = None
+        self.model: Optional[SCGEN] = None
         self.adata: Optional[ad.AnnData] = None
         self.model_name: Optional[str] = None
 
@@ -65,7 +65,7 @@ class ScGenWrapper:
             raise ValueError(f"labels_key '{labels_key}' not found in adata.obs")
 
         # Setup anndata for scGen
-        scgen.SCGEN.setup_anndata(
+        SCGEN.setup_anndata(
             self.adata,
             batch_key=batch_key,
             labels_key=labels_key
@@ -91,7 +91,7 @@ class ScGenWrapper:
         if self.adata is None:
             raise ValueError("Call setup() before initializing model")
 
-        self.model = scgen.SCGEN(
+        self.model = SCGEN(
             self.adata,
             n_latent=n_latent,
             n_hidden=n_hidden,
@@ -193,7 +193,7 @@ class ScGenWrapper:
         elif adata is None:
             raise ValueError("Must provide adata when loading model")
 
-        self.model = scgen.SCGEN.load(str(load_dir), adata)
+        self.model = SCGEN.load(str(load_dir), adata)
         self.adata = adata
         self.model_name = name
 
