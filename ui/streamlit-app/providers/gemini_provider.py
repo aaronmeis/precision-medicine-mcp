@@ -84,19 +84,16 @@ class GeminiProvider(LLMProvider):
             })
 
         try:
-            # Create config
-            config = types.GenerateContentConfig(
-                temperature=temperature,
-                max_output_tokens=max_tokens
-            )
+            # Note: Gemini Interactions API does not support config parameters
+            # (temperature, max_output_tokens) in the interactions.create() call
+            # These parameters are not available for the Interactions API
 
             # Use asyncio to run the async interaction
             interaction = asyncio.run(
                 self._create_interaction_async(
                     model=model,
                     input_messages=input_messages,
-                    tools=formatted_servers,
-                    config=config
+                    tools=formatted_servers
                 )
             )
 
@@ -119,8 +116,7 @@ class GeminiProvider(LLMProvider):
         self,
         model: str,
         input_messages: List[Dict],
-        tools: List[Dict],
-        config: Any
+        tools: List[Dict]
     ):
         """Create interaction with Gemini API (async).
 
@@ -128,7 +124,6 @@ class GeminiProvider(LLMProvider):
             model: Model identifier
             input_messages: Formatted messages
             tools: MCP server tools
-            config: Generation config
 
         Returns:
             Interaction response
@@ -136,8 +131,7 @@ class GeminiProvider(LLMProvider):
         return self.client.interactions.create(
             model=model,
             input=input_messages,
-            tools=tools,
-            config=config
+            tools=tools
         )
 
     def get_provider_name(self) -> str:
