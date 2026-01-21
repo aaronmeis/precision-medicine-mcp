@@ -84,28 +84,22 @@ class GeminiProvider(LLMProvider):
             })
 
         try:
-            # Create tool config to force function calling
-            # Mode "ANY" forces the model to make tool calls instead of just describing them
-            tool_config = types.ToolConfig(
-                function_calling_config=types.FunctionCallingConfig(
-                    mode="AUTO"  # Use AUTO to let model decide when to call tools
-                )
-            )
+            # NOTE: The Interactions API does NOT support tool_config parameter
+            # This is a limitation of the experimental Interactions API
+            # It doesn't support FunctionCallingConfig like the standard Gemini API
 
             # Debug logging
             import sys
             print(f"DEBUG: Formatted MCP servers: {formatted_servers}", file=sys.stderr)
             print(f"DEBUG: Model: {model}", file=sys.stderr)
             print(f"DEBUG: Number of messages: {len(input_messages)}", file=sys.stderr)
-            print(f"DEBUG: Tool config: {tool_config}", file=sys.stderr)
 
             # Use asyncio to run the async interaction
             interaction = asyncio.run(
                 self._create_interaction_async(
                     model=model,
                     input_messages=input_messages,
-                    tools=formatted_servers,
-                    tool_config=tool_config
+                    tools=formatted_servers
                 )
             )
 
@@ -141,8 +135,7 @@ class GeminiProvider(LLMProvider):
         self,
         model: str,
         input_messages: List[Dict],
-        tools: List[Dict],
-        tool_config: Any = None
+        tools: List[Dict]
     ):
         """Create interaction with Gemini API (async).
 
@@ -150,21 +143,15 @@ class GeminiProvider(LLMProvider):
             model: Model identifier
             input_messages: Formatted messages
             tools: MCP server tools
-            tool_config: Tool calling configuration
 
         Returns:
             Interaction response
         """
-        kwargs = {
-            "model": model,
-            "input": input_messages,
-            "tools": tools
-        }
-
-        if tool_config:
-            kwargs["tool_config"] = tool_config
-
-        return self.client.interactions.create(**kwargs)
+        return self.client.interactions.create(
+            model=model,
+            input=input_messages,
+            tools=tools
+        )
 
     def get_provider_name(self) -> str:
         """Get provider name."""
