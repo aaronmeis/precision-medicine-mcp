@@ -105,9 +105,14 @@ class GeminiProvider(LLMProvider):
 
             # Debug: check interaction response structure
             print(f"DEBUG: Interaction type: {type(interaction)}", file=sys.stderr)
-            print(f"DEBUG: Interaction attributes: {dir(interaction)}", file=sys.stderr)
-            if hasattr(interaction, 'outputs'):
-                print(f"DEBUG: Number of outputs: {len(interaction.outputs)}", file=sys.stderr)
+            print(f"DEBUG: Interaction dir: {dir(interaction)}", file=sys.stderr)
+            print(f"DEBUG: Interaction repr: {repr(interaction)}", file=sys.stderr)
+
+            # Check various possible response attributes
+            for attr in ['outputs', 'text', 'content', 'response', 'result', 'messages']:
+                if hasattr(interaction, attr):
+                    val = getattr(interaction, attr)
+                    print(f"DEBUG: interaction.{attr} = {val}", file=sys.stderr)
 
             # Extract content from interaction outputs
             content = self._format_response(interaction)
@@ -276,27 +281,57 @@ When analyzing these files, use the appropriate MCP tools with the file paths pr
         Returns:
             Formatted text response
         """
-        if not hasattr(interaction, 'outputs') or not interaction.outputs:
-            return "No response from Gemini"
+        import sys
 
+        # Try multiple possible response formats
         parts = []
-        for output in interaction.outputs:
-            # Extract text from output
-            if hasattr(output, 'text'):
-                parts.append(output.text)
-            elif hasattr(output, 'content'):
-                # Handle both string and structured content
-                if isinstance(output.content, str):
-                    parts.append(output.content)
-                else:
-                    # Handle array of content parts
-                    for content_part in output.content:
-                        if hasattr(content_part, 'text'):
-                            parts.append(content_part.text)
-                        elif isinstance(content_part, str):
-                            parts.append(content_part)
 
-        return "\n\n".join(parts) if parts else "Empty response"
+        # Check for text attribute (direct response)
+        if hasattr(interaction, 'text') and interaction.text:
+            print(f"DEBUG: Found interaction.text", file=sys.stderr)
+            return interaction.text
+
+        # Check for content attribute
+        if hasattr(interaction, 'content') and interaction.content:
+            print(f"DEBUG: Found interaction.content", file=sys.stderr)
+            if isinstance(interaction.content, str):
+                return interaction.content
+            elif isinstance(interaction.content, list):
+                for item in interaction.content:
+                    if hasattr(item, 'text'):
+                        parts.append(item.text)
+                    elif isinstance(item, str):
+                        parts.append(item)
+
+        # Check for outputs attribute
+        if hasattr(interaction, 'outputs') and interaction.outputs:
+            print(f"DEBUG: Found interaction.outputs", file=sys.stderr)
+            for output in interaction.outputs:
+                if hasattr(output, 'text'):
+                    parts.append(output.text)
+                elif hasattr(output, 'content'):
+                    if isinstance(output.content, str):
+                        parts.append(output.content)
+                    else:
+                        for content_part in output.content:
+                            if hasattr(content_part, 'text'):
+                                parts.append(content_part.text)
+                            elif isinstance(content_part, str):
+                                parts.append(content_part)
+
+        # Check for messages attribute
+        if hasattr(interaction, 'messages') and interaction.messages:
+            print(f"DEBUG: Found interaction.messages", file=sys.stderr)
+            for msg in interaction.messages:
+                if hasattr(msg, 'content'):
+                    parts.append(str(msg.content))
+
+        if parts:
+            return "\n\n".join(parts)
+
+        # Last resort: convert to string
+        print(f"DEBUG: No standard attributes found, using repr", file=sys.stderr)
+        return f"Debug - Interaction object: {repr(interaction)}"
 
     def _get_usage_info(self, interaction) -> Optional[UsageInfo]:
         """Extract usage information from Gemini response.
