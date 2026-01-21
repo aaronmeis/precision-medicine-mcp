@@ -44,7 +44,7 @@ class GeminiProvider(LLMProvider):
         self,
         messages: List[ChatMessage],
         mcp_servers: List[Dict],
-        model: str = "gemini-3-flash-preview",
+        model: str = "gemini-2.0-flash-exp",
         max_tokens: int = 4096,
         temperature: float = 1.0,
         uploaded_files: Optional[Dict] = None
@@ -88,6 +88,12 @@ class GeminiProvider(LLMProvider):
             # (temperature, max_output_tokens) in the interactions.create() call
             # These parameters are not available for the Interactions API
 
+            # Debug logging
+            import sys
+            print(f"DEBUG: Formatted MCP servers: {formatted_servers}", file=sys.stderr)
+            print(f"DEBUG: Model: {model}", file=sys.stderr)
+            print(f"DEBUG: Number of messages: {len(input_messages)}", file=sys.stderr)
+
             # Use asyncio to run the async interaction
             interaction = asyncio.run(
                 self._create_interaction_async(
@@ -96,6 +102,12 @@ class GeminiProvider(LLMProvider):
                     tools=formatted_servers
                 )
             )
+
+            # Debug: check interaction response structure
+            print(f"DEBUG: Interaction type: {type(interaction)}", file=sys.stderr)
+            print(f"DEBUG: Interaction attributes: {dir(interaction)}", file=sys.stderr)
+            if hasattr(interaction, 'outputs'):
+                print(f"DEBUG: Number of outputs: {len(interaction.outputs)}", file=sys.stderr)
 
             # Extract content from interaction outputs
             content = self._format_response(interaction)
@@ -110,6 +122,8 @@ class GeminiProvider(LLMProvider):
             )
 
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             raise Exception(f"Gemini API error: {str(e)}")
 
     async def _create_interaction_async(
@@ -141,6 +155,7 @@ class GeminiProvider(LLMProvider):
     def get_model_display_name(self, model: str) -> str:
         """Get human-readable model name."""
         model_names = {
+            "gemini-2.0-flash-exp": "Gemini 2.0 Flash (Experimental)",
             "gemini-3-flash-preview": "Gemini 3.0 Flash",
             "gemini-3.0-flash-preview": "Gemini 3.0 Flash",
         }
