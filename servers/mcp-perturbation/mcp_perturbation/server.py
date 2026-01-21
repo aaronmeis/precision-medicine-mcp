@@ -1,6 +1,6 @@
 """MCP Server for perturbation prediction using GEARS."""
 
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, Literal, List
 import json
