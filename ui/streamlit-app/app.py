@@ -723,7 +723,7 @@ def handle_user_input(prompt: str, model: str, max_tokens: int):
                     messages=[{"role": msg["role"], "content": msg["content"]}
                              for msg in st.session_state.messages],
                     duration_ms=duration_ms,
-                    tokens=usage.get("total_tokens", 0),
+                    tokens=usage.get("total_tokens", 0) if usage else 0,
                     cost_usd=estimated_cost if usage else 0
                 )
 
