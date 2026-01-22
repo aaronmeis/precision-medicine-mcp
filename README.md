@@ -9,7 +9,7 @@
 
 > **40 hours of manual bioinformatics → 35 minutes AI-orchestrated**
 >
-> 11 specialized MCP servers | 60+ analysis tools | Stage IV Ovarian Cancer demo
+> 10 specialized MCP servers | 60+ analysis tools | Multi-provider AI (Claude + Gemini) | Stage IV Ovarian Cancer demo
 
 ---
 
@@ -41,24 +41,27 @@ graph LR
         U[Clinicians<br/>Bioinformaticians<br/>Researchers]
     end
 
-    subgraph AI["🤖 AI Orchestration"]
-        CLAUDE[Claude API<br/>Natural Language]
+    subgraph AI["🤖 Multi-Provider AI Orchestration"]
+        CLAUDE[Claude<br/>Native MCP]
+        GEMINI[Gemini<br/>SSE-based MCP]
     end
 
-    subgraph Servers["🔧 11 MCP Servers"]
+    subgraph Servers["🔧 10 MCP Servers"]
         S1[Clinical<br/>FHIR]
         S2[Genomics<br/>VCF/FASTQ]
         S3[Multi-omics<br/>Integration]
         S4[Spatial<br/>Visium]
-        S5[Imaging<br/>H&E/MxIF]
+        S5[Perturbation<br/>GEARS]
     end
 
     subgraph Output["📊 Outputs"]
-        O[Treatment Targets<br/>Visualizations<br/>Reports]
+        O[Treatment Targets<br/>Predictions<br/>Visualizations]
     end
 
-    U --> AI
-    AI --> Servers
+    U --> CLAUDE
+    U --> GEMINI
+    CLAUDE --> Servers
+    GEMINI --> Servers
     Servers --> Output
 
     style Users fill:#e1f5ff
