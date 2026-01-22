@@ -1,7 +1,12 @@
 # Streamlit App Update: mcp-perturbation Integration
 
+> **⚠️ ARCHIVED DOCUMENT**
+> This document describes the initial integration of the mcp-perturbation server (Jan 20-21, 2026).
+> The perturbation server is now fully integrated and documented in the main README.md.
+> This file is retained for historical reference.
+
 **Date**: 2026-01-20/21
-**Status**: ✅ Configuration updated and deployed
+**Status**: ✅ Configuration updated and deployed (COMPLETED - NOW INTEGRATED)
 
 ---
 

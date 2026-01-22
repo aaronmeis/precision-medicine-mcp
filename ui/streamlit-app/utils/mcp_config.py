@@ -1,6 +1,6 @@
 """MCP Server Configuration
 
-Contains URLs and metadata for all 9 deployed GCP Cloud Run MCP servers.
+Contains URLs and metadata for all 10 deployed GCP Cloud Run MCP servers.
 """
 
 from typing import Dict, List, TypedDict

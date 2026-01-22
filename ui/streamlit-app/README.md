@@ -91,7 +91,7 @@ sequenceDiagram
 
 - 💬 **Chat Interface** - Natural language interaction with MCP servers
 - 🤖 **Multi-Provider Support** - Choose between Claude (Anthropic) or Gemini (Google) LLMs
-- 🔧 **Server Selection** - Choose which of the 9 MCP servers to use
+- 🔧 **Server Selection** - Choose which of the 10 MCP servers to use
 - 🎯 **Example Prompts** - Quick-start templates for common workflows
 - 📊 **Token Usage** - Track API usage per message
 - 🎨 **Clean UI** - Simple, Claude Desktop-like interface
@@ -215,6 +215,7 @@ Use the sidebar to select which servers to enable:
 - **fgbio** - Genomic reference data and FASTQ validation
 - **multiomics** - Multi-omics integration (RNA/Protein/Phospho)
 - **spatialtools** - Spatial transcriptomics analysis
+- **perturbation** - GEARS perturbation prediction for treatment response
 
 **Mock Servers (Demo Only):**
 - tcga, openimagedata, seqera, huggingface, deepcell, mockepic
@@ -501,7 +502,7 @@ The deployment script automatically sets the keys as Cloud Run environment varia
 
 ### MCP Server Configuration
 
-Server URLs are configured in `utils/mcp_config.py`. All 9 servers are pre-configured with GCP Cloud Run URLs.
+Server URLs are configured in `utils/mcp_config.py`. All 10 servers are pre-configured with GCP Cloud Run URLs.
 
 To add/modify servers:
 ```python
@@ -519,17 +520,37 @@ MCP_SERVERS = {
 
 ## Architecture
 
+### Multi-Provider System
+
 ```
 Streamlit UI (Browser)
     ↓
-Python Chat Handler
+Provider Abstraction Layer
+    ├─→ Claude Provider (Native MCP)
+    │       ↓
+    │   Anthropic Claude API
+    │       ↓
+    │   [Direct MCP orchestration]
+    │
+    └─→ Gemini Provider (SSE-based MCP)
+            ↓
+        MCP SSE Client ─→ Cloud Run MCP Servers (10 servers)
+            ↓                      ↓
+        Google Gemini API ← Tool Results
+            ↓
+    [Manual agentic loop]
     ↓
-Anthropic Claude API (with MCP support)
+GCP Cloud Run MCP Servers (10 servers)
     ↓
-GCP Cloud Run MCP Servers (9 servers)
-    ↓
-Bioinformatics Tools (STAR, ComBat, HAllA, etc.)
+Bioinformatics Tools (STAR, ComBat, HAllA, GEARS, etc.)
 ```
+
+**Key Components:**
+- **Provider Abstraction** - Unified interface for Claude and Gemini
+- **Claude Provider** - Uses Anthropic's native MCP support
+- **Gemini Provider** - Custom SSE client with manual tool orchestration
+- **MCP Servers** - 10 Cloud Run services (4 production, 6 mock)
+- **Bioinformatics Tools** - Real analysis engines (STAR, scanpy, GEARS, etc.)
 
 ## Cost Estimates
 
@@ -541,7 +562,7 @@ Bioinformatics Tools (STAR, ComBat, HAllA, etc.)
 **Typical Session (10 messages):**
 - ~$0.20-0.80 total
 
-**See:** [Cost Analysis](../../docs/for-hospitals/operations/COST_ANALYSIS.md) for detailed breakdowns
+**See:** [Cost Analysis](../../docs/for-hospitals/operations/cost-and-budget.md) for detailed breakdowns
 
 ## Troubleshooting
 
