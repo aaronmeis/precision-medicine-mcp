@@ -14,9 +14,10 @@ graph LR
         OMICS[Multiomics<br/>RNA/Protein]
         SPATIAL[Spatial<br/>Visium]
         IMG[Imaging<br/>H&E/MxIF]
+        SCRNA[Single-cell<br/>scRNA-seq]
     end
 
-    subgraph MCP["🔧 10 MCP Servers (55 Tools)"]
+    subgraph MCP["🔧 10 MCP Servers (63 Tools)"]
         direction TB
         S1[Clinical<br/>epic/mockepic]
         S2[Genomic<br/>fgbio/tcga]
@@ -24,10 +25,12 @@ graph LR
         S4[Multiomics<br/>multiomics]
         S5[Imaging<br/>openimagedata<br/>deepcell]
         S6[AI/ML<br/>huggingface<br/>seqera]
+        S7[Perturbation<br/>perturbation<br/>GEARS]
     end
 
     subgraph Output["📊 Analysis Outputs"]
         TREAT[Treatment<br/>Recommendations]
+        PREDICT[Response<br/>Predictions]
         VIZ[Visualizations<br/>& Reports]
         INSIGHTS[Therapeutic<br/>Targets]
     end
@@ -37,6 +40,7 @@ graph LR
     OMICS --> S4
     SPATIAL --> S3
     IMG --> S5
+    SCRNA --> S7
 
     S1 --> MCP
     S2 --> MCP
@@ -44,8 +48,10 @@ graph LR
     S4 --> MCP
     S5 --> MCP
     S6 --> MCP
+    S7 --> MCP
 
     MCP --> TREAT
+    MCP --> PREDICT
     MCP --> VIZ
     MCP --> INSIGHTS
 
@@ -69,7 +75,7 @@ Technical system design documentation:
 
 ## 📊 Architecture by Analysis Modality
 
-7 analysis modalities, 10 specialized servers, 55 tools:
+8 analysis modalities, 10 specialized servers, 63 tools:
 
 | Modality | Servers | Tools | Status | Documentation |
 |----------|---------|-------|--------|---------------|
@@ -78,6 +84,7 @@ Technical system design documentation:
 | 🖼️ **Imaging** | mcp-openimagedata, mcp-deepcell | 9 | ⚠️ Partial (60%/0%) | [imaging/README.md](imaging/README.md) |
 | 🔬 **Multiomics** | mcp-multiomics | 10 | ✅ Production (85%) | [multiomics/README.md](multiomics/README.md) |
 | 📍 **Spatial Transcriptomics** | mcp-fgbio, mcp-spatialtools | 18 | ✅ Production (95%) | [spatial-transcriptomics/README.md](spatial-transcriptomics/README.md) |
+| 🎯 **Perturbation Prediction** | mcp-perturbation | 8 | ✅ Production (GEARS) | [perturbation/README.md](perturbation/README.md) |
 | 🤖 **AI/ML Inference** | mcp-huggingface | 3 | ❌ Mocked (HF-ready) | [ai-ml/README.md](ai-ml/README.md) |
 | ⚙️ **Workflow Orchestration** | mcp-seqera | 3 | ❌ Mocked (Seqera-ready) | [workflow/README.md](workflow/README.md) |
 
@@ -168,7 +175,32 @@ Technical system design documentation:
 
 ---
 
-## 🤖 6. AI/ML Model Inference
+## 🎯 6. Perturbation Prediction
+
+**GEARS-based treatment response prediction using graph neural networks**
+
+**Server:** mcp-perturbation (8 tools, production)
+
+**Key Features:**
+- **Model Training:** Setup and train GEARS GNN models on single-cell perturbation datasets
+- **Response Prediction:** Predict cellular responses to genetic/pharmacological perturbations
+- **Differential Expression:** Identify genes most affected by perturbations
+- **Treatment Screening:** Test multiple therapies to find optimal responses
+
+**Workflow:** `scRNA-seq Data → Load Dataset → Setup GEARS Model → Train → Predict Response → Differential Expression → Treatment Recommendations`
+
+**Use Cases:**
+- Predict T-cell response to checkpoint inhibitors (PD1/CTLA4)
+- Screen PARP inhibitors vs platinum therapy for ovarian cancer
+- Identify biomarkers of treatment sensitivity/resistance
+
+**Technology:** GEARS (Graph-Enhanced Gene Activation Modeling) - Nature Biotechnology 2024
+
+📖 **[Detailed Architecture →](perturbation/README.md)**
+
+---
+
+## 🤖 7. AI/ML Model Inference
 
 **Genomic foundation model inference for cell type prediction and sequence embedding**
 
@@ -185,7 +217,7 @@ Technical system design documentation:
 
 ---
 
-## ⚙️ 7. Workflow Orchestration
+## ⚙️ 8. Workflow Orchestration
 
 **Nextflow pipeline execution and monitoring via Seqera Platform**
 
