@@ -652,8 +652,9 @@ def handle_user_input(prompt: str, model: str, max_tokens: int):
                             "total_tokens": chat_response.usage.total_tokens
                         }
 
-                    # Keep raw response for trace building
+                    # Keep raw response and metadata for trace building
                     response = chat_response.raw_response
+                    tool_calls_metadata = chat_response.tool_calls_metadata
 
                 else:
                     # Local development - use existing ChatHandler
@@ -672,6 +673,9 @@ def handle_user_input(prompt: str, model: str, max_tokens: int):
                     # Format response (existing logic)
                     response_text = st.session_state.chat_handler.format_response(response)
                     usage = st.session_state.chat_handler.get_usage_info(response)
+
+                    # No metadata for local development path
+                    tool_calls_metadata = None
 
                 # Calculate query duration
                 query_duration = (datetime.utcnow() - query_start_time).total_seconds()
@@ -717,6 +721,13 @@ def handle_user_input(prompt: str, model: str, max_tokens: int):
 
                 # Build orchestration trace
                 message_index = len(st.session_state.messages)  # Index where this message will be stored
+
+                # Get provider name for trace
+                if is_cloud_run() and st.session_state.provider_instance:
+                    provider_name = st.session_state.provider_instance.get_provider_name()
+                else:
+                    provider_name = "Claude"  # Default for local development
+
                 trace = build_orchestration_trace(
                     query=prompt,
                     response=response,
@@ -724,7 +735,9 @@ def handle_user_input(prompt: str, model: str, max_tokens: int):
                              for msg in st.session_state.messages],
                     duration_ms=duration_ms,
                     tokens=usage.get("total_tokens", 0) if usage else 0,
-                    cost_usd=estimated_cost if usage else 0
+                    cost_usd=estimated_cost if usage else 0,
+                    tool_calls_metadata=tool_calls_metadata,
+                    provider_name=provider_name
                 )
 
                 # Store trace in session state

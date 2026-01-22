@@ -120,6 +120,7 @@ class GeminiProvider(LLMProvider):
                 max_iterations = 10
                 iteration = 0
                 conversation_history = gemini_messages.copy()
+                all_tool_calls = []  # Track all tool calls for trace
 
                 while iteration < max_iterations:
                     iteration += 1
@@ -160,12 +161,22 @@ class GeminiProvider(LLMProvider):
                         return ChatResponse(
                             content=content,
                             usage=usage,
-                            raw_response=response
+                            raw_response=response,
+                            tool_calls_metadata=all_tool_calls if all_tool_calls else None
                         )
 
                     # Execute tool calls
                     print(f"DEBUG: Executing {len(tool_calls)} tool calls", file=sys.stderr)
                     tool_results = await self._execute_tool_calls(mcp_manager, tool_calls)
+
+                    # Store tool calls and results for trace
+                    for i, tc in enumerate(tool_calls):
+                        all_tool_calls.append({
+                            "server_name": tc["name"].split("_", 1)[0] if "_" in tc["name"] else "unknown",
+                            "tool_name": tc["name"].split("_", 1)[1] if "_" in tc["name"] else tc["name"],
+                            "input": tc["args"],
+                            "result": tool_results[i]["response"] if i < len(tool_results) else None
+                        })
 
                     # Add tool calls and results to conversation history
                     # CRITICAL: Use original Part objects directly to preserve thought_signature

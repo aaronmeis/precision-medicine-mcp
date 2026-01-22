@@ -161,10 +161,13 @@ def render_trace_timeline(trace: OrchestrationTrace):
 
 def _generate_mermaid_code(trace: OrchestrationTrace) -> str:
     """Generate Mermaid sequence diagram code for a trace."""
+    # Use provider name from trace (defaults to "Claude" for backward compatibility)
+    provider = trace.provider_name
+
     mermaid_lines = [
         "sequenceDiagram",
         "    participant User",
-        "    participant Claude"
+        f"    participant {provider}"
     ]
 
     # Add unique servers as participants
@@ -180,20 +183,20 @@ def _generate_mermaid_code(trace: OrchestrationTrace) -> str:
 
     # Add the initial query
     query_short = trace.query[:50] + "..." if len(trace.query) > 50 else trace.query
-    mermaid_lines.append(f"    User->>Claude: {query_short}")
+    mermaid_lines.append(f"    User->>{provider}: {query_short}")
 
     # Add tool calls
     for tc in trace.tool_calls:
         alias = tc.server_name.replace('-', '_')
-        mermaid_lines.append(f"    Claude->>+{alias}: {tc.tool_name}()")
+        mermaid_lines.append(f"    {provider}->>+{alias}: {tc.tool_name}()")
         if tc.result_summary:
             result_short = tc.result_summary[:30] + "..." if len(tc.result_summary) > 30 else tc.result_summary
-            mermaid_lines.append(f"    {alias}-->>-Claude: {result_short}")
+            mermaid_lines.append(f"    {alias}-->>-{provider}: {result_short}")
         else:
-            mermaid_lines.append(f"    {alias}-->>-Claude: result")
+            mermaid_lines.append(f"    {alias}-->>-{provider}: result")
 
     # Add final response
-    mermaid_lines.append("    Claude->>User: Analysis complete")
+    mermaid_lines.append(f"    {provider}->>User: Analysis complete")
 
     return "\n".join(mermaid_lines)
 

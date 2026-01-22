@@ -15,16 +15,21 @@ set -a
 source .env
 set +a
 
-# Verify API key is set
+# Verify API keys are set
 if [ -z "$ANTHROPIC_API_KEY" ]; then
     echo "Error: ANTHROPIC_API_KEY not set in .env"
     exit 1
 fi
 
+if [ -z "$GEMINI_API_KEY" ]; then
+    echo "Warning: GEMINI_API_KEY not set in .env - Gemini provider will be unavailable"
+fi
+
 echo "=========================================="
 echo "Deploying Streamlit to Cloud Run"
 echo "=========================================="
-echo "API Key length: ${#ANTHROPIC_API_KEY} characters"
+echo "Claude API Key length: ${#ANTHROPIC_API_KEY} characters"
+echo "Gemini API Key length: ${#GEMINI_API_KEY} characters"
 echo ""
 
 # Deploy
@@ -39,7 +44,7 @@ gcloud run deploy streamlit-mcp-chat \
     --min-instances 0 \
     --max-instances 5 \
     --timeout 300 \
-    --set-env-vars "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY},ENVIRONMENT=development" \
+    --set-env-vars "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY},GEMINI_API_KEY=${GEMINI_API_KEY},ENVIRONMENT=development" \
     --port 8501 \
     --quiet
 

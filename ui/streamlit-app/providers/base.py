@@ -29,6 +29,7 @@ class ChatResponse:
     content: str  # Main response text
     usage: Optional[UsageInfo] = None  # Token usage info
     raw_response: Any = None  # Provider-specific raw response
+    tool_calls_metadata: Optional[List[Dict]] = None  # Tool calls for trace (Gemini)
 
 
 class LLMProvider(ABC):

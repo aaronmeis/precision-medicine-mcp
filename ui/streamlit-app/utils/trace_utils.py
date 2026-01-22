@@ -32,6 +32,7 @@ class OrchestrationTrace:
     total_duration_ms: float
     total_tokens: int
     estimated_cost_usd: float
+    provider_name: str = "Claude"  # Default to Claude for backward compatibility
 
     @property
     def servers_used(self) -> List[str]:
@@ -44,19 +45,27 @@ class OrchestrationTrace:
         return len(self.tool_calls)
 
 
-def extract_tool_calls_from_response(response: Any) -> List[ToolCall]:
+def extract_tool_calls_from_response(
+    response: Any,
+    metadata: Optional[List[Dict]] = None
+) -> List[ToolCall]:
     """
-    Extract tool calls from a Claude API response.
+    Extract tool calls from a Claude API response or Gemini metadata.
 
-    Works with both the Anthropic Python SDK response objects
-    and raw JSON responses.
+    Works with both the Anthropic Python SDK response objects,
+    raw JSON responses, and Gemini tool call metadata.
 
     Args:
         response: Claude API response (SDK object or dict)
+        metadata: Optional Gemini tool calls metadata (from ChatResponse.tool_calls_metadata)
 
     Returns:
         List of ToolCall objects in order of execution
     """
+    # If Gemini metadata provided, use that instead
+    if metadata:
+        return _extract_tool_calls_from_metadata(metadata)
+
     tool_calls = []
     step_number = 0
 
@@ -117,6 +126,49 @@ def extract_tool_calls_from_response(response: Any) -> List[ToolCall]:
                     input_params=block.get('params', block.get('input', {})),
                     tool_use_id=block.get('id')
                 ))
+
+    return tool_calls
+
+
+def _extract_tool_calls_from_metadata(metadata: List[Dict]) -> List[ToolCall]:
+    """
+    Extract tool calls from Gemini provider metadata.
+
+    Args:
+        metadata: List of tool call metadata from Gemini provider
+            Format: [{"server_name": "...", "tool_name": "...", "input": {...}, "result": {...}}]
+
+    Returns:
+        List of ToolCall objects
+    """
+    tool_calls = []
+
+    for step_number, call in enumerate(metadata, start=1):
+        # Extract result summary from the result content
+        result_summary = None
+        if call.get("result"):
+            result_data = call["result"]
+            if isinstance(result_data, dict):
+                # Extract text from content array if present
+                if "content" in result_data and isinstance(result_data["content"], list):
+                    texts = [
+                        item.get("text", "")
+                        for item in result_data["content"]
+                        if isinstance(item, dict) and item.get("type") == "text"
+                    ]
+                    result_summary = _truncate_result(" ".join(texts))
+                else:
+                    result_summary = _truncate_result(json.dumps(result_data))
+            else:
+                result_summary = _truncate_result(str(result_data))
+
+        tool_calls.append(ToolCall(
+            step_number=step_number,
+            server_name=call.get("server_name", "unknown"),
+            tool_name=call.get("tool_name", "unknown"),
+            input_params=call.get("input", {}),
+            result_summary=result_summary
+        ))
 
     return tool_calls
 
@@ -237,23 +289,27 @@ def build_orchestration_trace(
     messages: List[Dict],
     duration_ms: float = 0,
     tokens: int = 0,
-    cost_usd: float = 0
+    cost_usd: float = 0,
+    tool_calls_metadata: Optional[List[Dict]] = None,
+    provider_name: str = "Claude"
 ) -> OrchestrationTrace:
     """
     Build a complete orchestration trace from a query and response.
 
     Args:
         query: The user's original query
-        response: Claude API response
+        response: Claude API response (or Gemini response if metadata provided)
         messages: Full conversation messages (for extracting results)
         duration_ms: Total request duration in milliseconds
         tokens: Total tokens used
         cost_usd: Estimated cost in USD
+        tool_calls_metadata: Optional Gemini tool calls metadata (from ChatResponse)
+        provider_name: Name of the LLM provider (e.g., "Claude", "Gemini")
 
     Returns:
         OrchestrationTrace object
     """
-    tool_calls = extract_tool_calls_from_response(response)
+    tool_calls = extract_tool_calls_from_response(response, metadata=tool_calls_metadata)
 
     # Extract results from both the response (MCP) and messages (standard tools)
     results = extract_tool_results(messages)
@@ -269,7 +325,8 @@ def build_orchestration_trace(
         tool_calls=tool_calls,
         total_duration_ms=duration_ms,
         total_tokens=tokens,
-        estimated_cost_usd=cost_usd
+        estimated_cost_usd=cost_usd,
+        provider_name=provider_name
     )
 
 
